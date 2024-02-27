@@ -1,0 +1,6 @@
+﻿  Prostokat.cpp
+  main.cpp
+D:\PO Lab1\ProgramowanieObiektowe\Project1\main.cpp(7,15): warning C4101: "c": lokalna zmienna, do której nie istnieje odwołanie
+D:\PO Lab1\ProgramowanieObiektowe\Project1\main.cpp(7,18): warning C4101: "r": lokalna zmienna, do której nie istnieje odwołanie
+  Generowanie kodu...
+  Project1.vcxproj -> D:\PO Lab1\ProgramowanieObiektowe\Project1\x64\Debug\Project1.exe
