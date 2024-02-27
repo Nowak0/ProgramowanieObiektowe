@@ -1,0 +1,1 @@
+Wiem, że polskie nazwy kłują w oczy, ale kod jest skopiowany z instrukcji i nie chciało mi się tego zmieniać ¯\_(ツ)_/¯
