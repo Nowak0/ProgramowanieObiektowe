@@ -32,14 +32,14 @@ void Trojkat::SetC(double c) {
 	this->c = c;
 }
 
-double Trojkat::Obwod() { //TODO1
+double Trojkat::Obwod() {
 	return a+b+c;
 }
 
-double Trojkat::Pole() { //TODO2
-	double cosC = (a * a + b * b - c * c) / (2 * a * b);
-	double sinC = sqrt((1 - cosC * cosC));
-	return 0.5*a*b*sinC;
+double Trojkat::Pole() {
+	double p = 0.5 * (a + b + c);
+	double result = sqrt(p * (p - a) * (p - b) * (p - c));
+	return result;
 }
 
 void Trojkat::Wypisz(std::ostream& out) const {

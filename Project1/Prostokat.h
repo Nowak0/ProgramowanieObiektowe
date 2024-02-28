@@ -17,6 +17,8 @@ public:
 	void SetB(double b);
 	double Obwod() override;
 	double Pole() override;
+	// gdy zakomentarzuje powyzsza linie, Pole() nie zostanie nadpisane poprzez plik Prostokat.cpp, 
+	// w wyniku czego bedzie wypisywac 1 (tak jak napisane w FiguraPlaska) dla obiektu Prostokat
 	~Prostokat() override;
 };
 

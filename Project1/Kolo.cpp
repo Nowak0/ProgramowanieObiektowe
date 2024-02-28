@@ -11,6 +11,10 @@ double Kolo::GetR() const {
 	return r;
 }
 
+double Kolo::GetPi() const {
+	return pi;
+}
+
 void Kolo::SetR(double r) {
 	this->r = r;
 }

@@ -5,27 +5,29 @@
 using namespace std;
 
 
-void printOutput(const double field, const double perimeter) {
-	cout << "Pole figury: " << field << endl;
-	cout << "Obwod figury: " << perimeter << endl;
-}
-
-
 int main() {
 	double a, b, c, r;
 	cin >> a >> b >> c >> r;
 
 	Prostokat* rect = new Prostokat(a, b);
-	printOutput(rect->Pole(), rect->Obwod());
+	rect->printOutput(rect->Pole(), rect->Obwod());
 	delete rect;
 
 	Trojkat* triangle = new Trojkat(a, b, c);
-	printOutput(triangle->Pole(), triangle->Obwod());
+	triangle->printOutput(triangle->Pole(), triangle->Obwod());
 	delete triangle;
+	
+	/*
+	FiguraPlaska* figury[2] = { new Prostokat(a,b), new Trojkat(a,b,c) };
+	figury[0]->printOutput(figury[0]->Pole(), figury[0]->Obwod());
+	delete figury[0];
+	delete figury[1];
 
-	Kolo* circle = new Kolo(r);
-	printOutput(circle->Pole(), circle->Obwod());
-	delete circle;
+	alternatywny sposob definiowania obiektow (dla prezentacji z tablica obiektow)
+	*/
+
+	Kolo circle(r);
+	circle.printOutput(circle.Pole(), circle.Obwod());
 
 	return 0;
 }

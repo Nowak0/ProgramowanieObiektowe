@@ -23,18 +23,19 @@ void Prostokat::SetB(double b) {
 	this->b = b;
 }
 
-double Prostokat::Obwod() { //TODO1
+double Prostokat::Obwod() {
 	return 2 * a + 2 * b;
 }
 
-double Prostokat::Pole() { //TODO2
+double Prostokat::Pole() {
 	return a * b;
 }
 
-void Prostokat::Wypisz(std::ostream& out) const { //TODO3
+
+void Prostokat::Wypisz(std::ostream& out) const {
 	out << "Jest to prostokat o wymiarach " << a << " x " << b << endl;
 }
 
-Prostokat::~Prostokat() { //TODO4
+Prostokat::~Prostokat() {
 	cout << "Destruktor Prostokata(" << a << "," << b << ")" << endl;
 }
