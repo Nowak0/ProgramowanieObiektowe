@@ -1,10 +1,14 @@
+#ifndef TROJKAT_H
+#define TROJKAT_H
 #include "FiguraPlaska.h"
 
-
 class Trojkat : public FiguraPlaska {
+private:
 	double a, b, c;
+
 protected:
 	void Wypisz(std::ostream& out) const override;
+
 public:
 	Trojkat(double a, double b, double c);
 	double GetA() const;
@@ -15,7 +19,8 @@ public:
 	void SetC(double c);
 	double Obwod() override;
 	double Pole() override;
-
 	~Trojkat() override;
-private:
 };
+
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef FIGURAPLASKA_H
+#define FIGURAPLASKA_H
 #include <iostream>
 
 
@@ -12,3 +14,6 @@ public:
 	virtual double Obwod() = 0;
 	virtual ~FiguraPlaska();
 };
+
+
+#endif

@@ -4,7 +4,7 @@ using namespace std;
 
 
 Prostokat::Prostokat(double a, double b) : a(a), b(b) {
-	cout << "Konstruktor Prostokata(" << a << "," << b << ")" << endl;
+	cout << endl << "Konstruktor Prostokata(" << a << "," << b << ")" << endl;
 }
 
 double Prostokat::GetA() const {

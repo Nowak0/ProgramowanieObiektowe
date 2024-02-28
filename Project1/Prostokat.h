@@ -1,5 +1,6 @@
+#ifndef PROSTOKAT_H
+#define PROSTOKAT_H
 #include "FiguraPlaska.h"
-
 
 class Prostokat : public FiguraPlaska {
 private:
@@ -18,3 +19,6 @@ public:
 	double Pole() override;
 	~Prostokat() override;
 };
+
+
+#endif
