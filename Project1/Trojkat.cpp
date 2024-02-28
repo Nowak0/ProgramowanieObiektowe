@@ -6,6 +6,7 @@ using namespace std;
 
 Trojkat::Trojkat(double a, double b, double c) : a(a), b(b), c(c) {
 	cout << endl << "Konstruktor Trojkata(" << a << "," << b << "," << c << ")" << endl;
+	Wypisz(cout);
 }
 
 double Trojkat::GetA() const {

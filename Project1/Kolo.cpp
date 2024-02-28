@@ -5,6 +5,7 @@ using namespace std;
 
 Kolo::Kolo(double r) : r(r) {
 	cout << endl << "Konstruktor Kola(" << r << ")" << endl;
+	Wypisz(cout);
 }
 
 double Kolo::GetR() const {
@@ -31,6 +32,6 @@ void Kolo::Wypisz(std::ostream& out) const {
 	out << "Jest to kolo o promieniu " << r << endl;
 }
 
-Kolo::~Kolo() { //TODO4
+Kolo::~Kolo() {
 	cout << "Destruktor Kola(" << r << ")" << endl;
 }

@@ -18,10 +18,10 @@ void FiguraPlaska::printOutput(const int field, const int perimeter) {
 	cout << "Obwod figury (int): " << perimeter << endl;
 }
 
+// powyzsze dwie funkcje przedstawiaja przeciazenie (overloading). polega on na podmianie dzialania funkcji ze wzgledu na typ przyjmowanych argumentow
+
 double FiguraPlaska::Pole() {
 	return 1;
 }
-
-// powyzsze dwie funkcje przedstawiaja przeciazenie (overloading). polega on na podmianie dzialania funkcji ze wzgledu na typ przyjmowanych argumentow
 
 FiguraPlaska::~FiguraPlaska() {}

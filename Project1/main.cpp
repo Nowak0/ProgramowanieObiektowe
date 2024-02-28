@@ -9,7 +9,7 @@ int main() {
 	double a, b, c, r;
 	cin >> a >> b >> c >> r;
 
-	Prostokat* rect = new Prostokat(a, b);
+	FiguraPlaska* rect = new Prostokat(a, b);
 	rect->printOutput(rect->Pole(), rect->Obwod());
 	delete rect;
 
@@ -28,6 +28,5 @@ int main() {
 
 	Kolo circle(r);
 	circle.printOutput(circle.Pole(), circle.Obwod());
-
 	return 0;
 }

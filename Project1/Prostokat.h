@@ -4,7 +4,7 @@
 
 class Prostokat : public FiguraPlaska {
 private:
-	double a, b;
+	double width, height;
 
 protected:
 	void Wypisz(std::ostream& out) const override;
