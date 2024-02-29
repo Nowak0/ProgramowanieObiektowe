@@ -1,6 +1,7 @@
 #ifndef PROSTOKAT_H
 #define PROSTOKAT_H
 #include "FiguraPlaska.h"
+#include <iostream>
 
 class Prostokat : public FiguraPlaska {
 private:
@@ -10,6 +11,7 @@ protected:
 	void Wypisz(std::ostream& out) const override;
 
 public:
+	Prostokat();
 	Prostokat(double a, double b);
 	double GetA() const;
 	void SetA(double a);

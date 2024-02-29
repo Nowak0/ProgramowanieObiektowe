@@ -2,14 +2,16 @@
 #include "Trojkat.h"
 #include "Prostokat.h"
 #include "Kolo.h"
+#include "Stozek.h"
 using namespace std;
 
 
 int main() {
-	double a, b, c, r;
-	cin >> a >> b >> c >> r;
+	double a, b, c, r, sr, h;
+	cout << "Podaj odpowiednio: a, b, c, r, sr, h: ";
+	cin >> a >> b >> c >> r >> sr >> h;
 
-	FiguraPlaska* rect = new Prostokat(a, b);
+	Prostokat* rect = new Prostokat(a,b);
 	rect->printOutput(rect->Pole(), rect->Obwod());
 	delete rect;
 
@@ -25,8 +27,14 @@ int main() {
 
 	alternatywny sposob definiowania obiektow (dla prezentacji z tablica obiektow)
 	*/
+	{
+		Kolo circle(r);
+		circle.printOutput(circle.Pole(), circle.Obwod());
+	}
 
-	Kolo circle(r);
-	circle.printOutput(circle.Pole(), circle.Obwod());
+	Stozek* stozek = new Stozek(sr,h);
+	stozek->printOutput(stozek->PolePowierzchniBocznej(), stozek->PolePowierzchniCalkowitej(), stozek->TworzacaStozka());
+	delete stozek;
+
 	return 0;
 }
