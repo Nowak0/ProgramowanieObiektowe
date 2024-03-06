@@ -1,5 +1,0 @@
-﻿  main.cpp
-C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\lab2\Lab2\main.cpp(48,11): error C2678: dwuargumentowy "[": nie znaleziono żadnego operatora, który przyjmuje lewostronny operand typu "const Vector" (lub nie istnieje akceptowalna konwersja)
-C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\lab2\Lab2\main.cpp(29,16): message : może to być „const double &Vector::operator [](size_t)”
-C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\lab2\Lab2\main.cpp(48,11): message : podczas próby dopasowania listy argumentów "(const Vector, size_t)"
-C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\lab2\Lab2\main.cpp(61,6): error C3892: "v1": nie można przypisać do zmiennej, która jest stałą
