@@ -9,29 +9,32 @@ Book::Book() {
 }
 
 Book::Book(const string& originalAuthor, const string& originalTitle) {
-	cout << "Book(l-ref)" << endl;
+	//cout << "Book(l-ref)" << endl;
 	author = originalAuthor;
 	title = originalTitle;
 }
 
 Book::Book(string&& originalAuthor, string&& originalTitle) {
-	cout << "Book(r-ref)" << endl;
+	//cout << "Book(r-ref)" << endl;
 	author = originalAuthor;
 	title = originalTitle;
 }
 
-Book::Book(const Book& original) { // konstruktor kopiujacy
-	cout << "Book(const Book& original)" << endl;
+Book::Book(const Book& original) {
+	//cout << "Book(const Book& original)" << endl;
 	author = original.author;
 	title = original.title;
 }
 
-Book::Book(Book&& original) { // kosntruktor przenoszacy
-	cout << "Book(Book&& original)" << endl;
+Book::Book(Book&& original) {
+	//cout << "Book(Book&& original)" << endl;
+	//swap(author, original.author);
+	//swap(title, original.title);
+	
 	author = original.author;
 	title = original.title;
-	original.author = "";
-	original.title = "";
+	original.author = "unknown";
+	original.title = "unknown";
 }
 
 string Book::getAuthor() const {
@@ -48,7 +51,6 @@ void Book::setAuthor(const string& givenAuthor) {
 
 void Book::setAuthor(string&& givenAuthor) {
 	this->author = givenAuthor;
-	//givenAuthor = "";
 }
 
 void Book::setTitle(const string& givenTitle) {
@@ -57,21 +59,26 @@ void Book::setTitle(const string& givenTitle) {
 
 void Book::setTitle(string&& givenTitle) {
 	this->title = givenTitle;
-	//givenTitle = "";
 }
 
-Book& Book::operator=(const Book& original) { // operator kopiujacy
-	std::cout << "operator=(const Vector&)" << std::endl;
+Book& Book::operator=(const Book& original) {
+	//cout << "operator=(const Book&)" << std::endl;
 	Book tmp = original;
-	std::swap(author, tmp.author);
-	std::swap(title, tmp.title);
+	swap(author, tmp.author);
+	swap(title, tmp.title);
 	return *this;
 }
 
-Book& Book::operator=(Book&& original) { // operator przenoszacy
-	std::cout << "operator=(Vector&&)" << std::endl;
-	std::swap(author, original.author);
-	std::swap(title, original.title);
+Book& Book::operator=(Book&& original) {
+	//cout << "operator=(Book&&)" << std::endl;
+	/*
+	author = original.author;
+	title = original.title;
+	original.author = "unknown";
+	original.title = "unknown";
+	*/
+	swap(author, original.author);
+	swap(title, original.title);
 	return *this;
 }
 
@@ -81,5 +88,5 @@ ostream& operator<<(ostream& os, const Book& thisBook) {
 }
 
 Book::~Book() {
-	cout << "Destruktor" << endl;
+	//cout << "Destruktor" << endl;
 }

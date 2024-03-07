@@ -5,7 +5,7 @@ using namespace std;
 
 
 Library::Library() : Library(0){
-	std::cout << "Library()" << std::endl;
+	//cout << "Library()" << std::endl;
 }
 
 Library::Library(size_t originalSize) {
@@ -14,7 +14,7 @@ Library::Library(size_t originalSize) {
 }
 
 Library::Library(initializer_list<Book> list) : size{ list.size() }, array{ new Book[list.size()]} {
-	cout << "Vector(std::initializer_list)" << endl;
+	//cout << "Library(std::initializer_list)" << endl;
 		size_t i = 0;
 		for (Book v : list)
 		{
@@ -24,13 +24,13 @@ Library::Library(initializer_list<Book> list) : size{ list.size() }, array{ new 
 }
 
 Library::Library(const Library& original) : size{ original.size }, array{ new Book[original.size] } {
-	std::cout << "Book(const Book&)" << std::endl;
+	//cout << "Library(const Library&)" << std::endl;
 	for (std::size_t i = 0; i < size; i++)
 		array[i] = original.array[i];
 }
 
 Library::Library(Library&& original) {
-	cout << "Book(Book&&)" << std::endl;
+	//cout << "LIbrary(Library&&)" << std::endl;
 	array = original.array;
 	size = original.size;
 
@@ -43,7 +43,7 @@ size_t Library::getSize() const {
 }
 
 Library& Library::operator=(const Library& original) {
-	cout << "operator=(const Envelope&)" << std::endl;
+	//cout << "operator=(const Library&)" << std::endl;
 	Library tmp(original);
 	swap(array, tmp.array);
 	swap(size, tmp.size);
@@ -51,9 +51,16 @@ Library& Library::operator=(const Library& original) {
 }
 
 Library& Library::operator=(Library&& original) {
-	cout << "operator=(Envelope&&)" << std::endl;
-	array = std::move(original.array);
-	size = std::move(original.size);
+	//cout << "operator=(Library&&)" << std::endl;
+	/*
+	array = original.array;
+	size = original.size;
+	original.array = nullptr;
+	original.size = 0;
+	*/
+
+	swap(array, original.array);
+	swap(size, original.size);
 	return *this;
 }
 
@@ -66,18 +73,23 @@ const Book& Library::operator[](size_t i) const {
 }
 
 ostream& operator<<(ostream& os, const Library& thisLibrary) {
+	if (thisLibrary.size == 0)
+	{
+		cout << "Empty" << endl;
+		return os;
+	}
 	for (int i = 0; i < thisLibrary.size; i++)
 	{
-		cout << endl << "Book number " << i + 1 << ": " << thisLibrary.array[i] << endl;
+		cout << "Book number " << i + 1 << ": " << thisLibrary.array[i] << endl;
 	}
 	return os;
 }
 
 Library::~Library() {
-	cout << "Library destructor" << endl;
+	//cout << "Library destructor" << endl;
 	if (array != nullptr)
 	{
-		std::cout << "Releasing memory " << array << std::endl;
+		cout << "Releasing memory " << array << std::endl;
 		delete[] array;
 	}
 }
