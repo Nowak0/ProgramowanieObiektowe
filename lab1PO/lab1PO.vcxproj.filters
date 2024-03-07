@@ -27,6 +27,12 @@
     <ClInclude Include="Trojkat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FigureList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input&amp;output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FiguraPlaska.cpp">
@@ -42,6 +48,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Trojkat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FigureList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input&amp;output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

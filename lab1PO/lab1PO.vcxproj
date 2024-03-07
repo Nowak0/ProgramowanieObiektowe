@@ -128,12 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FiguraPlaska.h" />
+    <ClInclude Include="FigureList.h" />
+    <ClInclude Include="input&amp;output.h" />
     <ClInclude Include="Kolo.h" />
     <ClInclude Include="Prostokat.h" />
     <ClInclude Include="Trojkat.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FiguraPlaska.cpp" />
+    <ClCompile Include="FigureList.cpp" />
+    <ClCompile Include="input&amp;output.cpp" />
     <ClCompile Include="Kolo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Prostokat.cpp" />
