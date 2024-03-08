@@ -1,0 +1,3 @@
+C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\lab2\Lab2\x64\Debug\Lab2.exe
+D:\lab2\Lab2\x64\Debug\Lab2.exe
+C:\Users\kuuba\Desktop\PG\semestr 2\PO\ProgramowanieObiektowe\lab2\lab2\Lab2\x64\Debug\Lab2.exe
