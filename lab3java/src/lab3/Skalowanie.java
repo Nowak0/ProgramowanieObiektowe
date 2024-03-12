@@ -12,7 +12,8 @@ public class Skalowanie implements Transformacja{
     public Transformacja getTransformacjaOdwrotna()
             throws BrakTransformacjiOdwrotnejException {
         if (skalaX == 0 || skalaY == 0) {
-            throw new BrakTransformacjiOdwrotnejException("Brak translacji odwrotnej");
+            throw new BrakTransformacjiOdwrotnejException("Brak translacji odwrotnej" +
+                    " z powodu dzielenia przez 0");
         }
         return new Skalowanie(1/skalaX, 1/skalaY);
     }
