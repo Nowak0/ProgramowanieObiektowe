@@ -28,6 +28,6 @@ public class Translacja implements Transformacja {
 
     @Override
     public String toString() {
-        return "Translacja o wektor {"+dX+", "+dY+")";
+        return "Translacja o wektor ("+dX+", "+dY+")";
     }
 }
