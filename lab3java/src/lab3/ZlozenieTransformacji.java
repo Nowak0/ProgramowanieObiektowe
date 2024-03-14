@@ -9,14 +9,18 @@ public class ZlozenieTransformacji implements Transformacja {
     }
 
     public Transformacja[] getTab() {
-        return tab;
+        return tab.clone();
+    }
+
+    public void setTab(int i, Transformacja value) {
+        if(i<tab.length) this.tab[i] = value;
     }
 
     @Override
     public Transformacja getTransformacjaOdwrotna() throws BrakTransformacjiOdwrotnejException {
         ZlozenieTransformacji t = new ZlozenieTransformacji(tab.length);
         for(int i=0;i< tab.length;i++) {
-            t.getTab()[i] = tab[i].getTransformacjaOdwrotna();
+            t.setTab(i, tab[i].getTransformacjaOdwrotna());
         }
         return t;
     }

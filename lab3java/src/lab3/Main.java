@@ -1,4 +1,5 @@
 package lab3;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -80,10 +81,9 @@ public class Main {
             Punkt p3 = t.transformuj(p2);
             System.out.println(p3);
         }
-        catch(BrakTransformacjiOdwrotnejException ex)
-            {
+        catch(BrakTransformacjiOdwrotnejException ex) {
                 ex.printStackTrace();
-            }
+        }
         System.out.println();
     }
 
@@ -93,15 +93,16 @@ public class Main {
             Punkt p1 = new Punkt(3,3);
             System.out.println(p1);
             ZlozenieTransformacji t = new ZlozenieTransformacji(3);
-            Transformacja[] thisTab = t.getTab();
-            thisTab[0] = new Translacja(5,5);
-            thisTab[1] = new Obrot(30);
-            thisTab[2] = new Skalowanie(2,10);
+            t.setTab(0, new Translacja(5,5));
+            t.setTab(1, new Obrot(30));
+            t.setTab(2, new Skalowanie(2,10));
+            System.out.println(Arrays.toString(t.getTab()));
             Punkt p2 = t.transformuj(p1);
             System.out.println(p2);
             Transformacja t2 = t.getTransformacjaOdwrotna();
             System.out.println(t2);
             Punkt p3 = t2.transformuj(p2);
+            System.out.println(p3);
         }
         catch (BrakTransformacjiOdwrotnejException ex) {
             ex.printStackTrace();

@@ -26,6 +26,6 @@ public class Obrot implements Transformacja {
 
     @Override
     public String toString() {
-        return "Obrot o kat alfa: "+alfa;
+        return "Obrot o kat alfa = "+alfa;
     }
 }
