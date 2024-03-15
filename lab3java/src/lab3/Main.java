@@ -1,6 +1,7 @@
 package lab3;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Main {
     public static void zadanie1() {
@@ -26,7 +27,8 @@ public class Main {
             Punkt p3 = trr.transformuj(p2);
             System.out.println(p3);
 
-        } catch (BrakTransformacjiOdwrotnejException ex) {
+        }
+        catch (BrakTransformacjiOdwrotnejException ex) {
             ex.printStackTrace();
         }
         System.out.println();
@@ -42,7 +44,8 @@ public class Main {
             System.out.println(trr2);
             Punkt p3 = trr2.transformuj(p2);
             System.out.println(p3);
-        } catch (BrakTransformacjiOdwrotnejException ex) {
+        }
+        catch (BrakTransformacjiOdwrotnejException ex) {
             ex.printStackTrace();
         }
         System.out.println();
@@ -101,6 +104,7 @@ public class Main {
             System.out.println(p2);
             Transformacja t2 = t.getTransformacjaOdwrotna();
             System.out.println(t2);
+            System.out.println(t);
             Punkt p3 = t2.transformuj(p2);
             System.out.println(p3);
         }
@@ -112,7 +116,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        zadanie4();
+        zadanie3();
 
     }
 }
