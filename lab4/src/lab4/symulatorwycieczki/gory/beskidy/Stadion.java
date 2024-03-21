@@ -4,7 +4,7 @@ import lab4.symulatorwycieczki.Atrakcja;
 
 public class Stadion extends Atrakcja {
     public Stadion(String miejscowosc) {
-        super(0.5, miejscowosc);
+        super(3, miejscowosc);
     }
 
     @Override

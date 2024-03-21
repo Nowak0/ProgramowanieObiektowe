@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author TB
  */
-public class Wycieczka {
+public class Wycieczka implements ElementWycieczki{
     private String nazwa;
     private List<ElementWycieczki> elementy = new ArrayList<>();
 
@@ -49,6 +49,7 @@ public class Wycieczka {
         return elementy.size();
     }
 
+    @Override
     public String getNazwa() {
         return nazwa;
     }

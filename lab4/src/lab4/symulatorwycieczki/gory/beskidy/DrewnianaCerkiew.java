@@ -4,7 +4,7 @@ import lab4.symulatorwycieczki.Atrakcja;
 
 public class DrewnianaCerkiew extends Atrakcja {
     public DrewnianaCerkiew(String miejscowosc) {
-        super(0.5, miejscowosc);
+        super(1, miejscowosc);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package lab4.symulatorwycieczki;
 
+import lab4.SluchaczZdarzen;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ public class SymulatorWycieczki {
     private int pozycjaGrupy = 0;
     private double czasWycieczki = 0.0;
     private double pokonanyDystans = 0.0;
+    private Set<SluchaczPostepow> sluchacze = new HashSet<SluchaczPostepow>();
 
     public SymulatorWycieczki(Grupa grupa, Wycieczka wycieczka) {
         this.grupa = grupa;
@@ -83,13 +86,30 @@ public class SymulatorWycieczki {
                 }
             }
 
-            System.out.println();
-           
+           for(SluchaczPostepow s : sluchacze) {
+               klasaWewnetrzna().aktualizujPostep(elementWycieczki, pozycjaGrupy+1, wycieczka.getLiczbaElementowWycieczki());
+           }
+
+           System.out.println();
         }
         System.out.printf("Trasa zajęła grupie %.2f h, przeszli oni %.2f GOT.\n", czasWycieczki, pokonanyDystans);
         System.out.println("===Koniec symulacji===");
     }
-    
-    
-    
+
+    private class KlasaWewnetrzna implements SluchaczPostepow {
+        public KlasaWewnetrzna() {}
+
+        @Override
+        public void aktualizujPostep(ElementWycieczki elementWycieczki, int lp, int liczbaElementow) {
+            System.out.println("Grupa zaliczyla "+elementWycieczki.getNazwa()+". Jest to "+lp+" punkt wycieczki z "+liczbaElementow);
+        }
+    }
+
+    public SluchaczPostepow klasaWewnetrzna() {
+        return new KlasaWewnetrzna();
+    }
+
+    public void dodajSluchacza(SluchaczPostepow sluchaczPostepu) {
+        sluchacze.add(sluchaczPostepu);
+    }
 }

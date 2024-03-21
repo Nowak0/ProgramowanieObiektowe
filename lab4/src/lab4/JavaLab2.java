@@ -6,10 +6,8 @@ import lab4.symulatorwycieczki.gory.Las;
 import lab4.symulatorwycieczki.gory.PrzeprawaPrzezRzeke;
 import lab4.symulatorwycieczki.gory.beskidy.DrewnianaCerkiew;
 import lab4.symulatorwycieczki.gory.beskidy.Stadion;
-import lab4.symulatorwycieczki.ludzie.Czlowiek;
-import lab4.symulatorwycieczki.ludzie.PrzewodnikStudencki;
-import lab4.symulatorwycieczki.ludzie.Student;
-import lab4.symulatorwycieczki.ludzie.StudentKSG;
+import lab4.symulatorwycieczki.ludzie.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +22,16 @@ public class JavaLab2 {
         PrzewodnikStudencki przewodnik = new PrzewodnikStudencki("Stefan", "Długonogi", Czlowiek.Plec.MEZCZYZNA);
         Set<Uczestnik> uczestnicy = new HashSet<>();
         uczestnicy.add(new Student("Alojzy", "Mechanik", Czlowiek.Plec.MEZCZYZNA));
-        uczestnicy.add(new Student("Ada", "Lovelace", Czlowiek.Plec.KOBIETA));
-        uczestnicy.add(new Student("Jan", "Elektronik", Czlowiek.Plec.MEZCZYZNA));
+        uczestnicy.add(new Przedszkolak("Ada", "Lovelace", Czlowiek.Plec.KOBIETA));
+        uczestnicy.add(new Noworodek("Jan", "Elektronik", Czlowiek.Plec.MEZCZYZNA));
         uczestnicy.add(new StudentKSG("Piotr","Teledetekcyjny", Czlowiek.Plec.MEZCZYZNA));
-        
+        uczestnicy.add(new Sportowiec("Jakub","Pilkarzyk", Czlowiek.Plec.MEZCZYZNA));
+        uczestnicy.add(new Emeryt("Kazimierz","Kowalski", Czlowiek.Plec.MEZCZYZNA));
+
         Grupa g = new Grupa(przewodnik, uczestnicy);
         
         SymulatorWycieczki symulator = new SymulatorWycieczki(g, w);
-        
+        symulator.dodajSluchacza(symulator.klasaWewnetrzna());
         symulator.symuluj();
     }
     
