@@ -44,8 +44,7 @@ public class SymulatorWycieczki {
         for(pozycjaGrupy = 0; pozycjaGrupy < wycieczka.getLiczbaElementowWycieczki(); pozycjaGrupy++) {
             ElementWycieczki elementWycieczki = wycieczka.getElementWycieczki(pozycjaGrupy);
             
-            if(elementWycieczki instanceof Wedrowka) {
-                Wedrowka wedrowka = (Wedrowka) elementWycieczki;
+            if(elementWycieczki instanceof Wedrowka wedrowka) {
 
                 System.out.println("Grupa wędruje po terenie: "+wedrowka.getNazwa());
                 

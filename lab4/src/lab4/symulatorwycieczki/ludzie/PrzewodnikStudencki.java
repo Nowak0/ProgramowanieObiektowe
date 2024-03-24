@@ -3,6 +3,7 @@ package lab4.symulatorwycieczki.ludzie;
 import lab4.symulatorwycieczki.Atrakcja;
 import lab4.symulatorwycieczki.Wycieczka;
 import lab4.symulatorwycieczki.gory.beskidy.DrewnianaCerkiew;
+import lab4.symulatorwycieczki.gory.beskidy.Panorama;
 import lab4.symulatorwycieczki.gory.beskidy.Stadion;
 
 
@@ -35,6 +36,11 @@ public class PrzewodnikStudencki extends Student {
         }
         else if(a instanceof Stadion stadion) {
             mow("To jest stadion druzyny z " + stadion.getMiejscowosc() + ". Co kilka dni zbiera się tutaj ogromna liczba fanów ...");
+            regeneruj(czas);
+        }
+
+        else if(a instanceof Panorama panorama) {
+            mow("To jest panorama " + panorama.getMiejscowosc() + ". Jest pieknie");
             regeneruj(czas);
         }
 //        else if(a instanceof CmentarzZIWojny) {
