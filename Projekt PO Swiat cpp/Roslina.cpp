@@ -1,7 +1,9 @@
 #include "Roslina.h"
 
 
-Roslina::Roslina() {}
+Roslina::Roslina() {
+	
+}
 
 
 void Roslina::akcja(const int wymiarMapyX, const int wymiarMapyY, Swiat& swiat) {

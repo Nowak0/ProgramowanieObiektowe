@@ -1,2 +1,1 @@
-C:\Users\kuuba\Desktop\PG learning\sem 2\Programowanie Obiektowe\ProgramowanieObiektowe\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe
 D:\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe

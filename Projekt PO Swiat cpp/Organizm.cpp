@@ -1,7 +1,7 @@
 #include "Organizm.h"
 
 
-Organizm::Organizm() {
+Organizm::Organizm(Swiat& danySwiat) : swiat(danySwiat) {
 	this->sila = 0;
 	this->inicjatywa = 0;
 	this->polozenieX = 0;
@@ -46,6 +46,11 @@ void Organizm::setPolozenieX(int polozenieX) {
 
 void Organizm::setPolozenieY(int polozenieY) {
 	this->polozenieY = polozenieY;
+}
+
+
+void Organizm::dodajNowyOrganizm(char symbolOrganizmu) {
+	swiat.setMapa(symbolOrganizmu, polozenieX, polozenieY);
 }
 
 

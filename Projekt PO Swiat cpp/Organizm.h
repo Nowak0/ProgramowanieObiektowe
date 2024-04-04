@@ -1,13 +1,17 @@
+#ifndef ORGANIZM_H
+#define ORGANIZM_H
 #include <iostream>
 #include <time.h>
 #include "Swiat.h"
 using namespace std;
+
 
 class Organizm {
 private:
 	
 
 protected:
+	Swiat& swiat;
 	int sila;
 	int inicjatywa;
 	int polozenieX;
@@ -22,10 +26,13 @@ protected:
 	void setPolozenieY(int polozenieY);
 
 public:
-	Organizm();
-	virtual void akcja(const int wymiarMapyX, const int wymiarMapyY, Swiat& swiat) = 0;
-	virtual void kolizja(Swiat& swiat) = 0;
+	Organizm(Swiat& danySwiat);
+	virtual void akcja(const int wymiarMapyX, const int wymiarMapyY) = 0;
+	virtual void kolizja() = 0;
 	virtual void rysowanie() = 0;
+	void dodajNowyOrganizm(char symbolOrganizmu);
 	virtual bool czySieObronil(Organizm& atakujacy) = 0;
 	virtual ~Organizm();
 };
+
+#endif

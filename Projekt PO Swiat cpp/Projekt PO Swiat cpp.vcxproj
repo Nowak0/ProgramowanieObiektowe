@@ -134,6 +134,7 @@
     <ClCompile Include="Czlowiek.cpp" />
     <ClCompile Include="Guarana.cpp" />
     <ClCompile Include="PrzygotowanieGry.cpp" />
+    <ClCompile Include="Swiat.cpp" />
     <ClCompile Include="WilczeJagody.cpp" />
     <ClCompile Include="Lis.cpp" />
     <ClCompile Include="Main.cpp" />

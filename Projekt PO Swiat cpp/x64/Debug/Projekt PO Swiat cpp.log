@@ -1,4 +1,7 @@
-﻿  Main.cpp
-  PrzygotowanieGry.cpp
+﻿  Swiat.cpp
+  Organizm.cpp
+  Roslina.cpp
+  Zwierze.cpp
+D:\Projekt PO Swiat cpp\Zwierze.cpp(8,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Generowanie kodu...
   Projekt PO Swiat cpp.vcxproj -> D:\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe
