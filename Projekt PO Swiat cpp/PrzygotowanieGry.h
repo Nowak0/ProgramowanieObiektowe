@@ -1,6 +1,6 @@
 #include <iostream>
 #include "conio2.h"
-#define PODSTAWOWY_KOLOR_TEKSTU 8
+#define PODSTAWOWY_KOLOR_TEKSTU 7
 #define PODSTAWOWY_KOLOR_TLA 0
 #define ROZMIAR_MENU_Y 8
 #define ROZMIAR_MENU_X 28

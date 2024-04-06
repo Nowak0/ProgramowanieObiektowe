@@ -16,6 +16,9 @@ public:
 	void wykonajTure();
 	void rysujSwiat();
 	void setMapa(const char symbolOrganizmu, const int polozenieX, const int polozenieY);
+	int getWymiarMapyX() const;
+	int getWymiarMapyY() const;
+	vector<vector<char>> getMapa() const;
 	virtual ~Swiat();
 };
 

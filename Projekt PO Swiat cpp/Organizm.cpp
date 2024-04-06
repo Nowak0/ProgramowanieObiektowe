@@ -1,14 +1,6 @@
 #include "Organizm.h"
 
 
-Organizm::Organizm(Swiat& danySwiat) : swiat(danySwiat) {
-	this->sila = 0;
-	this->inicjatywa = 0;
-	this->polozenieX = 0;
-	this->polozenieY = 0;
-}
-
-
 int Organizm::getSila() const {
 	return sila;
 }
@@ -16,6 +8,11 @@ int Organizm::getSila() const {
 
 int Organizm::getInicjatywa() const {
 	return inicjatywa;
+}
+
+
+int Organizm::getWiek() const {
+	return wiek;
 }
 
 
@@ -39,6 +36,11 @@ void Organizm::setInicjatywa(int inicjatywa) {
 }
 
 
+void Organizm::setWiek(int wiek) {
+	this->wiek = wiek;
+}
+
+
 void Organizm::setPolozenieX(int polozenieX) {
 	this->polozenieX = polozenieX;
 }
@@ -49,8 +51,13 @@ void Organizm::setPolozenieY(int polozenieY) {
 }
 
 
-void Organizm::dodajNowyOrganizm(char symbolOrganizmu) {
-	swiat.setMapa(symbolOrganizmu, polozenieX, polozenieY);
+void Organizm::dodajOrganizm(Organizm& organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
+}
+
+
+void Organizm::usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
 }
 
 

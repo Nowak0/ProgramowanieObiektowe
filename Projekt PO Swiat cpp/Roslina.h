@@ -1,12 +1,17 @@
+#ifndef ROSLINA_H
+#define ROSLINA_H
 #include "Organizm.h"
 
 
 class Roslina : public Organizm {
-private:
+protected:
+	//int inicjatywa = 0;
 
 public:
 	Roslina();
-	virtual void akcja(const int wymiarMapyX, const int wymiarMapyY, Swiat& swiat);
+	virtual void akcja(Swiat& swiat) override;
 	//virtual void kolizja(Swiat& swiat) override;
-	virtual ~Roslina();
+	virtual ~Roslina() override;
 };
+
+#endif
