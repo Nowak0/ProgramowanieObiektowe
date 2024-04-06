@@ -53,7 +53,9 @@ void Zwierze::kolizja(Swiat& swiat) {
 }
 
 
-bool Zwierze::czyOdbilAtak(Organizm& atakujacy) {}
+bool Zwierze::czyOdbilAtak(Organizm& atakujacy) {
+	return true;
+}
 
 
 Zwierze::~Zwierze() {}

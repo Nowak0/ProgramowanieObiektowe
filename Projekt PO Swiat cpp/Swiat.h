@@ -1,9 +1,11 @@
 #ifndef SWIAT_H
 #define SWIAT_H
 #include <iostream>
+#include "Organizm.h"
 #include <vector>
 using namespace std;
 
+class Organizm;
 
 class Swiat {
 private:
@@ -12,6 +14,7 @@ private:
 	vector<vector<char>> mapa;
 	//vector<char> organizmy;
 public:
+	vector<vector<Organizm>> organizmy;
 	Swiat(const int x, const int y);
 	void wykonajTure();
 	void rysujSwiat();

@@ -6,6 +6,9 @@
 using namespace std;
 
 
+class Swiat;
+
+
 class Organizm {
 private:
 	int sila;
@@ -15,7 +18,7 @@ private:
 	int polozenieY;
 
 protected:
-	vector<vector<Organizm>> organizmy;
+	//vector<vector<Organizm>> organizmy;
 	int getSila() const;
 	int getInicjatywa() const;
 	int getWiek() const;

@@ -1,7 +1,4 @@
-﻿  Main.cpp
-D:\Projekt PO Swiat cpp\Main.cpp(4,1): warning C4005: "PODSTAWOWY_KOLOR_TEKSTU": ponowna definicja makra
-D:\Projekt PO Swiat cpp\PrzygotowanieGry.h(3,1): message : zobacz poprzednią definicję „PODSTAWOWY_KOLOR_TEKSTU”
-D:\Projekt PO Swiat cpp\Main.cpp(12,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-  PrzygotowanieGry.cpp
+﻿  Antylopa.cpp
+  Zwierze.cpp
   Generowanie kodu...
   Projekt PO Swiat cpp.vcxproj -> D:\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe

@@ -39,8 +39,8 @@ void Antylopa::akcja(Swiat& swiat) {
 	if (mapa[nowyY][nowyX] == ' ') {
 		swiat.setMapa(symbol, nowyX, nowyY);
 		swiat.setMapa(' ', polozenieX, polozenieY);
-		dodajOrganizm(organizmy[polozenieY][polozenieX], nowyX, nowyY);
-		usunOrganizm(organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
+		usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
 	}
@@ -60,9 +60,9 @@ void Antylopa::akcja(Swiat& swiat) {
 
 void Antylopa::kolizja(Swiat& swiat) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	bool czyPrzetrwal = czyOdbilAtak(organizmy[polozenieY][polozenieX]);
+	bool czyPrzetrwal = czyOdbilAtak(swiat.organizmy[polozenieY][polozenieX]);
 	if (!czyPrzetrwal) {
-		usunOrganizm(organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		return;
 	}
 
@@ -74,7 +74,7 @@ void Antylopa::kolizja(Swiat& swiat) {
 			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
 				swiat.setMapa(symbol, x, y);
-				organizmy[y][x] = *this;
+				swiat.organizmy[y][x] = *this;
 				return;
 			}
 		}
