@@ -1,5 +1,4 @@
-#ifndef SWIAT_H
-#define SWIAT_H
+#pragma once
 #include <iostream>
 #include "Organizm.h"
 #include <vector>
@@ -12,17 +11,17 @@ private:
 	int wymiarMapyX;
 	int wymiarMapyY;
 	vector<vector<char>> mapa;
-	//vector<char> organizmy;
 public:
-	vector<vector<Organizm>> organizmy;
 	Swiat(const int x, const int y);
 	void wykonajTure();
 	void rysujSwiat();
 	void setMapa(const char symbolOrganizmu, const int polozenieX, const int polozenieY);
 	int getWymiarMapyX() const;
 	int getWymiarMapyY() const;
+	vector<vector<Organizm>> organizmy;
+	//vector<vector<Organizm>> getOrganizmy() const;
 	vector<vector<char>> getMapa() const;
+	void dodajOrganizm(Organizm& nowyOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
+	void usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
 	virtual ~Swiat();
 };
-
-#endif

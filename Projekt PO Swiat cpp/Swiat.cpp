@@ -49,4 +49,19 @@ vector<vector<char>> Swiat::getMapa() const {
 }
 
 
+//vector<vector<Organizm>> Swiat::getOrganizmy() const {
+//	return organizmy;
+//}
+//
+//
+void Swiat::dodajOrganizm(Organizm& organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
+}
+//
+//
+void Swiat::usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
+}
+
+
 Swiat::~Swiat() {}

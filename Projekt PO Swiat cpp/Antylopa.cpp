@@ -39,8 +39,9 @@ void Antylopa::akcja(Swiat& swiat) {
 	if (mapa[nowyY][nowyX] == ' ') {
 		swiat.setMapa(symbol, nowyX, nowyY);
 		swiat.setMapa(' ', polozenieX, polozenieY);
-		dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
-		usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		//swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
+		swiat.dodajOrganizm(*this, nowyX, nowyY);
+		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
 	}
@@ -49,6 +50,7 @@ void Antylopa::akcja(Swiat& swiat) {
 
 	else {
 		swiat.setMapa(' ', polozenieX, polozenieY); // usuwam dotychczasowe polozenie antylopy
+		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY); // ustawiam nowe polozenie antylopy (mimo ze okupowane jest przez kogos innego)
 		kolizja(swiat);
@@ -62,7 +64,6 @@ void Antylopa::kolizja(Swiat& swiat) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
 	bool czyPrzetrwal = czyOdbilAtak(swiat.organizmy[polozenieY][polozenieX]);
 	if (!czyPrzetrwal) {
-		usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		return;
 	}
 
@@ -74,7 +75,9 @@ void Antylopa::kolizja(Swiat& swiat) {
 			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
 				swiat.setMapa(symbol, x, y);
-				swiat.organizmy[y][x] = *this;
+				setPolozenieX(x);
+				setPolozenieY(y);
+				swiat.dodajOrganizm(*this, x, y);
 				return;
 			}
 		}

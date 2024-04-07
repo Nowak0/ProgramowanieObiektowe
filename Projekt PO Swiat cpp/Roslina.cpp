@@ -7,39 +7,33 @@ Roslina::Roslina() {
 
 
 void Roslina::akcja(Swiat& swiat) {
-	int rozsiewanie = rand() % 100, polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
+	int rozsiewanie = rand() % 100;
 	if (rozsiewanie < 75) return;
 
-	int ruch = rozsiewanie % 4, wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY();
+	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
 	vector<vector<char>> mapa = swiat.getMapa();
+	vector<int> mozliweMiejscaX;
+	vector<int> mozliweMiejscaY;
+	char aktualnySymbolPostaci = mapa[polozenieY][polozenieX];
 
-	if (ruch == 0 && polozenieX - 1 > 0) //stworz nowy obiekt rosliny i dodaj w podanym miejscu do swiata
+	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
-		if (mapa[polozenieY][polozenieX-1] == ' ') {
-			swiat.setMapa(mapa[polozenieY][polozenieX], polozenieX - 1, polozenieY);
+		if (y <= 0 || y >= swiat.getWymiarMapyY()) continue;
+		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
+		{
+			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
+			if (x == polozenieX && y == polozenieY) continue;
+			if (mapa[y][x] == ' ') {
+				mozliweMiejscaX.push_back(x);
+				mozliweMiejscaY.push_back(y);
+			}
 		}
 	}
 
-	if (ruch == 1 && polozenieX + 1 < wymiarMapyX)
-	{
-		if (mapa[polozenieY][polozenieX + 1] == ' ') {
-			swiat.setMapa(mapa[polozenieY][polozenieX], polozenieX + 1, polozenieY);
-		}
-	}
-
-	if (ruch == 2 && polozenieY - 1 > 0)
-	{
-		if (mapa[polozenieY - 1][polozenieX] == ' ') {
-			swiat.setMapa(mapa[polozenieY][polozenieX], polozenieX, polozenieY - 1);
-		}
-	}
-
-	if (ruch == 3 && polozenieY + 1 < wymiarMapyY)
-	{
-		if (mapa[polozenieY + 1][polozenieX] == ' ') {
-			swiat.setMapa(mapa[polozenieY][polozenieX], polozenieX, polozenieY + 1);
-		}
-	}
+	int ruch = rand() % mozliweMiejscaX.size();
+	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
+	swiat.setMapa(aktualnySymbolPostaci, nowyX, nowyY);
+	//swiat.dodajOrganizm(swiat.getOrganizmy()[polozenieY][polozenieX], nowyX, nowyY);
 }
 
 

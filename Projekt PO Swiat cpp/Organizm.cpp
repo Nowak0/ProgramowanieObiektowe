@@ -51,14 +51,14 @@ void Organizm::setPolozenieY(int polozenieY) {
 }
 
 
-void Organizm::dodajOrganizm(Organizm& organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
-	//organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
-}
-
-
-void Organizm::usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
-	//organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
-}
+//void Organizm::dodajOrganizm(Organizm& organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+//	//organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
+//}
+//
+//
+//void Organizm::usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+//	//organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
+//}
 
 
 Organizm::~Organizm() {}

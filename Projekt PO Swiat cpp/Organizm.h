@@ -1,5 +1,4 @@
-#ifndef ORGANIZM_H
-#define ORGANIZM_H
+#pragma once
 #include <iostream>
 #include <time.h>
 #include "Swiat.h"
@@ -18,7 +17,6 @@ private:
 	int polozenieY;
 
 protected:
-	//vector<vector<Organizm>> organizmy;
 	int getSila() const;
 	int getInicjatywa() const;
 	int getWiek() const;
@@ -35,9 +33,7 @@ public:
 	virtual void kolizja(Swiat& swiat) = 0;
 	virtual void rysowanie() = 0;
 	virtual bool czyOdbilAtak(Organizm& atakujacy) = 0;
-	void dodajOrganizm(Organizm& nowyOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
-	void usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
+	//void dodajOrganizm(Organizm& nowyOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
+	//void usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
 	virtual ~Organizm();
 };
-
-#endif
