@@ -16,7 +16,12 @@ private:
 	int polozenieX;
 	int polozenieY;
 
-protected:
+public:
+	virtual void akcja(Swiat& swiat) = 0;
+	virtual void kolizja(Swiat& swiat) = 0;
+	//virtual void rysowanie() = 0;
+	virtual bool czyOdbilAtak(Organizm& atakujacy) = 0;
+	virtual char getSymbol() = 0;
 	int getSila() const;
 	int getInicjatywa() const;
 	int getWiek() const;
@@ -27,13 +32,5 @@ protected:
 	void setWiek(int wiek);
 	void setPolozenieX(int polozenieX);
 	void setPolozenieY(int polozenieY);
-
-public:
-	virtual void akcja(Swiat& swiat) = 0;
-	virtual void kolizja(Swiat& swiat) = 0;
-	virtual void rysowanie() = 0;
-	virtual bool czyOdbilAtak(Organizm& atakujacy) = 0;
-	//void dodajOrganizm(Organizm& nowyOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
-	//void usunOrganizm(Organizm& staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY);
 	virtual ~Organizm();
 };

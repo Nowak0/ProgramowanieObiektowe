@@ -24,12 +24,10 @@ void Zwierze::akcja(Swiat& swiat) {
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 
 	if (mapa[nowyY][nowyX] == ' ') {
-		swiat.setMapa(aktualnySymbolPostaci, nowyX, nowyY);
-		//swiat.dodajOrganizm(swiat.getOrganizmy()[polozenieY][polozenieX], nowyX, nowyY);
-		swiat.setMapa(' ', polozenieX, polozenieY);
-		//swiat.usunOrganizm(swiat.getOrganizmy()[polozenieY][polozenieX], polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
+		swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
+		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 	}
 
 	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) kolizja(swiat);
@@ -47,8 +45,7 @@ void Zwierze::kolizja(Swiat& swiat) {
 		{
 			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
-				swiat.setMapa(aktualnySymbolPostaci, x, y);
-				//swiat.dodajOrganizm(swiat.getOrganizmy()[polozenieY][polozenieX], x, y);
+				swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], x, y);
 				return;
 			}
 		}

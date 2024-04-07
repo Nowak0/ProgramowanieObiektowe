@@ -1,7 +1,7 @@
 #include "Antylopa.h"
 
 
-Antylopa::Antylopa(int polozenieX, int polozenieY, int wiek) {
+Antylopa::Antylopa(const int polozenieX, const int polozenieY, const int wiek) {
 	setSila(4);
 	setInicjatywa(4);
 	setWiek(wiek);
@@ -10,7 +10,7 @@ Antylopa::Antylopa(int polozenieX, int polozenieY, int wiek) {
 }
 
 
-int Antylopa::getSymbol() const {
+char Antylopa::getSymbol() {
 	return symbol;
 }
 
@@ -37,22 +37,22 @@ void Antylopa::akcja(Swiat& swiat) {
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 
 	if (mapa[nowyY][nowyX] == ' ') {
-		swiat.setMapa(symbol, nowyX, nowyY);
-		swiat.setMapa(' ', polozenieX, polozenieY);
-		//swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
-		swiat.dodajOrganizm(*this, nowyX, nowyY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
+		//swiat.setMapa(symbol, nowyX, nowyY);
+		//swiat.setMapa(' ', polozenieX, polozenieY);
+		//swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
+		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
 	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat);
 
 	else {
-		swiat.setMapa(' ', polozenieX, polozenieY); // usuwam dotychczasowe polozenie antylopy
-		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY); // ustawiam nowe polozenie antylopy (mimo ze okupowane jest przez kogos innego)
+		//swiat.setMapa(' ', polozenieX, polozenieY); // usuwam dotychczasowe polozenie antylopy
 		kolizja(swiat);
 	}
 
@@ -62,7 +62,7 @@ void Antylopa::akcja(Swiat& swiat) {
 
 void Antylopa::kolizja(Swiat& swiat) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	bool czyPrzetrwal = czyOdbilAtak(swiat.organizmy[polozenieY][polozenieX]);
+	bool czyPrzetrwal = czyOdbilAtak(*swiat.organizmy[polozenieY][polozenieX]);
 	if (!czyPrzetrwal) {
 		return;
 	}
@@ -77,7 +77,7 @@ void Antylopa::kolizja(Swiat& swiat) {
 				swiat.setMapa(symbol, x, y);
 				setPolozenieX(x);
 				setPolozenieY(y);
-				swiat.dodajOrganizm(*this, x, y);
+				swiat.dodajOrganizm(this, x, y);
 				return;
 			}
 		}
