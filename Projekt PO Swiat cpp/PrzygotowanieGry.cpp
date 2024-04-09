@@ -1,5 +1,5 @@
 #include "PrzygotowanieGry.h"
-
+#include <string>
 
 PrzygotowanieGry::PrzygotowanieGry() {
 	settitle("Jakub Nowak 197860");
@@ -31,6 +31,7 @@ void PrzygotowanieGry::wyswietlEkranPoczatkowy() {
 		pozycjaWyswietlaniaY += 1;
 		gotoxy(POCZATKOWA_POZYCJA_X, pozycjaWyswietlaniaY);
 	}
+
 }
 
 

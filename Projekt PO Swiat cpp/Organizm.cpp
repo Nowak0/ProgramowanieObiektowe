@@ -1,6 +1,19 @@
 #include "Organizm.h"
 
 
+bool Organizm::czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany) {
+	int silaAtakowanego = atakowany.getSila();
+	int silaAtakujacego = atakujacy.getSila();
+
+	if (silaAtakujacego >= silaAtakowanego) return false;
+	else return true;
+}
+
+string Organizm::getNazwa() const {
+	return nazwa;
+}
+
+
 int Organizm::getSila() const {
 	return sila;
 }
@@ -23,6 +36,11 @@ int Organizm::getPolozenieX() const {
 
 int Organizm::getPolozenieY() const {
 	return polozenieY;
+}
+
+
+void Organizm::setNazwa(string nazwa) {
+	this->nazwa = nazwa;
 }
 
 

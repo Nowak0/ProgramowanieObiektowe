@@ -4,6 +4,7 @@
 Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 	this->wymiarMapyX = x;
 	this->wymiarMapyY = y;
+	this->liczbaWiadomosci = 0;
 	for (int y = 0; y < wymiarMapyY; y++)
 	{
 		for (int x = 0; x < wymiarMapyX; x++)
@@ -19,6 +20,7 @@ Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 
 
 void Swiat::wykonajTure() {
+	liczbaWiadomosci = 0;
 	for (int y = 0; y < organizmy.size(); y++)
 	{
 		for (int x = 0; x < organizmy[y].size(); x++)
@@ -65,12 +67,18 @@ int Swiat::getWymiarMapyY() const {
 }
 
 
+int Swiat::getLiczbaWiadomsci() const {
+	return liczbaWiadomosci;
+}
+
+
 vector<vector<char>> Swiat::getMapa() const {
 	return mapa;
 }
 
 
 void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	//wypiszWiadomosc("dodano " + organizm->getNazwa());
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
 	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = organizm->getSymbol();
 }
@@ -78,8 +86,21 @@ void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int poloz
 
 void Swiat::usunOrganizm(Organizm* staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
 	//organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
+	//wypiszWiadomosc("usunieto " + staryOrganizm->getNazwa());
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = nullptr;
 	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = ' ';
+}
+
+
+void Swiat::setLiczbaWiadomosci() {
+	liczbaWiadomosci++;
+}
+
+
+void Swiat::wypiszWiadomosc(string wiadomosc) {
+	gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX(), POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
+	cout << wiadomosc;
+	setLiczbaWiadomosci();
 }
 
 

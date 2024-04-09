@@ -6,8 +6,7 @@
 class Zwierze : public Organizm {
 public:
 	virtual void akcja(Swiat& swiat) override;
-	virtual void kolizja(Swiat& swiat) override;
-	virtual bool czyOdbilAtak(Organizm& atakujacy) override;
+	virtual void kolizja(Swiat& swiat, Organizm& atakujacy) override;
 	virtual ~Zwierze() override;
 };
 

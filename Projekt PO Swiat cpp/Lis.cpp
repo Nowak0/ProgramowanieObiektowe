@@ -2,6 +2,7 @@
 
 
 Lis::Lis(const int polozenieX, const int polozenieY, const int wiek) {
+	setNazwa("Lis");
 	setSila(3);
 	setInicjatywa(7);
 	setWiek(wiek);
@@ -22,55 +23,52 @@ void Lis::akcja(Swiat& swiat) {
 	vector<int> mozliweMiejscaY;
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
-		if (y <= 0 || y >= swiat.getWymiarMapyY()) continue;
-		for (int x = polozenieX - 1; x <= polozenieX + 1; x ++)
+		if (y < 0 || y > swiat.getWymiarMapyY()) continue;
+		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 		{
-			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
-			if (x == polozenieX && y == polozenieY) continue;
-			if (mapa[y][x] == ' ' || swiat.organizmy[y][x]->getSila() <= getSila()) {
+			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
+			else if (x == polozenieX && y == polozenieY) continue;
+			else if (mapa[y][x] == ' ' || this->getSila() >= swiat.organizmy[y][x]->getSila()) {
 				mozliweMiejscaX.push_back(x);
 				mozliweMiejscaY.push_back(y);
 			}
 		}
 	}
 
-	int ruchX = rand() % mozliweMiejscaX.size(), ruchY = rand() % mozliweMiejscaY.size();
-	int nowyX = mozliweMiejscaX[ruchX], nowyY = mozliweMiejscaY[ruchY];
-
+	int ruch = rand() % mozliweMiejscaX.size();
+	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
+	
 	if (mapa[nowyY][nowyX] == ' ') {
+		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
-		//swiat.setMapa(symbol, nowyX, nowyY);
-		//swiat.setMapa(' ', polozenieX, polozenieY);
-		//swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
 		swiat.dodajOrganizm(this, nowyX, nowyY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat);
+	//else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat, *this);
 
 	else {
-		setPolozenieX(nowyX);
-		setPolozenieY(nowyY);
-		//swiat.setMapa(' ', polozenieX, polozenieY);
-		swiat.usunOrganizm(this, polozenieX, polozenieY);
-		kolizja(swiat);
+		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
 	}
 }
 
 
-void Lis::kolizja(Swiat& swiat) {
-	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
-	swiat.dodajOrganizm(this, polozenieX, polozenieY);
-	//swiat.setMapa(symbol, polozenieX, polozenieY);
-	gotoxy(POCZATKOWA_POZYCJA_X + 3 * swiat.getWymiarMapyX(), POCZATKOWA_POZYCJA_Y);
-	cputs("Lis zabil");
-}
+void Lis::kolizja(Swiat& swiat, Organizm& atakujacy) {
+	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
+	bool czyPrzetrwal = czyOdbilAtak(atakujacy, *this);
 
-
-bool Lis::czyOdbilAtak(Organizm& atakujacy) {
-	return true;
+	if (czyPrzetrwal) {
+		swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa());
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
+	}
+	else {
+		swiat.usunOrganizm(this, polozenieX, polozenieY);
+		atakujacy.setPolozenieX(polozenieX);
+		atakujacy.setPolozenieY(polozenieY);
+		swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
+		swiat.usunOrganizm(swiat.organizmy[polozenieYAtak][polozenieXAtak], polozenieXAtak, polozenieYAtak);
+		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis");
+	}
 }
 
 

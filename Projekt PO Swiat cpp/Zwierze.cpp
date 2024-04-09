@@ -30,31 +30,26 @@ void Zwierze::akcja(Swiat& swiat) {
 		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) kolizja(swiat);
+	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) kolizja(swiat, *this);
 
 }
 
 
-void Zwierze::kolizja(Swiat& swiat) {
-	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	char aktualnySymbolPostaci = swiat.getMapa()[polozenieY][polozenieX];
+void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
+	int polozenieX = atakujacy.getPolozenieX(), polozenieY = atakujacy.getPolozenieY();
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
-		if (y <= 0 || y >= swiat.getWymiarMapyY()) continue;
+		if (y < 0 || y > swiat.getWymiarMapyY()) continue;
 		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 		{
-			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
+			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
-				swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], x, y);
+				//tutaj nalezy stworzyc nowy dynamiczny obiekt tej samej klasy co atakujacy, czyli nalezy wykorzystac konstruktor kopiujacy 
+				//swiat.dodajOrganizm(puste, x, y);
 				return;
 			}
 		}
 	}
-}
-
-
-bool Zwierze::czyOdbilAtak(Organizm& atakujacy) {
-	return true;
 }
 
 
