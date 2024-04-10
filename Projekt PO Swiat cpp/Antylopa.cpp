@@ -3,6 +3,7 @@
 
 Antylopa::Antylopa(const int polozenieX, const int polozenieY, const int wiek) {
 	setNazwa("Antylopa");
+	setSymbol('A');
 	setSila(4);
 	setInicjatywa(4);
 	setWiek(wiek);
@@ -11,8 +12,8 @@ Antylopa::Antylopa(const int polozenieX, const int polozenieY, const int wiek) {
 }
 
 
-char Antylopa::getSymbol() {
-	return symbol;
+void Antylopa::kopiujObiekt(const Organizm& inny) {
+	Organizm::kopiujObiekt(inny);
 }
 
 

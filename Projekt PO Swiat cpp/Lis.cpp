@@ -3,6 +3,7 @@
 
 Lis::Lis(const int polozenieX, const int polozenieY, const int wiek) {
 	setNazwa("Lis");
+	setSymbol('L');
 	setSila(3);
 	setInicjatywa(7);
 	setWiek(wiek);
@@ -11,12 +12,13 @@ Lis::Lis(const int polozenieX, const int polozenieY, const int wiek) {
 }
 
 
-char Lis::getSymbol() {
-	return symbol;
+void Lis::kopiujObiekt(const Organizm& inny) {
+	Organizm::kopiujObiekt(inny);
 }
 
 
 void Lis::akcja(Swiat& swiat) {
+	
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
 	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
@@ -45,7 +47,7 @@ void Lis::akcja(Swiat& swiat) {
 		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
-	//else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat, *this);
+	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat, *this);
 
 	else {
 		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
@@ -70,6 +72,18 @@ void Lis::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis");
 	}
 }
+
+
+//Lis& Lis::operator=(const Organizm& other) {
+//	setNazwa(other.getNazwa());
+//	setSymbol(other.getSymbol());
+//	setSila(other.getSila());
+//	setInicjatywa(other.getInicjatywa());
+//	setWiek(other.getWiek());
+//	setPolozenieX(other.getPolozenieX());
+//	setPolozenieY(other.getPolozenieY());
+//	return *this;
+//}
 
 
 Lis::~Lis() {}

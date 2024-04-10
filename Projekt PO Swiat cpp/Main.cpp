@@ -19,20 +19,19 @@ int main() {
 	przygotowanieGry->wyswietlEkranPoczatkowy();
 	cin >> action;
 	Swiat* swiat = new Swiat(20, 20);
-	Organizm* lis = new Lis(1, 1, 1);
-	Organizm* lis2 = new Lis(2, 2, 1);
-	//Organizm* antylopa = new Antylopa(2, 2, 2);
+	Organizm* lis = new Lis(1, 1, 0);
+	Organizm* lis2 = new Lis(5, 5, 1);
+	//Organizm* antylopa = new Antylopa(4, 4, 1);
 	if (action == 'p')
 	{
 		przygotowanieGry->przygotujEkran();
 		swiat->dodajOrganizm(lis, lis->getPolozenieX(), lis->getPolozenieY());
 		swiat->dodajOrganizm(lis2, lis2->getPolozenieX(), lis2->getPolozenieY());
-		lis->akcja(*swiat);
-		//swiat->wykonajTure();
-		//lis2->akcja(*swiat);
+		//swiat->dodajOrganizm(antylopa, antylopa->getPolozenieX(), antylopa->getPolozenieY());
+		swiat->wykonajTure();
 		swiat->rysujSwiat();
 	}
-	
+
 	delete przygotowanieGry;
 	delete swiat;
 	return 0;

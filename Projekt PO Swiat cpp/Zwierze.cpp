@@ -44,8 +44,12 @@ void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		{
 			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
-				//tutaj nalezy stworzyc nowy dynamiczny obiekt tej samej klasy co atakujacy, czyli nalezy wykorzystac konstruktor kopiujacy 
-				//swiat.dodajOrganizm(puste, x, y);
+				Organizm* nowyOrganizm = new Zwierze();
+				nowyOrganizm->kopiujObiekt(atakujacy);
+				nowyOrganizm->setPolozenieX(x);
+				nowyOrganizm->setPolozenieY(y);
+				nowyOrganizm->setWiek(swiat.getLiczbaOrganizmow() + 1);
+				swiat.dodajOrganizm(nowyOrganizm, x, y);
 				return;
 			}
 		}

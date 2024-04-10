@@ -5,6 +5,8 @@ Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 	this->wymiarMapyX = x;
 	this->wymiarMapyY = y;
 	this->liczbaWiadomosci = 0;
+	this->liczbaOrganizmow = 0;
+	this->posortowaneOrganizmy.resize(0);
 	for (int y = 0; y < wymiarMapyY; y++)
 	{
 		for (int x = 0; x < wymiarMapyX; x++)
@@ -21,12 +23,16 @@ Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 
 void Swiat::wykonajTure() {
 	liczbaWiadomosci = 0;
-	for (int y = 0; y < organizmy.size(); y++)
-	{
-		for (int x = 0; x < organizmy[y].size(); x++)
+	cout << posortowaneOrganizmy.size();
+	int i = 0;
+	for (const auto& o : posortowaneOrganizmy) {
+		if (i>0)
 		{
-			if (organizmy[y][x] != nullptr) organizmy[y][x]->akcja(*this);
+			return;
 		}
+		if(o == nullptr) continue;
+		o->akcja(*this);
+		i++;
 	}
 }
 
@@ -72,6 +78,11 @@ int Swiat::getLiczbaWiadomsci() const {
 }
 
 
+int Swiat::getLiczbaOrganizmow() const {
+	return liczbaOrganizmow;
+}
+
+
 vector<vector<char>> Swiat::getMapa() const {
 	return mapa;
 }
@@ -80,14 +91,15 @@ vector<vector<char>> Swiat::getMapa() const {
 void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
 	//wypiszWiadomosc("dodano " + organizm->getNazwa());
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
+	dodajOrganizmDoPosortowanych(organizm);
 	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = organizm->getSymbol();
 }
 
 
 void Swiat::usunOrganizm(Organizm* staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
-	//organizmy[polozenieOrganizmuY].erase(organizmy[polozenieOrganizmuY].begin() + polozenieOrganizmuX);
 	//wypiszWiadomosc("usunieto " + staryOrganizm->getNazwa());
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = nullptr;
+	usunPusteMiejscaVector();
 	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = ' ';
 }
 
@@ -97,10 +109,53 @@ void Swiat::setLiczbaWiadomosci() {
 }
 
 
+void Swiat::setLiczbaOrganizmow() {
+	liczbaOrganizmow++;
+}
+
+
+void Swiat::setLiczbaOrganizmow(const int liczba) {
+	this->liczbaOrganizmow = liczba;
+}
+
+
 void Swiat::wypiszWiadomosc(string wiadomosc) {
 	gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX(), POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
 	cout << wiadomosc;
 	setLiczbaWiadomosci();
+}
+
+
+void Swiat::dodajOrganizmDoPosortowanych(Organizm* organizm) {
+	usunPusteMiejscaVector();
+	int n = posortowaneOrganizmy.size();
+	int i = 0, inicjatywaOrganizmu = organizm->getInicjatywa(), wiekOrganizmu = organizm->getWiek();
+	for (Organizm* o : posortowaneOrganizmy) {
+		if (o == nullptr) continue;
+		if (inicjatywaOrganizmu > o->getInicjatywa()) {
+			posortowaneOrganizmy.resize(n + 1);
+			posortowaneOrganizmy.insert(posortowaneOrganizmy.begin() + i, organizm);
+			return;
+		}
+		else if (inicjatywaOrganizmu == o->getInicjatywa() && wiekOrganizmu < o->getWiek()) {
+			posortowaneOrganizmy.resize(n + 1);
+			posortowaneOrganizmy.insert(posortowaneOrganizmy.begin() + i, organizm);
+			return;
+		}
+		i++;
+	}
+	//posortowaneOrganizmy.resize(n + 1);
+	//posortowaneOrganizmy.insert(posortowaneOrganizmy.begin() + i, organizm);
+	posortowaneOrganizmy.push_back(organizm); // jezeli nie znaleziono miejsca w srodku, to dodaj organizm na koniec
+}
+
+
+void Swiat::usunPusteMiejscaVector() {
+	int i = 0;
+	while (i<posortowaneOrganizmy.size()) {
+		if (posortowaneOrganizmy[i] == nullptr) posortowaneOrganizmy.erase(posortowaneOrganizmy.begin() + i);
+		i++;
+	}
 }
 
 

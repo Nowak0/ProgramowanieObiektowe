@@ -9,8 +9,25 @@ bool Organizm::czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany) {
 	else return true;
 }
 
+
+void Organizm::kopiujObiekt(const Organizm& innyOrganizm) {
+	nazwa = innyOrganizm.getNazwa();
+	symbol = innyOrganizm.getSymbol();
+	sila = innyOrganizm.getSila();
+	inicjatywa = innyOrganizm.getInicjatywa();
+	wiek = innyOrganizm.getWiek();
+	polozenieX = innyOrganizm.getPolozenieX();
+	polozenieY = innyOrganizm.getPolozenieY();
+}
+
+
 string Organizm::getNazwa() const {
 	return nazwa;
+}
+
+
+char Organizm::getSymbol() const {
+	return symbol;
 }
 
 
@@ -44,6 +61,11 @@ void Organizm::setNazwa(string nazwa) {
 }
 
 
+void Organizm::setSymbol(char symbol) {
+	this->symbol = symbol;
+}
+
+
 void Organizm::setSila(int sila) {
 	this->sila = sila;
 }
@@ -67,6 +89,18 @@ void Organizm::setPolozenieX(int polozenieX) {
 void Organizm::setPolozenieY(int polozenieY) {
 	this->polozenieY = polozenieY;
 }
+
+
+//Organizm& Organizm::operator=(const Organizm& innyOrganizm) {
+//	nazwa = innyOrganizm.getNazwa();
+//	symbol = innyOrganizm.getSymbol();
+//	sila = innyOrganizm.getSila();
+//	inicjatywa = innyOrganizm.getInicjatywa();
+//	wiek = innyOrganizm.getWiek();
+//	polozenieX = innyOrganizm.getPolozenieX();
+//	polozenieY = innyOrganizm.getPolozenieY();
+//	return *this;
+//}
 
 
 Organizm::~Organizm() {}

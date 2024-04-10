@@ -2,7 +2,6 @@
 #define ZWIERZE_H
 #include "Organizm.h"
 
-
 class Zwierze : public Organizm {
 public:
 	virtual void akcja(Swiat& swiat) override;
