@@ -1,3 +1,0 @@
-﻿  Swiat.cpp
-D:\Projekt PO Swiat cpp\Swiat.cpp(131,8): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
-  Projekt PO Swiat cpp.vcxproj -> D:\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe
