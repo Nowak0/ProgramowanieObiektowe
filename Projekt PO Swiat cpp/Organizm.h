@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include "Swiat.h"
+#define NIEZYWY_ORGANIZM -1
 using namespace std;
 
 
@@ -21,7 +22,7 @@ private:
 public:
 	virtual void akcja(Swiat& swiat) = 0;
 	virtual void kolizja(Swiat& swiat, Organizm& atakujacy) = 0;
-	//virtual void rysowanie() = 0;
+	virtual Organizm* stworzNowySklonowanyObiekt() = 0;
 	virtual bool czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany);
 	virtual void kopiujObiekt(const Organizm& innyOrganizm);
 	string getNazwa() const;

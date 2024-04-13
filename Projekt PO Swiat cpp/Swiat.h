@@ -6,6 +6,7 @@
 #include <vector>
 #define POCZATKOWA_POZYCJA_Y 3
 #define POCZATKOWA_POZYCJA_X 20
+#define NIEZYWY_ORGANIZM -1
 using namespace std;
 
 class Organizm;
@@ -16,13 +17,14 @@ private:
 	int wymiarMapyY;
 	int liczbaWiadomosci;
 	vector<vector<char>> mapa;
+	vector<Organizm*> posortowaneOrganizmy;
+	vector<bool> zyjaceOrganizmy;
 	void usunOrganizmZPosortowanych(Organizm* organizm);
 	void usunNullPTR();
 	void dodajOrganizmDoPosortowanych(Organizm* organizm);
 public:
 	Swiat(const int x, const int y);
 	vector<vector<Organizm*>> organizmy;
-	vector<Organizm*> posortowaneOrganizmy;
 	void wykonajTure();
 	void rysujSwiat();
 	int getWymiarMapyX() const;

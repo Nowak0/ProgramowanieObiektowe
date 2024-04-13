@@ -12,13 +12,17 @@ Lis::Lis(const int polozenieX, const int polozenieY, const int wiek) {
 }
 
 
-void Lis::kopiujObiekt(const Organizm& inny) {
-	Organizm::kopiujObiekt(inny);
+Lis::Lis(const Organizm& inny) {
+	kopiujObiekt(inny);
+}
+
+
+Organizm* Lis::stworzNowySklonowanyObiekt() {
+	return new Lis(*this);
 }
 
 
 void Lis::akcja(Swiat& swiat) {
-	
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
 	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
@@ -47,7 +51,10 @@ void Lis::akcja(Swiat& swiat) {
 		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat, *this);
+	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+		Organizm* nowyLis = new Lis(*this);
+		Zwierze::kolizja(swiat, *nowyLis);
+	}
 
 	else {
 		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
@@ -61,9 +68,11 @@ void Lis::kolizja(Swiat& swiat, Organizm& atakujacy) {
 
 	if (czyPrzetrwal) {
 		swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa());
+		atakujacy.setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 	}
 	else {
+		setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		atakujacy.setPolozenieX(polozenieX);
 		atakujacy.setPolozenieY(polozenieY);
@@ -72,18 +81,6 @@ void Lis::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis");
 	}
 }
-
-
-//Lis& Lis::operator=(const Organizm& other) {
-//	setNazwa(other.getNazwa());
-//	setSymbol(other.getSymbol());
-//	setSila(other.getSila());
-//	setInicjatywa(other.getInicjatywa());
-//	setWiek(other.getWiek());
-//	setPolozenieX(other.getPolozenieX());
-//	setPolozenieY(other.getPolozenieY());
-//	return *this;
-//}
 
 
 Lis::~Lis() {}

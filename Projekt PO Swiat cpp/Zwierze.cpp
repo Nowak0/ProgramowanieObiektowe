@@ -6,7 +6,6 @@ void Zwierze::akcja(Swiat& swiat) {
 	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
 	vector<int> mozliweMiejscaY;
-	char aktualnySymbolPostaci = mapa[polozenieY][polozenieX];
 
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
@@ -30,12 +29,19 @@ void Zwierze::akcja(Swiat& swiat) {
 		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) kolizja(swiat, *this);
+	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+		Organizm* noweZwierze = this->stworzNowySklonowanyObiekt();
+		kolizja(swiat, *noweZwierze);
+	}
 
+	else {
+		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
+	}
 }
 
 
-void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
+void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) { 
+	// nazwa atakujacy jest dla zachowania ciaglosci nazw, jednakze jest to nowy organizm, ktory ma sie dopiero urodzic. Organizm ten ma ustawiony te same parametry co rodzic
 	int polozenieX = atakujacy.getPolozenieX(), polozenieY = atakujacy.getPolozenieY();
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
@@ -44,13 +50,11 @@ void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		{
 			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
 			if (swiat.getMapa()[y][x] == ' ') {
-				Organizm* nowyOrganizm = new Zwierze();
-				nowyOrganizm->kopiujObiekt(atakujacy);
-				nowyOrganizm->setPolozenieX(x);
-				nowyOrganizm->setPolozenieY(y);
-				nowyOrganizm->setWiek(swiat.getLiczbaOrganizmow() + 1);
-				swiat.dodajOrganizm(nowyOrganizm, x, y);
-				swiat.wypiszWiadomosc("Nowe zwierze " + nowyOrganizm->getNazwa());
+				atakujacy.setPolozenieX(x);
+				atakujacy.setPolozenieY(y);
+				atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1);
+				swiat.dodajOrganizm(&atakujacy, x, y);
+				swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa());
 				return;
 			}
 		}

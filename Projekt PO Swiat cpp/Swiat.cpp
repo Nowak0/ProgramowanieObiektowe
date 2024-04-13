@@ -23,11 +23,20 @@ Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 void Swiat::wykonajTure() {
 	liczbaWiadomosci = 0;
 	vector<Organizm*> tmp;
+	zyjaceOrganizmy.clear();
+	zyjaceOrganizmy.resize(posortowaneOrganizmy.size(), true);
+
 	for (Organizm* o : posortowaneOrganizmy) {
 		tmp.push_back(o);
 	}
 	for (Organizm* o : tmp) {
-		if(o != nullptr) o->akcja(*this);
+		if (o != nullptr && o->getWiek() != NIEZYWY_ORGANIZM) o->akcja(*this);
+	}
+	for (Organizm* o : tmp) {
+		if (o != nullptr && o->getWiek() == NIEZYWY_ORGANIZM) {
+			wypiszWiadomosc("usuwam " + o->getNazwa());
+			delete o;
+		}
 	}
 }
 

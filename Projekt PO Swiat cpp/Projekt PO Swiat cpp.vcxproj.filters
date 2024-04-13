@@ -42,7 +42,7 @@
     <ClCompile Include="Lis.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="CyberOwca.cpp">
+    <ClCompile Include="Owca.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="Trawa.cpp">
@@ -95,7 +95,7 @@
     <ClInclude Include="Antylopa.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="CyberOwca.h">
+    <ClInclude Include="Owca.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Zolw.h">

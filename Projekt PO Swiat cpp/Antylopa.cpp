@@ -12,8 +12,13 @@ Antylopa::Antylopa(const int polozenieX, const int polozenieY, const int wiek) {
 }
 
 
-void Antylopa::kopiujObiekt(const Organizm& inny) {
-	Organizm::kopiujObiekt(inny);
+Antylopa::Antylopa(const Organizm& inny) {
+	kopiujObiekt(inny);
+}
+
+
+Organizm* Antylopa::stworzNowySklonowanyObiekt() {
+	return new Antylopa(*this);
 }
 
 
@@ -45,7 +50,10 @@ void Antylopa::akcja(Swiat& swiat) {
 		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) Zwierze::kolizja(swiat, *this);
+	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+		Organizm* nowaAntylopa = new Antylopa(*this);
+		Zwierze::kolizja(swiat, *nowaAntylopa);
+	}
 
 	else {
 		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
@@ -80,16 +88,20 @@ void Antylopa::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	}
 
 	bool czyPrzetrwal = czyOdbilAtak(atakujacy, *this);
-	if (!czyPrzetrwal) {
+	if (czyPrzetrwal) {
+		swiat.wypiszWiadomosc("Antylopa zabija " + atakujacy.getNazwa());
+		atakujacy.setWiek(NIEZYWY_ORGANIZM);
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
+	}
+
+	else {
+		setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		atakujacy.setPolozenieX(polozenieX);
 		atakujacy.setPolozenieY(polozenieY);
 		swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
+		swiat.usunOrganizm(swiat.organizmy[polozenieYAtak][polozenieXAtak], polozenieXAtak, polozenieYAtak);
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa");
-	}
-
-	else {
-		swiat.wypiszWiadomosc("Antylopa zabija " + atakujacy.getNazwa());
 	}
 }
 

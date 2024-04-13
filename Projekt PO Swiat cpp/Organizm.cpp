@@ -11,13 +11,13 @@ bool Organizm::czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany) {
 
 
 void Organizm::kopiujObiekt(const Organizm& innyOrganizm) {
-	nazwa = innyOrganizm.getNazwa();
-	symbol = innyOrganizm.getSymbol();
-	sila = innyOrganizm.getSila();
-	inicjatywa = innyOrganizm.getInicjatywa();
-	wiek = innyOrganizm.getWiek();
-	polozenieX = innyOrganizm.getPolozenieX();
-	polozenieY = innyOrganizm.getPolozenieY();
+	this->nazwa = innyOrganizm.getNazwa();
+	this->symbol = innyOrganizm.getSymbol();
+	this->sila = innyOrganizm.getSila();
+	this->inicjatywa = innyOrganizm.getInicjatywa();
+	this->wiek = innyOrganizm.getWiek();
+	this->polozenieX = innyOrganizm.getPolozenieX();
+	this->polozenieY = innyOrganizm.getPolozenieY();
 }
 
 
@@ -89,18 +89,6 @@ void Organizm::setPolozenieX(int polozenieX) {
 void Organizm::setPolozenieY(int polozenieY) {
 	this->polozenieY = polozenieY;
 }
-
-
-//Organizm& Organizm::operator=(const Organizm& innyOrganizm) {
-//	nazwa = innyOrganizm.getNazwa();
-//	symbol = innyOrganizm.getSymbol();
-//	sila = innyOrganizm.getSila();
-//	inicjatywa = innyOrganizm.getInicjatywa();
-//	wiek = innyOrganizm.getWiek();
-//	polozenieX = innyOrganizm.getPolozenieX();
-//	polozenieY = innyOrganizm.getPolozenieY();
-//	return *this;
-//}
 
 
 Organizm::~Organizm() {}
