@@ -48,4 +48,10 @@ void Owca::kolizja(Swiat& swiat, Organizm& atakujacy) {
 }
 
 
+char Owca::rysowanie() {
+	textcolor(WHITE);
+	return getSymbol();
+}
+
+
 Owca::~Owca() {};

@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "Organizm.h"
-#include "conio2.h"
 #include <string>
 #include <vector>
 #define POCZATKOWA_POZYCJA_Y 3
@@ -18,9 +17,9 @@ private:
 	int liczbaWiadomosci;
 	vector<vector<char>> mapa;
 	vector<Organizm*> posortowaneOrganizmy;
-	vector<bool> zyjaceOrganizmy;
+	vector<Organizm*> nieZyjaceOrganizmy;
 	void usunOrganizmZPosortowanych(Organizm* organizm);
-	void usunNullPTR();
+	void usunNullPTR(const int i);
 	void dodajOrganizmDoPosortowanych(Organizm* organizm);
 public:
 	Swiat(const int x, const int y);

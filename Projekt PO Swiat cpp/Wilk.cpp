@@ -49,4 +49,10 @@ void Wilk::kolizja(Swiat& swiat, Organizm& atakujacy) {
 }
 
 
+char Wilk::rysowanie() {
+	textcolor(DARKGRAY);
+	return getSymbol();
+}
+
+
 Wilk::~Wilk() {};

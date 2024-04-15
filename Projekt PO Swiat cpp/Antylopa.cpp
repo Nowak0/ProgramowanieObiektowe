@@ -65,21 +65,23 @@ void Antylopa::akcja(Swiat& swiat) {
 
 void Antylopa::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), unik = rand() % 2, polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
-	swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
-
+	
 	if (unik == 1) {
 		for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 		{
-			if (y <= 0 || y >= swiat.getWymiarMapyY()) continue;
+			if (y < 0 || y >= swiat.getWymiarMapyY()) continue;
 			for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 			{
-				if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
+				if (x < 0 || x >= swiat.getWymiarMapyX()) continue;
 				if (swiat.getMapa()[y][x] == ' ') {
+					swiat.usunOrganizm(this, polozenieX, polozenieY);
 					setPolozenieX(x);
 					setPolozenieY(y);
+					atakujacy.setPolozenieX(polozenieX);
+					atakujacy.setPolozenieY(polozenieY);
 					swiat.dodajOrganizm(this, x, y);
-					swiat.usunOrganizm(this, polozenieX, polozenieY);
 					swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
+					swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 					swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa());
 					return;
 				}
@@ -100,9 +102,15 @@ void Antylopa::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		atakujacy.setPolozenieX(polozenieX);
 		atakujacy.setPolozenieY(polozenieY);
 		swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieYAtak][polozenieXAtak], polozenieXAtak, polozenieYAtak);
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa");
 	}
+}
+
+
+char Antylopa::rysowanie() {
+	textcolor(BROWN);
+	return getSymbol();
 }
 
 

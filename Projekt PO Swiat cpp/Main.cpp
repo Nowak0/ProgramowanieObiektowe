@@ -1,37 +1,64 @@
 #include <iostream>
 #include "conio2.h"
+#include <vector>
 #include "PrzygotowanieGry.h"
 #include "Swiat.h"
 #include "Antylopa.h"
+#include "Barszcz.h"
+#include "Guarana.h"
 #include "Lis.h"
+#include "Mlecz.h"
 #include "Owca.h"
+#include "Trawa.h"
+#include "WilczeJagody.h"
 #include "Wilk.h"
 #include "Zolw.h"
 #define PODSTAWOWY_KOLOR_TEKSTU 7
 #define PODSTAWOWY_KOLOR_TLA 0
+#define MAKSYMALNA_LICZBA_MOZLIWOSCI_ROZPRZESTRZENIENIA 8
 
 
-void przeprowadzGre(char& akcja, Swiat* swiat, PrzygotowanieGry* przygotowanieGry) {
-	Organizm* lis = new Lis(0, 0, 0);
-	Organizm* antylopa = new Antylopa(2, 2, 1);
-	Organizm* zolw = new Zolw(2, 11, 2);
-	Organizm* owca = new Owca(2, 10, 3);
-	Organizm* wilk = new Wilk(2, 9, 4);
-	przygotowanieGry->przygotujEkran();
-	swiat->dodajOrganizm(lis, lis->getPolozenieX(), lis->getPolozenieY());
-	swiat->dodajOrganizm(antylopa, antylopa->getPolozenieX(), antylopa->getPolozenieY());
-	swiat->dodajOrganizm(zolw, zolw->getPolozenieX(), zolw->getPolozenieY());
-	swiat->dodajOrganizm(owca, owca->getPolozenieX(), owca->getPolozenieY());
-	swiat->dodajOrganizm(wilk, wilk->getPolozenieX(), wilk->getPolozenieY());
-	swiat->rysujSwiat();
+void dodajOrganizmyDoSwiata(vector<Organizm*>& noweOrganizmy, Swiat& swiat) {
+	for (Organizm* o : noweOrganizmy) {
+		for (int i = 0; i < swiat.getWymiarMapyX() * swiat.getWymiarMapyY() - swiat.getLiczbaOrganizmow(); i++) {
+			int polozenieX = rand() % swiat.getWymiarMapyX();
+			int polozenieY = rand() % swiat.getWymiarMapyY();
+			if (swiat.organizmy[polozenieY][polozenieX] == nullptr) {
+				o->setPolozenieX(polozenieX);
+				o->setPolozenieY(polozenieY);
+				o->setWiek(swiat.getLiczbaOrganizmow() + 1);
+				swiat.dodajOrganizm(o, o->getPolozenieX(), o->getPolozenieY());
+				break;
+			}
+		}
+	}
+}
+
+
+void przeprowadzGre(char& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGry) {
+	vector<Organizm*> noweOrganizmy;
+	noweOrganizmy.push_back(new Lis(0, 0, 0));
+	noweOrganizmy.push_back(new Antylopa(0, 0, 0));
+	noweOrganizmy.push_back(new Zolw(0, 0, 0));
+	noweOrganizmy.push_back(new Owca(0, 0, 0));
+	noweOrganizmy.push_back(new Wilk(0, 0, 0));
+	noweOrganizmy.push_back(new Trawa(0, 0, 0));
+	noweOrganizmy.push_back(new Barszcz(0, 0, 0));
+	noweOrganizmy.push_back(new Guarana(0, 0, 0));
+	noweOrganizmy.push_back(new Mlecz(0, 0, 0));
+	noweOrganizmy.push_back(new WilczeJagody(0, 0, 0));
+	dodajOrganizmyDoSwiata(noweOrganizmy, swiat);
+
+	przygotowanieGry.przygotujEkran();
+	swiat.rysujSwiat();
 
 	while (akcja != 'q') { // q czyli koniec gry
 		cin >> akcja;
 		if (akcja == 'n') // n czyli nowa tura
 		{
-			przygotowanieGry->przygotujEkran();
-			swiat->wykonajTure();
-			swiat->rysujSwiat();
+			przygotowanieGry.przygotujEkran();
+			swiat.wykonajTure();
+			swiat.rysujSwiat();
 		}
 	}
 }
@@ -50,7 +77,7 @@ int main() {
 	cin >> akcja;
 
 	while (akcja != 'q') {
-		if (akcja == 'p') przeprowadzGre(akcja, swiat, przygotowanieGry);
+		if (akcja == 'p') przeprowadzGre(akcja, *swiat, *przygotowanieGry);
 		else cin >> akcja;
 	}
 	

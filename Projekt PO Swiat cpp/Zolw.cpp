@@ -52,6 +52,12 @@ void Zolw::kolizja(Swiat& swiat, Organizm& atakujacy) {
 }
 
 
+char Zolw::rysowanie() {
+	textcolor(GREEN);
+	return getSymbol();
+}
+
+
 bool Zolw::czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany) {
 	int silaAtakujacego = atakujacy.getSila();
 

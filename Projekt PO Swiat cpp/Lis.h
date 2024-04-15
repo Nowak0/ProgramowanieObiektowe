@@ -8,6 +8,7 @@ public:
 	Lis(const Organizm& inny);
 	void akcja(Swiat& swiat) override;
 	void kolizja(Swiat& swiat, Organizm& atakujacy) override;
+	char rysowanie() override;
 	Organizm* stworzNowySklonowanyObiekt() override;
 	~Lis() override;
 };

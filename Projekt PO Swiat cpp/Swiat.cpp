@@ -23,20 +23,21 @@ Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
 void Swiat::wykonajTure() {
 	liczbaWiadomosci = 0;
 	vector<Organizm*> tmp;
-	zyjaceOrganizmy.clear();
-	zyjaceOrganizmy.resize(posortowaneOrganizmy.size(), true);
+	nieZyjaceOrganizmy.clear();
 
 	for (Organizm* o : posortowaneOrganizmy) {
 		tmp.push_back(o);
 	}
+
 	for (Organizm* o : tmp) {
-		if (o != nullptr && o->getWiek() != NIEZYWY_ORGANIZM) o->akcja(*this);
-	}
-	for (Organizm* o : tmp) {
-		if (o != nullptr && o->getWiek() == NIEZYWY_ORGANIZM) {
-			wypiszWiadomosc("usuwam " + o->getNazwa());
-			delete o;
+		if (o != nullptr && o->getWiek() != NIEZYWY_ORGANIZM) {
+			wypiszWiadomosc("akcja dla " + o->getNazwa());
+			o->akcja(*this);
 		}
+	}
+
+	for (Organizm* o : nieZyjaceOrganizmy) {
+		if (o != nullptr) delete o;
 	}
 }
 
@@ -108,6 +109,7 @@ void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int poloz
 
 void Swiat::usunOrganizm(Organizm* staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
 	usunOrganizmZPosortowanych(staryOrganizm);
+	if (staryOrganizm->getWiek() == NIEZYWY_ORGANIZM) nieZyjaceOrganizmy.push_back(staryOrganizm);
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = nullptr;
 	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = ' ';
 }
@@ -157,15 +159,13 @@ void Swiat::usunOrganizmZPosortowanych(Organizm* organizm) {
 		i++;
 	}
 
-	usunNullPTR();
+	usunNullPTR(i);
 }
 
 
-void Swiat::usunNullPTR() {
-	for (auto o = posortowaneOrganizmy.begin(); o != posortowaneOrganizmy.end();) {
-		if (*o == nullptr) o = posortowaneOrganizmy.erase(o);
-		else o++;
-	}
+void Swiat::usunNullPTR(const int i) {
+	auto o = posortowaneOrganizmy.begin() + i;
+	if (*o == nullptr) o = posortowaneOrganizmy.erase(o);
 }
 
 

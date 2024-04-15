@@ -1,5 +1,5 @@
 #include "PrzygotowanieGry.h"
-#include <string>
+
 
 PrzygotowanieGry::PrzygotowanieGry() {
 	settitle("Jakub Nowak 197860");

@@ -8,6 +8,7 @@ public:
 	Zolw(const Organizm& inny);
 	void akcja(Swiat& swiat) override;
 	void kolizja(Swiat& swiat, Organizm& atakujacy) override;
+	char rysowanie() override;
 	bool czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany) override;
 	Organizm* stworzNowySklonowanyObiekt() override;
 	~Zolw() override;

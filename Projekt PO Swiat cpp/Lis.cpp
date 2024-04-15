@@ -41,6 +41,8 @@ void Lis::akcja(Swiat& swiat) {
 		}
 	}
 
+	if (mozliweMiejscaX.size() == 0) return;
+
 	int ruch = rand() % mozliweMiejscaX.size();
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 	
@@ -77,9 +79,15 @@ void Lis::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		atakujacy.setPolozenieX(polozenieX);
 		atakujacy.setPolozenieY(polozenieY);
 		swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieYAtak][polozenieXAtak], polozenieXAtak, polozenieYAtak);
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis");
 	}
+}
+
+
+char Lis::rysowanie() {
+	textcolor(RED);
+	return getSymbol();
 }
 
 
