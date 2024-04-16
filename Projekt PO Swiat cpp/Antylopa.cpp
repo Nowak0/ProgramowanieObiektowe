@@ -24,7 +24,6 @@ Organizm* Antylopa::stworzNowySklonowanyObiekt() {
 
 void Antylopa::akcja(Swiat& swiat) {
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
 	vector<int> mozliweMiejscaY;
 
@@ -40,23 +39,25 @@ void Antylopa::akcja(Swiat& swiat) {
 		}
 	}
 
+	if (mozliweMiejscaX.size() == 0) return;
+
 	int ruch = rand() % mozliweMiejscaX.size();
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 
-	if (mapa[nowyY][nowyX] == ' ') {
+	if (swiat.getOrganizm(nowyX, nowyY) == nullptr) {
 		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
 		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+	else if (swiat.getOrganizm(nowyX, nowyY)->getSymbol() == swiat.getOrganizm(polozenieX, polozenieY)->getSymbol()) {
 		Organizm* nowaAntylopa = new Antylopa(*this);
 		Zwierze::kolizja(swiat, *nowaAntylopa);
 	}
 
 	else {
-		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
+		swiat.getOrganizm(nowyX, nowyY)->kolizja(swiat, *this);
 	}
 
 
@@ -73,7 +74,7 @@ void Antylopa::kolizja(Swiat& swiat, Organizm& atakujacy) {
 			for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 			{
 				if (x < 0 || x >= swiat.getWymiarMapyX()) continue;
-				if (swiat.getMapa()[y][x] == ' ') {
+				if (swiat.getOrganizm(x, y) == nullptr) {
 					swiat.usunOrganizm(this, polozenieX, polozenieY);
 					setPolozenieX(x);
 					setPolozenieY(y);

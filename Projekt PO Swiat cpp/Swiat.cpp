@@ -1,18 +1,11 @@
 #include "Swiat.h"
 
 
-Swiat::Swiat(const int x, const int y) : mapa(y, vector<char>(x)) {
+Swiat::Swiat(const int x, const int y) {
 	this->wymiarMapyX = x;
 	this->wymiarMapyY = y;
 	this->liczbaWiadomosci = 0;
 	this->posortowaneOrganizmy.resize(0);
-	for (int y = 0; y < wymiarMapyY; y++)
-	{
-		for (int x = 0; x < wymiarMapyX; x++)
-		{
-			mapa[y][x] = ' ';
-		}
-	}
 	organizmy.resize(wymiarMapyY);
 	for (int i = 0; i < wymiarMapyY; i++) {
 		organizmy[i].resize(wymiarMapyX, nullptr);
@@ -31,7 +24,7 @@ void Swiat::wykonajTure() {
 
 	for (Organizm* o : tmp) {
 		if (o != nullptr && o->getWiek() != NIEZYWY_ORGANIZM) {
-			wypiszWiadomosc("akcja dla " + o->getNazwa());
+			//wypiszWiadomosc("akcja dla " + o->getNazwa());
 			o->akcja(*this);
 		}
 	}
@@ -53,7 +46,14 @@ void Swiat::rysujSwiat() {
 			else if ((x == wymiarMapyX && y == -1) || (x == wymiarMapyX && y == wymiarMapyY)) putch('>');
 			else if (x == -1 || x == wymiarMapyX) putch('|');
 			else if (y == -1 || y == wymiarMapyY) putch('-');
-			else putch(mapa[y][x]);
+			else {
+				if (organizmy[y][x] == nullptr) putch(' ');
+				else {
+					putch(organizmy[y][x]->rysowanie());
+					textcolor(PODSTAWOWY_KOLOR_TEKSTU);
+					textbackground(PODSTAWOWY_KOLOR_TLA);
+				}
+			}
 
 			putch(' ');
 		}
@@ -66,12 +66,7 @@ void Swiat::rysujSwiat() {
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 3);
 	puts("Q - koniec");
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 4);
-	puts("Poruszanie czlowiekiem (@) jest strzalkami");
-}
-
-
-void Swiat::setMapa(const char symbolOrganizmu, const int polozenieX, const int polozenieY) {
-	this->mapa[polozenieY][polozenieX] = symbolOrganizmu;
+	puts("Poruszanie czlowiekiem (C) odbywa sie strzalkami");
 }
 
 
@@ -91,19 +86,18 @@ int Swiat::getLiczbaWiadomsci() const {
 
 
 int Swiat::getLiczbaOrganizmow() const {
-	return posortowaneOrganizmy.size();
+	return (int)posortowaneOrganizmy.size();
 }
 
 
-vector<vector<char>> Swiat::getMapa() const {
-	return mapa;
+Organizm* Swiat::getOrganizm(const int polozenieX, const int polozenieY) {
+	return organizmy[polozenieY][polozenieX];
 }
 
 
 void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
 	dodajOrganizmDoPosortowanych(organizm);
-	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = organizm->getSymbol();
 }
 
 
@@ -111,7 +105,6 @@ void Swiat::usunOrganizm(Organizm* staryOrganizm, int polozenieOrganizmuX, int p
 	usunOrganizmZPosortowanych(staryOrganizm);
 	if (staryOrganizm->getWiek() == NIEZYWY_ORGANIZM) nieZyjaceOrganizmy.push_back(staryOrganizm);
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = nullptr;
-	mapa[polozenieOrganizmuY][polozenieOrganizmuX] = ' ';
 }
 
 
@@ -121,13 +114,15 @@ void Swiat::setLiczbaWiadomosci() {
 
 
 void Swiat::wypiszWiadomosc(string wiadomosc) {
-	gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX(), POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
+	gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX() + 3, POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
 	cout << wiadomosc;
 	setLiczbaWiadomosci();
 }
 
 
 void Swiat::dodajOrganizmDoPosortowanych(Organizm* organizm) {
+	if (organizm == nullptr) return;
+
 	int n = posortowaneOrganizmy.size();
 	int i = 0, inicjatywaOrganizmu = organizm->getInicjatywa(), wiekOrganizmu = organizm->getWiek();
 	for (Organizm* o : posortowaneOrganizmy) {

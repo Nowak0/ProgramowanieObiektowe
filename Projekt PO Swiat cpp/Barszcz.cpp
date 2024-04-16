@@ -30,7 +30,6 @@ Organizm* Barszcz::stworzNowySklonowanyObiekt() {
 
 void Barszcz::akcja(Swiat& swiat) {
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	vector<vector<char>> mapa = swiat.getMapa();
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
 		if (y < 0 || y >= wymiarMapyY) continue;
@@ -38,11 +37,11 @@ void Barszcz::akcja(Swiat& swiat) {
 		{
 			if (x < 0 || x >= wymiarMapyX) continue;
 			else if (x == polozenieX && y == polozenieY) continue;
-			else if (mapa[y][x] != ' ' && swiat.organizmy[y][x]->getSila() > 0 && swiat.organizmy[y][x]->getNazwa() != "WilczeJagody") {
-				swiat.organizmy[y][x]->setWiek(NIEZYWY_ORGANIZM);
-				swiat.wypiszWiadomosc(swiat.organizmy[y][x]->getNazwa() + " zostaje zabity");
+			else if (swiat.getOrganizm(x, y) != nullptr && swiat.getOrganizm(x, y)->getSila() > 0 && swiat.getOrganizm(x, y)->getNazwa() != "WilczeJagody") {
+				swiat.getOrganizm(x, y)->setWiek(NIEZYWY_ORGANIZM);
+				swiat.wypiszWiadomosc(swiat.getOrganizm(x, y)->getNazwa() + " zostaje zabity");
 				swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego");
-				swiat.usunOrganizm(swiat.organizmy[y][x], x, y);
+				swiat.usunOrganizm(swiat.getOrganizm(x, y), x, y);
 			}
 		}
 	}

@@ -24,7 +24,6 @@ Organizm* Lis::stworzNowySklonowanyObiekt() {
 
 void Lis::akcja(Swiat& swiat) {
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
 	vector<int> mozliweMiejscaY;
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
@@ -34,7 +33,7 @@ void Lis::akcja(Swiat& swiat) {
 		{
 			if (x < 0 || x >= wymiarMapyX) continue;
 			else if (x == polozenieX && y == polozenieY) continue;
-			else if (mapa[y][x] == ' ' || this->getSila() >= swiat.organizmy[y][x]->getSila()) {
+			else if (swiat.getOrganizm(x, y) == nullptr || this->getSila() >= swiat.getOrganizm(x, y)->getSila()) {
 				mozliweMiejscaX.push_back(x);
 				mozliweMiejscaY.push_back(y);
 			}
@@ -46,20 +45,20 @@ void Lis::akcja(Swiat& swiat) {
 	int ruch = rand() % mozliweMiejscaX.size();
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 	
-	if (mapa[nowyY][nowyX] == ' ') {
+	if (swiat.getOrganizm(nowyX, nowyY) == nullptr) {
 		swiat.usunOrganizm(this, polozenieX, polozenieY);
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
 		swiat.dodajOrganizm(this, nowyX, nowyY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+	else if (swiat.getOrganizm(nowyX, nowyY)->getSymbol() == swiat.getOrganizm(polozenieX, polozenieY)->getSymbol()) {
 		Organizm* nowyLis = new Lis(*this);
 		Zwierze::kolizja(swiat, *nowyLis);
 	}
 
 	else {
-		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
+		swiat.getOrganizm(nowyX, nowyY)->kolizja(swiat, *this);
 	}
 }
 

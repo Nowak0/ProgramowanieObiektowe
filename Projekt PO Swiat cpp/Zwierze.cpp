@@ -3,39 +3,40 @@
 
 void Zwierze::akcja(Swiat& swiat) {
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
 	vector<int> mozliweMiejscaY;
 
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
-		if (y <= 0 || y >= swiat.getWymiarMapyY()) continue;
+		if (y < 0 || y >= swiat.getWymiarMapyY()) continue;
 		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 		{
-			if (x <= 0 || x >= swiat.getWymiarMapyX()) continue;
+			if (x < 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (x == polozenieX && y == polozenieY) continue;
 			mozliweMiejscaX.push_back(x);
 			mozliweMiejscaY.push_back(y);
 		}
 	}
 
+	if (mozliweMiejscaX.size() == 0) return;
+
 	int ruch = rand() % mozliweMiejscaX.size();
 	int nowyX = mozliweMiejscaX[ruch], nowyY = mozliweMiejscaY[ruch];
 
-	if (mapa[nowyY][nowyX] == ' ') {
+	if (swiat.getOrganizm(nowyX,nowyY) == nullptr) {
 		setPolozenieX(nowyX);
 		setPolozenieY(nowyY);
-		swiat.dodajOrganizm(swiat.organizmy[polozenieY][polozenieX], nowyX, nowyY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieY][polozenieX], polozenieX, polozenieY);
+		swiat.dodajOrganizm(swiat.getOrganizm(polozenieX, polozenieY) , nowyX, nowyY);
+		swiat.usunOrganizm(swiat.getOrganizm(polozenieX, polozenieY), polozenieX, polozenieY);
 	}
 
-	else if (mapa[nowyY][nowyX] == mapa[polozenieY][polozenieX]) {
+	else if (swiat.getOrganizm(nowyX, nowyY)->getSymbol() == swiat.getOrganizm(polozenieX, polozenieY)->getSymbol()) {
 		Organizm* noweZwierze = this->stworzNowySklonowanyObiekt();
 		kolizja(swiat, *noweZwierze);
 	}
 
 	else {
-		swiat.organizmy[nowyY][nowyX]->kolizja(swiat, *this);
+		swiat.getOrganizm(nowyX, nowyY)->kolizja(swiat, *this);
 	}
 }
 
@@ -49,7 +50,7 @@ void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 		{
 			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
-			if (swiat.getMapa()[y][x] == ' ') {
+			if (swiat.getOrganizm(x, y) == nullptr) {
 				atakujacy.setPolozenieX(x);
 				atakujacy.setPolozenieY(y);
 				atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1);

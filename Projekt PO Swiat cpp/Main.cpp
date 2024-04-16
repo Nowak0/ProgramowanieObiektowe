@@ -5,6 +5,7 @@
 #include "Swiat.h"
 #include "Antylopa.h"
 #include "Barszcz.h"
+#include "Czlowiek.h"
 #include "Guarana.h"
 #include "Lis.h"
 #include "Mlecz.h"
@@ -19,24 +20,31 @@
 
 
 void dodajOrganizmyDoSwiata(vector<Organizm*>& noweOrganizmy, Swiat& swiat) {
+	int wolneMiejsca = swiat.getWymiarMapyX() * swiat.getWymiarMapyY();
+
 	for (Organizm* o : noweOrganizmy) {
-		for (int i = 0; i < swiat.getWymiarMapyX() * swiat.getWymiarMapyY() - swiat.getLiczbaOrganizmow(); i++) {
+		bool dodano = false;
+		
+		while (!dodano && wolneMiejsca > 0)
+		{
 			int polozenieX = rand() % swiat.getWymiarMapyX();
 			int polozenieY = rand() % swiat.getWymiarMapyY();
-			if (swiat.organizmy[polozenieY][polozenieX] == nullptr) {
+			if (swiat.getOrganizm(polozenieX, polozenieY) == nullptr) {
 				o->setPolozenieX(polozenieX);
 				o->setPolozenieY(polozenieY);
 				o->setWiek(swiat.getLiczbaOrganizmow() + 1);
 				swiat.dodajOrganizm(o, o->getPolozenieX(), o->getPolozenieY());
-				break;
+				wolneMiejsca--;
+				dodano = true;
 			}
 		}
 	}
 }
 
 
-void przeprowadzGre(char& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGry) {
+void przeprowadzGre(int& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGry) {
 	vector<Organizm*> noweOrganizmy;
+	noweOrganizmy.push_back(new Czlowiek(0, 0, 0));
 	noweOrganizmy.push_back(new Lis(0, 0, 0));
 	noweOrganizmy.push_back(new Antylopa(0, 0, 0));
 	noweOrganizmy.push_back(new Zolw(0, 0, 0));
@@ -53,7 +61,8 @@ void przeprowadzGre(char& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGr
 	swiat.rysujSwiat();
 
 	while (akcja != 'q') { // q czyli koniec gry
-		cin >> akcja;
+		akcja = getch();
+		if (akcja == 0x48)
 		if (akcja == 'n') // n czyli nowa tura
 		{
 			przygotowanieGry.przygotujEkran();
@@ -68,7 +77,7 @@ int main() {
 #ifndef __cplusplus
 	Conio2_Init();
 #endif
-	char akcja;
+	int akcja;
 	srand(time(NULL));
 	PrzygotowanieGry* przygotowanieGry = new PrzygotowanieGry();
 	przygotowanieGry->przygotujEkran();
@@ -78,7 +87,7 @@ int main() {
 
 	while (akcja != 'q') {
 		if (akcja == 'p') przeprowadzGre(akcja, *swiat, *przygotowanieGry);
-		else cin >> akcja;
+		else akcja = getch();
 	}
 	
 	delete przygotowanieGry;

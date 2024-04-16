@@ -42,7 +42,7 @@ void Owca::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		atakujacy.setPolozenieX(polozenieX);
 		atakujacy.setPolozenieY(polozenieY);
 		swiat.dodajOrganizm(&atakujacy, polozenieX, polozenieY);
-		swiat.usunOrganizm(swiat.organizmy[polozenieYAtak][polozenieXAtak], polozenieXAtak, polozenieYAtak);
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Owca");
 	}
 }

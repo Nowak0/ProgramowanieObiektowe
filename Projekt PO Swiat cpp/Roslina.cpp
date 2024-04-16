@@ -6,7 +6,6 @@ void Roslina::akcja(Swiat& swiat) {
 	if (rozsiewanie <= 90) return;
 
 	int wymiarMapyX = swiat.getWymiarMapyX(), wymiarMapyY = swiat.getWymiarMapyY(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
-	vector<vector<char>> mapa = swiat.getMapa();
 	vector<int> mozliweMiejscaX;
 	vector<int> mozliweMiejscaY;
 
@@ -17,7 +16,7 @@ void Roslina::akcja(Swiat& swiat) {
 		{
 			if (x < 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (x == polozenieX && y == polozenieY) continue;
-			if (mapa[y][x] == ' ') {
+			if (swiat.getOrganizm(x, y) == nullptr) {
 				mozliweMiejscaX.push_back(x);
 				mozliweMiejscaY.push_back(y);
 			}
