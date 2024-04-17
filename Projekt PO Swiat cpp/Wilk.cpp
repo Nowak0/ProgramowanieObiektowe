@@ -9,6 +9,7 @@ Wilk::Wilk(const int polozenieX, const int polozenieY, const int wiek) {
 	setWiek(wiek);
 	setPolozenieX(polozenieX);
 	setPolozenieY(polozenieY);
+	setNiesmiertelnosc(false);
 }
 
 
@@ -32,6 +33,7 @@ void Wilk::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	bool czyPrzetrwal = czyOdbilAtak(atakujacy, *this);
 
 	if (czyPrzetrwal) {
+		atakujacy.setWiek(NIEZYWY_ORGANIZM);
 		swiat.wypiszWiadomosc("Wilk zabija " + atakujacy.getNazwa());
 		atakujacy.setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
@@ -45,7 +47,6 @@ void Wilk::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Wilk");
 	}
-	atakujacy.setWiek(NIEZYWY_ORGANIZM);
 }
 
 

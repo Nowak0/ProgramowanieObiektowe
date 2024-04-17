@@ -64,8 +64,10 @@ void Swiat::rysujSwiat() {
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 2);
 	puts("N - nowa tura");
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 3);
-	puts("Q - koniec");
+	puts("K - niesmiertelnosc postaci");
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 4);
+	puts("Q - koniec");
+	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 5);
 	puts("Poruszanie czlowiekiem (C) odbywa sie strzalkami");
 }
 

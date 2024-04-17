@@ -9,6 +9,7 @@ Zolw::Zolw(const int polozenieX, const int polozenieY, const int wiek) {
 	setWiek(wiek);
 	setPolozenieX(polozenieX);
 	setPolozenieY(polozenieY);
+	setNiesmiertelnosc(false);
 }
 
 

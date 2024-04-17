@@ -56,6 +56,12 @@ int Organizm::getPolozenieY() const {
 }
 
 
+bool Organizm::czyNiesmiertelny() const {
+	if (aktywnaNiesmiertelnosc) return true;
+	else return false;
+}
+
+
 void Organizm::setNazwa(string nazwa) {
 	this->nazwa = nazwa;
 }
@@ -88,6 +94,20 @@ void Organizm::setPolozenieX(int polozenieX) {
 
 void Organizm::setPolozenieY(int polozenieY) {
 	this->polozenieY = polozenieY;
+}
+
+
+void Organizm::setNiesmiertelnosc(bool wyrazenie) {
+	this->aktywnaNiesmiertelnosc = wyrazenie;
+}
+
+
+void Organizm::setRuchCzlowieka(const int ruch) {
+	return;
+}
+
+void Organizm::aktywujNiesmiertelnoscCzlowieka(Swiat& swiat) {
+	return;
 }
 
 

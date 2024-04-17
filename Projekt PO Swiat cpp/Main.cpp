@@ -49,10 +49,10 @@ void przeprowadzGre(int& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGry
 	noweOrganizmy.push_back(new Antylopa(0, 0, 0));
 	noweOrganizmy.push_back(new Zolw(0, 0, 0));
 	noweOrganizmy.push_back(new Owca(0, 0, 0));
-	noweOrganizmy.push_back(new Wilk(0, 0, 0));
+	//noweOrganizmy.push_back(new Wilk(0, 0, 0));
 	noweOrganizmy.push_back(new Trawa(0, 0, 0));
-	noweOrganizmy.push_back(new Barszcz(0, 0, 0));
-	noweOrganizmy.push_back(new Guarana(0, 0, 0));
+	//noweOrganizmy.push_back(new Barszcz(0, 0, 0));
+	//noweOrganizmy.push_back(new Guarana(0, 0, 0));
 	noweOrganizmy.push_back(new Mlecz(0, 0, 0));
 	noweOrganizmy.push_back(new WilczeJagody(0, 0, 0));
 	dodajOrganizmyDoSwiata(noweOrganizmy, swiat);
@@ -62,7 +62,16 @@ void przeprowadzGre(int& akcja, Swiat& swiat, PrzygotowanieGry& przygotowanieGry
 
 	while (akcja != 'q') { // q czyli koniec gry
 		akcja = getch();
-		if (akcja == 0x48)
+
+		if (akcja == 0) { // uzytkownik mozliwe ze chce wykonac ruch 
+			akcja = getch();
+			noweOrganizmy[0]->setRuchCzlowieka(akcja);
+		}
+
+		if (akcja == 'k') {
+			noweOrganizmy[0]->aktywujNiesmiertelnoscCzlowieka(swiat);
+		}
+
 		if (akcja == 'n') // n czyli nowa tura
 		{
 			przygotowanieGry.przygotujEkran();
@@ -82,8 +91,8 @@ int main() {
 	PrzygotowanieGry* przygotowanieGry = new PrzygotowanieGry();
 	przygotowanieGry->przygotujEkran();
 	przygotowanieGry->wyswietlEkranPoczatkowy();
-	Swiat* swiat = new Swiat(20, 20);
-	cin >> akcja;
+	Swiat* swiat = new Swiat(3, 3);
+	akcja = getch();
 
 	while (akcja != 'q') {
 		if (akcja == 'p') przeprowadzGre(akcja, *swiat, *przygotowanieGry);

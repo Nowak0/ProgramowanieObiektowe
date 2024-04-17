@@ -9,6 +9,7 @@ WilczeJagody::WilczeJagody(const int polozenieX, const int polozenieY, const int
 	setWiek(wiek);
 	setPolozenieX(polozenieX);
 	setPolozenieY(polozenieY);
+	setNiesmiertelnosc(false);
 }
 
 
@@ -41,8 +42,7 @@ void WilczeJagody::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	swiat.usunOrganizm(this, polozenieX, polozenieY);
 	swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 	swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Wilcze Jagody");
-	swiat.wypiszWiadomosc(atakujacy.getNazwa() + " umiera w wyniku");
-	swiat.wypiszWiadomosc("zjedzenia Wilczych Jagod");
+	swiat.wypiszWiadomosc("oraz umiera w wyniku ich zjedzenia");
 }
 
 

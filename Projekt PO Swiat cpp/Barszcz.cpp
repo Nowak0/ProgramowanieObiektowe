@@ -9,6 +9,7 @@ Barszcz::Barszcz(const int polozenieX, const int polozenieY, const int wiek) {
 	setWiek(wiek);
 	setPolozenieX(polozenieX);
 	setPolozenieY(polozenieY);
+	setNiesmiertelnosc(false);
 }
 
 
@@ -37,7 +38,7 @@ void Barszcz::akcja(Swiat& swiat) {
 		{
 			if (x < 0 || x >= wymiarMapyX) continue;
 			else if (x == polozenieX && y == polozenieY) continue;
-			else if (swiat.getOrganizm(x, y) != nullptr && swiat.getOrganizm(x, y)->getSila() > 0 && swiat.getOrganizm(x, y)->getNazwa() != "WilczeJagody") {
+			else if (swiat.getOrganizm(x, y) != nullptr && swiat.getOrganizm(x, y)->getSila() > 0 && swiat.getOrganizm(x, y)->getNazwa() != "WilczeJagody" && !swiat.getOrganizm(x, y)->czyNiesmiertelny()) {
 				swiat.getOrganizm(x, y)->setWiek(NIEZYWY_ORGANIZM);
 				swiat.wypiszWiadomosc(swiat.getOrganizm(x, y)->getNazwa() + " zostaje zabity");
 				swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego");

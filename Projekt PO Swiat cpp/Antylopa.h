@@ -6,6 +6,7 @@ public:
 	Antylopa(const Organizm& inny);
 	void akcja(Swiat& swiat) override;
 	void kolizja(Swiat& swiat, Organizm& atakujacy) override;
+	bool unikAntylopy(Swiat& swiat, Organizm& atakujacy);
 	char rysowanie() override;
 	Organizm* stworzNowySklonowanyObiekt() override;
 	~Antylopa() override;

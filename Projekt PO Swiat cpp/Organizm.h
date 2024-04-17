@@ -4,6 +4,11 @@
 #include "conio2.h"
 #include "Swiat.h"
 #define NIEZYWY_ORGANIZM -1
+#define RUCH_PRAWO 0x4d
+#define RUCH_LEWO 0x4b
+#define RUCH_GORA 0x48
+#define RUCH_DOL 0x50
+#define RUCH_NIEAKTYWNY 1
 using namespace std;
 
 
@@ -19,6 +24,7 @@ private:
 	int wiek;
 	int polozenieX;
 	int polozenieY;
+	bool aktywnaNiesmiertelnosc;
 
 public:
 	virtual void akcja(Swiat& swiat) = 0;
@@ -27,6 +33,8 @@ public:
 	virtual Organizm* stworzNowySklonowanyObiekt() = 0;
 	virtual bool czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany);
 	virtual void kopiujObiekt(const Organizm& innyOrganizm);
+	virtual void setRuchCzlowieka(const int ruch);
+	virtual void aktywujNiesmiertelnoscCzlowieka(Swiat& swiat);
 	string getNazwa() const;
 	char getSymbol() const;
 	int getSila() const;
@@ -34,6 +42,7 @@ public:
 	int getWiek() const;
 	int getPolozenieX() const;
 	int getPolozenieY() const;
+	bool czyNiesmiertelny() const;
 	void setNazwa(string nazwa);
 	void setSymbol(char symbol);
 	void setSila(int sila);
@@ -41,5 +50,6 @@ public:
 	void setWiek(int wiek);
 	void setPolozenieX(int polozenieX);
 	void setPolozenieY(int polozenieY);
+	void setNiesmiertelnosc(bool wyrazenie);
 	virtual ~Organizm();
 };

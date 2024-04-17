@@ -1,8 +1,5 @@
 ﻿  Czlowiek.cpp
-  Lis.cpp
   Main.cpp
-D:\Projekt PO Swiat cpp\Main.cpp(81,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-  Swiat.cpp
-D:\Projekt PO Swiat cpp\Swiat.cpp(126,8): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+D:\Projekt PO Swiat cpp\Main.cpp(90,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Generowanie kodu...
   Projekt PO Swiat cpp.vcxproj -> D:\Projekt PO Swiat cpp\x64\Debug\Projekt PO Swiat cpp.exe
