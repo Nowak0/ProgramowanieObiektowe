@@ -53,11 +53,15 @@ void Barszcz::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
 
 	setWiek(NIEZYWY_ORGANIZM);
-	atakujacy.setWiek(NIEZYWY_ORGANIZM);
 	swiat.usunOrganizm(this, polozenieX, polozenieY);
-	swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 	swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego");
-	swiat.wypiszWiadomosc(atakujacy.getNazwa() + " umiera w wyniku zjedzenia Barszczu Sosnowskiego");
+
+	if (!atakujacy.czyNiesmiertelny()) {
+		atakujacy.setWiek(NIEZYWY_ORGANIZM);
+		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
+		swiat.wypiszWiadomosc(atakujacy.getNazwa() + " umiera w wyniku");
+		swiat.wypiszWiadomosc("zjedzenia Barszczu Sosnowskiego");
+	}
 }
 
 

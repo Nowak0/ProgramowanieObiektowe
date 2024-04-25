@@ -106,7 +106,13 @@ void Organizm::setRuchCzlowieka(const int ruch) {
 	return;
 }
 
-void Organizm::aktywujNiesmiertelnoscCzlowieka(Swiat& swiat) {
+
+bool Organizm::aktywujNiesmiertelnoscCzlowieka() {
+	return false;
+}
+
+
+void Organizm::sprawdzLiczenieTur() {
 	return;
 }
 

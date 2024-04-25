@@ -17,7 +17,6 @@ Czlowiek::Czlowiek(const int polozenieX, const int polozenieY, const int wiek) {
 
 
 void Czlowiek::akcja(Swiat& swiat) {
-	sprawdzLiczenieTur(swiat);
 
 	if (ruch == RUCH_PRAWO && getPolozenieX() + 1 < swiat.getWymiarMapyX()) {
 		if (swiat.getOrganizm(getPolozenieX() + 1, getPolozenieY()) == nullptr) { // przesun czlowieka jezeli jest wolne miejsca
@@ -79,7 +78,7 @@ void Czlowiek::kolizja(Swiat& swiat, Organizm& atakujacy) {
 
 void Czlowiek::kolizjaNiesmiertelnosc(Swiat& swiat, Organizm& atakujacy) {
 	int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
-	swiat.wypiszWiadomosc("czlowiek jest niesmiertelny");
+
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
 		if (y < 0 || y >= swiat.getWymiarMapyY()) continue;
@@ -128,8 +127,8 @@ void Czlowiek::kolizjaBezNiesmiertelnosci(Swiat& swiat, Organizm& atakujacy) {
 
 
 char Czlowiek::rysowanie() {
-	textcolor(WHITE);
-	textbackground(MAGENTA);
+	textcolor(DARKGRAY);
+	textbackground(WHITE);
 	return getSymbol();
 }
 
@@ -145,18 +144,20 @@ void Czlowiek::setRuchCzlowieka(const int ruch) {
 }
 
 
-void Czlowiek::aktywujNiesmiertelnoscCzlowieka(Swiat& swiat) {
-	if (czyMoznaAktywowacNiesmiertelnosc) {
-		swiat.wypiszWiadomosc("aktywowano niesmiertelnosc");
+bool Czlowiek::aktywujNiesmiertelnoscCzlowieka() {
+	if (czyMoznaAktywowacNiesmiertelnosc && !czyNiesmiertelny()) {
 		setNiesmiertelnosc(true);
-		licznikTur = 5;
+		czyMoznaAktywowacNiesmiertelnosc = false;
+		licznikTur = LICZBA_TUR;
+		return true;
 	}
+
+	else return false;
 }
 
 
-void Czlowiek::sprawdzLiczenieTur(Swiat& swiat) {
+void Czlowiek::sprawdzLiczenieTur() {
 	if (licznikTur == 0) {
-		swiat.wypiszWiadomosc("wylaczono niesmiertelnosc");
 		setNiesmiertelnosc(false);
 		czyMoznaAktywowacNiesmiertelnosc = false;
 	}

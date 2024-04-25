@@ -38,6 +38,7 @@ void Wilk::kolizja(Swiat& swiat, Organizm& atakujacy) {
 		atakujacy.setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(&atakujacy, polozenieXAtak, polozenieYAtak);
 	}
+
 	else {
 		setWiek(NIEZYWY_ORGANIZM);
 		swiat.usunOrganizm(this, polozenieX, polozenieY);

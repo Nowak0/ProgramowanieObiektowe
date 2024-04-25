@@ -32,7 +32,7 @@ void Zwierze::akcja(Swiat& swiat) {
 
 	else if (swiat.getOrganizm(nowyX, nowyY)->getSymbol() == swiat.getOrganizm(polozenieX, polozenieY)->getSymbol()) {
 		Organizm* noweZwierze = this->stworzNowySklonowanyObiekt();
-		kolizja(swiat, *noweZwierze);
+		Zwierze::kolizja(swiat, *noweZwierze);
 	}
 
 	else {
@@ -46,10 +46,10 @@ void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
 	int polozenieX = atakujacy.getPolozenieX(), polozenieY = atakujacy.getPolozenieY();
 	for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
 	{
-		if (y < 0 || y > swiat.getWymiarMapyY()) continue;
+		if (y < 0 || y >= swiat.getWymiarMapyY()) continue;
 		for (int x = polozenieX - 1; x <= polozenieX + 1; x++)
 		{
-			if (x < 0 || x > swiat.getWymiarMapyX()) continue;
+			if (x < 0 || x >= swiat.getWymiarMapyX()) continue;
 			if (swiat.getOrganizm(x, y) == nullptr) {
 				atakujacy.setPolozenieX(x);
 				atakujacy.setPolozenieY(y);
@@ -60,6 +60,8 @@ void Zwierze::kolizja(Swiat& swiat, Organizm& atakujacy) {
 			}
 		}
 	}
+
+	delete& atakujacy; //jezeli nie znaleziono miejsca dla rozmnozonego zwierzecia to nalezy usunac obiekt 
 }
 
 

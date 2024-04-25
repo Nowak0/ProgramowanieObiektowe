@@ -6,10 +6,8 @@ Swiat::Swiat(const int x, const int y) {
 	this->wymiarMapyY = y;
 	this->liczbaWiadomosci = 0;
 	this->posortowaneOrganizmy.resize(0);
-	organizmy.resize(wymiarMapyY);
-	for (int i = 0; i < wymiarMapyY; i++) {
-		organizmy[i].resize(wymiarMapyX, nullptr);
-	}
+	this->czlowiekZyje = false;
+	uaktualnijGraniceMapy();
 }
 
 
@@ -20,11 +18,11 @@ void Swiat::wykonajTure() {
 
 	for (Organizm* o : posortowaneOrganizmy) {
 		tmp.push_back(o);
+		if (o!=nullptr && o->getNazwa() == "Czlowiek") sprawdzNiesmiertelnosc(*o);
 	}
 
 	for (Organizm* o : tmp) {
 		if (o != nullptr && o->getWiek() != NIEZYWY_ORGANIZM) {
-			//wypiszWiadomosc("akcja dla " + o->getNazwa());
 			o->akcja(*this);
 		}
 	}
@@ -61,10 +59,12 @@ void Swiat::rysujSwiat() {
 		gotoxy(POCZATKOWA_POZYCJA_X, pozycjaWyswietlaniaY);
 	}
 
-	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 2);
+	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 1);
 	puts("N - nowa tura");
-	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 3);
+	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 2);
 	puts("K - niesmiertelnosc postaci");
+	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 3);
+	puts("S - zapisz gre");
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 4);
 	puts("Q - koniec");
 	gotoxy(POCZATKOWA_POZYCJA_X + 5, pozycjaWyswietlaniaY + 5);
@@ -97,7 +97,18 @@ Organizm* Swiat::getOrganizm(const int polozenieX, const int polozenieY) {
 }
 
 
+void Swiat::setWymiarMapyX(const int wymiar) {
+	this->wymiarMapyX = wymiar;
+}
+
+
+void Swiat::setWymiarMapyY(const int wymiar) {
+	this->wymiarMapyY = wymiar;
+}
+
+
 void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
+	if (organizm->getNazwa() == "Czlowiek") czlowiekZyje = true;
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = organizm;
 	dodajOrganizmDoPosortowanych(organizm);
 }
@@ -105,7 +116,10 @@ void Swiat::dodajOrganizm(Organizm* organizm, int polozenieOrganizmuX, int poloz
 
 void Swiat::usunOrganizm(Organizm* staryOrganizm, int polozenieOrganizmuX, int polozenieOrganizmuY) {
 	usunOrganizmZPosortowanych(staryOrganizm);
-	if (staryOrganizm->getWiek() == NIEZYWY_ORGANIZM) nieZyjaceOrganizmy.push_back(staryOrganizm);
+	if (staryOrganizm->getWiek() == NIEZYWY_ORGANIZM) {
+		nieZyjaceOrganizmy.push_back(staryOrganizm);
+		if (staryOrganizm->getNazwa() == "Czlowiek") czlowiekZyje = false;
+	}
 	organizmy[polozenieOrganizmuY][polozenieOrganizmuX] = nullptr;
 }
 
@@ -116,7 +130,11 @@ void Swiat::setLiczbaWiadomosci() {
 
 
 void Swiat::wypiszWiadomosc(string wiadomosc) {
-	gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX() + 3, POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
+	if (getLiczbaWiadomsci() > getWymiarMapyY()) {
+		gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX() + 3, POCZATKOWA_POZYCJA_Y);
+		liczbaWiadomosci = 0;
+	}
+	else gotoxy(POCZATKOWA_POZYCJA_X + 3 * getWymiarMapyX() + 3, POCZATKOWA_POZYCJA_Y + getLiczbaWiadomsci());
 	cout << wiadomosc;
 	setLiczbaWiadomosci();
 }
@@ -163,6 +181,68 @@ void Swiat::usunOrganizmZPosortowanych(Organizm* organizm) {
 void Swiat::usunNullPTR(const int i) {
 	auto o = posortowaneOrganizmy.begin() + i;
 	if (*o == nullptr) o = posortowaneOrganizmy.erase(o);
+}
+
+
+void Swiat::sprawdzNiesmiertelnosc(Organizm& organizm) {
+	organizm.sprawdzLiczenieTur();
+	if (organizm.czyNiesmiertelny()) wypiszWiadomosc("niesmiertelnosc aktywna");
+	else wypiszWiadomosc("niesmiertelnosc nieaktywna");
+}
+
+
+void Swiat::zapiszStanGry() {
+	FILE* plik;
+	plik = fopen("zapisGry.txt", "w");
+	wstawIntDoPliku(getWymiarMapyX(), plik);
+	wstawIntDoPliku(getWymiarMapyY(), plik);
+	fputc('\n', plik);
+
+	for (Organizm* o : posortowaneOrganizmy) {
+		if (o == nullptr) continue;
+		fputc(o->getSymbol(), plik);
+		fputc(' ', plik);
+		wstawIntDoPliku(o->getWiek(), plik);
+		wstawIntDoPliku(o->getPolozenieX(), plik);
+		wstawIntDoPliku(o->getPolozenieY(), plik);
+		fputc('\n', plik);
+	}
+
+	fputc(KONIEC_PLIKU, plik);
+	fclose(plik);
+	wypiszWiadomosc("zapisano stan gry");
+}
+
+
+void Swiat::wstawIntDoPliku(int liczba, FILE* plik) {
+	vector<int> wynik;
+
+	if (liczba != 0) {
+		while (liczba != 0) {
+			wynik.push_back(liczba % 10);
+			liczba /= 10;
+		}
+	}
+	else wynik.push_back(liczba);
+
+	for (int i = wynik.size() - 1; i >= 0; i--) {
+		fputc(wynik[i] + '0', plik);
+	}
+
+	fputc(' ', plik);
+}
+
+
+void Swiat::uaktualnijGraniceMapy() {
+	organizmy.resize(wymiarMapyY);
+	for (int i = 0; i < wymiarMapyY; i++) {
+		organizmy[i].resize(wymiarMapyX, nullptr);
+	}
+}
+
+
+bool Swiat::czyCzlowiekZyje() {
+	return czlowiekZyje;
 }
 
 

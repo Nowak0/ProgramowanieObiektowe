@@ -15,8 +15,8 @@ public:
 	void kolizjaNiesmiertelnosc(Swiat& swiat, Organizm& atakujacy);
 	char rysowanie() override;
 	void setRuchCzlowieka(const int ruch) override;
-	void aktywujNiesmiertelnoscCzlowieka(Swiat& swiat) override;
+	bool aktywujNiesmiertelnoscCzlowieka() override;
 	Organizm* stworzNowySklonowanyObiekt() override;
-	void sprawdzLiczenieTur(Swiat& swiat);
+	void sprawdzLiczenieTur() override;
 	~Czlowiek() override;
 };

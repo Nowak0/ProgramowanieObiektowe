@@ -11,9 +11,7 @@
 #define RUCH_NIEAKTYWNY 1
 using namespace std;
 
-
 class Swiat;
-
 
 class Organizm {
 private:
@@ -34,7 +32,8 @@ public:
 	virtual bool czyOdbilAtak(Organizm& atakujacy, Organizm& atakowany);
 	virtual void kopiujObiekt(const Organizm& innyOrganizm);
 	virtual void setRuchCzlowieka(const int ruch);
-	virtual void aktywujNiesmiertelnoscCzlowieka(Swiat& swiat);
+	virtual bool aktywujNiesmiertelnoscCzlowieka();
+	virtual void sprawdzLiczenieTur();
 	string getNazwa() const;
 	char getSymbol() const;
 	int getSila() const;
