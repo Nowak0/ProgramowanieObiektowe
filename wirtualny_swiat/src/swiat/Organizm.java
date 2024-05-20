@@ -1,4 +1,5 @@
 package swiat;
+import java.awt.Color;
 
 public abstract class Organizm {
     private String nazwa;
@@ -10,90 +11,124 @@ public abstract class Organizm {
     private int polozenieY;
     private boolean aktywnaNiesmiertelnosc;
     private boolean czyZyje;
-
+    public final int RUCH_NIEAKTYWNY = -1;
+    public final int RUCH_PRAWO = 1;
+    public final int RUCH_LEWO = 2;
+    public final int RUCH_GORA = 3;
+    public final int RUCH_DOL = 4;
     public abstract void akcja(Swiat swiat);
     public abstract void kolizja(Swiat swiat, Organizm atakujacy);
-    public abstract char rysowanie();
+    public abstract Color rysowanie();
     public abstract Organizm stworzNowySklonowanyObiekt();
-    public abstract void kopiujObiekt(final Organizm innyOrganizm);
-    public abstract boolean czyOdbilAtak(Organizm atakujacy, Organizm atakowany);
     //public abstract void setRuchCzlowieka(final int ruch);
     //public abstract boolean aktywujNiesmiertelnoscCzlowieka();
-    public abstract void sprawdzLiczenieTur();
+    //public abstract void sprawdzLiczenieTur();
 
-    String getNazwa() {
+    public void kopiujObiekt(final Organizm innyOrganizm) {
+        this.nazwa = innyOrganizm.getNazwa();
+        this.symbol = innyOrganizm.getSymbol();
+        this.sila = innyOrganizm.getSila();
+        this.inicjatywa = innyOrganizm.getInicjatywa();
+        this.wiek = innyOrganizm.getWiek();
+        this.polozenieX = innyOrganizm.getPolozenieX();
+        this.polozenieY = innyOrganizm.getPolozenieY();
+    }
+
+
+    public boolean czyOdbilAtak(Organizm atakujacy, Organizm atakowany) {
+        int silaAtakowanego = atakowany.getSila();
+        int silaAtakujacego = atakujacy.getSila();
+
+        return silaAtakujacego < silaAtakowanego;
+    }
+
+
+    public String getNazwa() {
         return nazwa;
     }
 
-    char getSymbol() {
+
+    public char getSymbol() {
         return symbol;
     }
 
-    int getSila() {
+
+    public int getSila() {
         return sila;
     }
 
-    int getInicjatywa() {
+
+    public int getInicjatywa() {
         return inicjatywa;
     }
 
-    int getWiek() {
+
+    public int getWiek() {
         return wiek;
     }
 
-    int getPolozenieX() {
+
+    public  int getPolozenieX() {
         return polozenieX;
     }
 
-    int getPolozenieY() {
+
+    public  int getPolozenieY() {
         return polozenieY;
     }
 
-    boolean czyNiesmiertelny() {
+
+    public boolean czyNiesmiertelny() {
         return aktywnaNiesmiertelnosc;
     }
 
-    boolean getCzyZyje() {
+
+    public boolean getCzyZyje() {
         return czyZyje;
     }
 
-    void setNazwa(String nazwa) {
+
+    public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
     }
 
-    void setSymbol(char symbol) {
+
+    public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
 
-    void setSila(int sila) {
+
+    public void setSila(int sila) {
         this.sila = sila;
     }
 
-    void setInicjatywa(int inicjatywa) {
+
+    public void setInicjatywa(int inicjatywa) {
         this.inicjatywa = inicjatywa;
     }
 
-    void setWiek(int wiek) {
+
+    public  void setWiek(int wiek) {
         this.wiek = wiek;
     }
 
-    void setCzyZyje(boolean wyrazenie) {
+
+    public void setCzyZyje(boolean wyrazenie) {
         this.czyZyje = wyrazenie;
     }
 
-    void setPolozenieX(int polozenieX) {
+
+    public void setPolozenieX(int polozenieX) {
         this.polozenieX = polozenieX;
     }
 
-    void setPolozenieY(int polozenieY) {
+
+    public void setPolozenieY(int polozenieY) {
         this.polozenieY = polozenieY;
     }
 
-    void setNiesmiertelnosc(boolean wyrazenie) {
+
+    public void setNiesmiertelnosc(boolean wyrazenie) {
         this.aktywnaNiesmiertelnosc = wyrazenie;
     }
-
-
-
-
 }
