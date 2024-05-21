@@ -1,5 +1,5 @@
 NOTATKI:
-- nie ma koordynatow przy wiadomosciach
 - oczyscic info obok ekranu z syfu
 - brak zadania 4 pkt
 - brak zapisu
+- inaczej ustawic grafike zeby nie przypominalo tego z paczki

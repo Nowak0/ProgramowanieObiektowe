@@ -155,7 +155,7 @@ public class Czlowiek extends Zwierze {
 
         if (czyPrzetrwal) {
             atakujacy.setCzyZyje(false);
-            swiat.wypiszWiadomosc("Czlowiek zabija " + atakujacy.getNazwa());
+            swiat.wypiszWiadomosc("Czlowiek zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
         else {
@@ -165,7 +165,7 @@ public class Czlowiek extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Czlowieka");
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Czlowieka" + " " + polozenieX + " " + polozenieY);
         }
     }
 
@@ -176,15 +176,12 @@ public class Czlowiek extends Zwierze {
     }
 
 
-    public boolean aktywujNiesmiertelnoscCzlowieka() {
+    public void aktywujNiesmiertelnoscCzlowieka() {
         if (czyMoznaAktywowacNiesmiertelnosc && !czyNiesmiertelny()) {
             setNiesmiertelnosc(true);
             czyMoznaAktywowacNiesmiertelnosc = false;
             licznikTur = LICZBA_TUR_NIESMIERTELNOSC;
-            return true;
         }
-
-        else return false;
     }
 
 

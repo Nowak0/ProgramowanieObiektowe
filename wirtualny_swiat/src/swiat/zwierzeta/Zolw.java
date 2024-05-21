@@ -41,21 +41,21 @@ public class Zolw extends Zwierze {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
-        int silaAtakujacego = atakujacy.getSila(), polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
+        int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
         int polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Zolw odpiera atak " + atakujacy.getNazwa());
-            return;
-        } else {
+            swiat.wypiszWiadomosc("Zolw odpiera atak " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+        }
+        else {
             setCzyZyje(false);
             swiat.usunOrganizm(this, polozenieX, polozenieY);
             atakujacy.setPolozenieX(polozenieX);
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw");
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw  " + polozenieX + " " + polozenieY);
         }
     }
 

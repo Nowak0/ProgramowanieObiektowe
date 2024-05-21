@@ -35,13 +35,12 @@ public class WilczeJagody extends Roslina {
 
         setCzyZyje(false);
         swiat.usunOrganizm(this, polozenieX, polozenieY);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Wilcze Jagody");
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Wilcze Jagody " + polozenieX + " " + polozenieY);
 
         if (!atakujacy.czyNiesmiertelny()) {
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " umiera w wyniku");
-            swiat.wypiszWiadomosc("zjedzenia Wilczych Jagod");
+            swiat.wypiszWiadomosc("i umiera w wyniku ich zjedzenia");
         }
     }
 

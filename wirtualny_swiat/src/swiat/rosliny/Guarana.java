@@ -41,7 +41,7 @@ public class Guarana extends Roslina {
         atakujacy.setSila(silaAtakujacego + 3);
         swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
         swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Guarana");
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Guarana " + polozenieX + " " + polozenieY);
     }
 
 

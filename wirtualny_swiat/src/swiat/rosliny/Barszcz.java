@@ -40,10 +40,12 @@ public class Barszcz extends Roslina {
             {
                 if (x < 0 || x >= wymiarMapyX) continue;
                 else if (x == polozenieX && y == polozenieY || swiat.getOrganizm(x, y) == null) continue;
-                else if (swiat.getOrganizm(x, y).getSila() > 0 && !Objects.equals(swiat.getOrganizm(x, y).getNazwa(), "WilczeJagody") && !swiat.getOrganizm(x, y).czyNiesmiertelny()) {
+                else if (swiat.getOrganizm(x, y).getSila() > 0 && !(swiat.getOrganizm(x, y) instanceof WilczeJagody) && !swiat.getOrganizm(x, y).czyNiesmiertelny()) {
+                    int tmpX = swiat.getOrganizm(x, y).getPolozenieX();
+                    int tmpY = swiat.getOrganizm(x, y).getPolozenieY();
                     swiat.getOrganizm(x, y).setCzyZyje(false);
                     swiat.wypiszWiadomosc(swiat.getOrganizm(x, y).getNazwa() + " zostaje zabity");
-                    swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego");
+                    swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego"  + " " + tmpX + " " + tmpY);
                     swiat.usunOrganizm(swiat.getOrganizm(x, y), x, y);
                 }
             }
@@ -57,13 +59,12 @@ public class Barszcz extends Roslina {
 
         setCzyZyje(false);
         swiat.usunOrganizm(this, polozenieX, polozenieY);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego");
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego" + polozenieX + " " + polozenieY );
 
         if (!atakujacy.czyNiesmiertelny()) {
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " umiera w wyniku");
-            swiat.wypiszWiadomosc("zjedzenia Barszczu Sosnowskiego");
+            swiat.wypiszWiadomosc("i umiera w wyniku jego zjedzenia");
         }
     }
 

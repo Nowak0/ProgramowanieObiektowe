@@ -81,7 +81,7 @@ public class Lis extends Zwierze {
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa());
+            swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
@@ -92,7 +92,7 @@ public class Lis extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis");
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis " + polozenieX + " " + polozenieY);
         }
     }
 

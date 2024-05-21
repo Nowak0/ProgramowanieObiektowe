@@ -62,7 +62,7 @@ public abstract class Zwierze extends Organizm {
                     atakujacy.setPolozenieY(y);
                     atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1);
                     swiat.dodajOrganizm(atakujacy, x, y);
-                    swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa());
+                    swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa() + " " + x + " " + y);
                     return;
                 }
             }

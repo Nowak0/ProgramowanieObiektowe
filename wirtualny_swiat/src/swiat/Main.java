@@ -45,7 +45,7 @@ public class Main {
         noweOrganizmy.add(new Zolw(0, 0, 0));
         noweOrganizmy.add(new Owca(0, 0, 0));
         noweOrganizmy.add(new Trawa(0, 0, 0));
-        noweOrganizmy.add(new Barszcz(0, 0, 0));
+        //noweOrganizmy.add(new Barszcz(0, 0, 0));
         noweOrganizmy.add(new Guarana(0, 0, 0));
         noweOrganizmy.add(new Guarana(0, 0, 0));
         noweOrganizmy.add(new Mlecz(0, 0, 0));
@@ -67,7 +67,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Swiat swiat = new Swiat(20,20);
+        Swiat swiat = new Swiat(5,5);
         List<Organizm> noweOrganizmy = new ArrayList<>();
         przeprowadzGre(swiat, noweOrganizmy);
 
