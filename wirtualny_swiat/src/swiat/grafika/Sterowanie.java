@@ -4,17 +4,16 @@ import java.awt.*;
 
 import swiat.Organizm;
 import swiat.Swiat;
-import swiat.grafika.Ekran;
 import swiat.zwierzeta.Czlowiek;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class InfoObokEkranu extends JPanel implements ActionListener {
+public class Sterowanie extends JPanel implements ActionListener {
     private final Swiat swiat;
 
 
-    public InfoObokEkranu(Swiat swiat) {
+    public Sterowanie(Swiat swiat) {
         this.swiat = swiat;
         repaint();
         dodajPrzyciski();
@@ -33,30 +32,23 @@ public class InfoObokEkranu extends JPanel implements ActionListener {
         JButton zapisz = new JButton("Zapisz Gre");
         JButton zaladuj = new JButton("Zaladuj Gre");
         JButton niesmiertelnosc = new JButton(("Aktywuj Niesmiertelnosc"));
+        final int BRAK_RUCHU = -1;
 
-        nowaTura.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                swiat.wykonajTure(swiat.BRAK_RUCHU);
-                //ekran.requestFocus();
-            }
+        nowaTura.addActionListener(e -> {
+                swiat.wykonajTure(BRAK_RUCHU);
         });
 
         zapisz.addActionListener(e -> {
-            //world.Save();
-            //swiat.frame.setVisible(false);
-            //ekran.requestFocus();
+            swiat.zapiszGre();
         });
 
         zaladuj.addActionListener(e -> {
-            //world.Load();
-            //swiat.frame.setVisible(false);
-            //ekran.requestFocus();
+            swiat.zaladujGre();
         });
 
         niesmiertelnosc.addActionListener(e -> {
-            final Organizm czlowiek = swiat.znajdzCzlowieka();
-            if(czlowiek == null) return;
+            if(!swiat.czyCzlowiekZyje()) return;
+            Organizm czlowiek = swiat.znajdzCzlowieka();
             ((Czlowiek) czlowiek).aktywujNiesmiertelnoscCzlowieka();
         });
 
@@ -98,7 +90,7 @@ public class InfoObokEkranu extends JPanel implements ActionListener {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Helvetica", Font.PLAIN,20));
         int poczatkowyY = 150, poczatkowyX = 100, przesuniecie = 50;
-        for (int i = 0; i < swiat.getLiczbaWiadomosci(); i++) {
+        for (int i = 0; i < swiat.getIloscWiadomosci(); i++) {
             String wiadomosc = swiat.getWiadomosci(i);
             g.drawString(wiadomosc, poczatkowyX, poczatkowyY+przesuniecie*i);
         }

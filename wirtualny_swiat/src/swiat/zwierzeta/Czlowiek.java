@@ -197,4 +197,24 @@ public class Czlowiek extends Zwierze {
         if (czyNiesmiertelny()) licznikTur--;
         else if (!czyNiesmiertelny() && !czyMoznaAktywowacNiesmiertelnosc) licznikTur++;
     }
+
+
+    public int getLicznikTur() {
+        return licznikTur;
+    }
+
+
+    public void setLicznikTur(final int licznikTur) {
+        this.licznikTur = licznikTur;
+    }
+
+
+    public boolean getCzyMoznaAktywowacNiesmiertelnosc() {
+        return czyMoznaAktywowacNiesmiertelnosc;
+    }
+
+
+    public void setCzyMoznaAktywowacNiesmiertelnosc(boolean wyrazenie) {
+        this.czyMoznaAktywowacNiesmiertelnosc = wyrazenie;
+    }
 }

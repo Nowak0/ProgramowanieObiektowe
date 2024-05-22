@@ -1,0 +1,14 @@
+30 30
+Lis L 3 7 0 2 2 false 
+Wilk W 9 5 17 10 12 false 
+Czlowiek C 5 4 0 10 1 false 5 true 
+Antylopa A 4 4 7 12 3 false 
+Owca O 4 4 15 0 5 false 
+Zolw Z 2 1 17 11 4 false 
+Trawa T 0 0 8 4 6 false 
+BarszczSosnowskiego B 10 0 2 14 7 false 
+Guarana G 0 0 6 8 8 false 
+Guarana G 0 0 14 2 9 false 
+Mlecz M 0 0 7 10 10 false 
+Mlecz M 0 0 18 11 11 false 
+WilczeJagody J 99 0 11 6 13 false 

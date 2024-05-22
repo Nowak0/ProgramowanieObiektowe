@@ -2,26 +2,26 @@ package swiat;
 
 import java.awt.*;
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import swiat.grafika.*;
-import swiat.zwierzeta.Czlowiek;
+import swiat.zwierzeta.*;
+import swiat.rosliny.*;
+
 
 public class Swiat {
     private int wymiarMapyX;
     private int wymiarMapyY;
-    private int liczbaWiadomosci;
-    public final int BRAK_RUCHU = -1;
-    public final int BRAK_CZLOWIEKA = -1;
-    public final int RUCH_PRAWO = 1;
-    public final int RUCH_LEWO = 2;
-    public final int RUCH_GORA = 3;
-    public final int RUCH_DOL = 4;
+    private final int BRAK_RUCHU = -1;
     private boolean czlowiekZyje;
     private List<Organizm> posortowaneOrganizmy;
     private List<List<Organizm>> organizmy;
     private List<String> wiadomosci;
+    private final String plikZapisu = ".\\src\\swiat\\zapis.txt";
     public JFrame wyswietlanie;
 
 
@@ -29,7 +29,6 @@ public class Swiat {
         this.wymiarMapyX = x;
         this.wymiarMapyY = y;
         this.czlowiekZyje = false;
-        this.liczbaWiadomosci = 0;
         this.posortowaneOrganizmy = new ArrayList<>();
         this.wyswietlanie = new JFrame();
         this.wiadomosci = new ArrayList<>();
@@ -50,10 +49,9 @@ public class Swiat {
 
 
     public void wykonajTure(int ruchCzlowieka) {
-        liczbaWiadomosci = 0;
         wiadomosci.clear();
         List<Organizm> tmp = new ArrayList<>();
-        if(ruchCzlowieka != BRAK_RUCHU) ustawianieRuchuCzlowieka(ruchCzlowieka);
+        if (ruchCzlowieka != BRAK_RUCHU) ustawianieRuchuCzlowieka(ruchCzlowieka);
 
         for (Organizm o : posortowaneOrganizmy) {
             tmp.add(o);
@@ -69,16 +67,12 @@ public class Swiat {
 
 
     public void rysujSwiat() {
-        Ekran ekran = new Ekran(wyswietlanie, this,organizmy);
-        InfoObokEkranu info = new InfoObokEkranu(this);
         wyswietlanie.setTitle("Wirtualny Swiat Jakub Nowak 197860");
         wyswietlanie.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        wyswietlanie.setLayout(new GridLayout(1,1,0,0));
-        wyswietlanie.setSize(1920,1080);
-        wyswietlanie.add(ekran);
-        wyswietlanie.add(info);
-        ekran.setVisible(true);
-        info.setVisible(true);
+        wyswietlanie.setSize(1920, 1080);
+        wyswietlanie.setLayout(new GridLayout(1, 1, 0, 0));
+        wyswietlanie.add(new Sterowanie(this));
+        wyswietlanie.add(new Plansza(this, organizmy));
         wyswietlanie.setVisible(true);
     }
 
@@ -90,11 +84,6 @@ public class Swiat {
 
     public int getWymiarMapyY() {
         return wymiarMapyY;
-    }
-
-
-    public int getLiczbaWiadomosci() {
-        return liczbaWiadomosci;
     }
 
 
@@ -123,12 +112,9 @@ public class Swiat {
     }
 
 
-    public void setLiczbaWiadomosci() {
-        liczbaWiadomosci++;
-    }
-
-
     public void dodajOrganizm(Organizm organizm, int polozenieX, int polozenieY) {
+        if (organizm == null) return;
+
         if (organizm instanceof Czlowiek) czlowiekZyje = true;
         organizm.setCzyZyje(true);
         organizmy.get(polozenieY).set(polozenieX, organizm);
@@ -137,8 +123,6 @@ public class Swiat {
 
 
     public void dodajOrganizmDoPosortowanych(Organizm organizm) {
-        if (organizm == null) return;
-
         int n = posortowaneOrganizmy.size();
         int i = 0, inicjatywaOrganizmu = organizm.getInicjatywa(), wiekOrganizmu = organizm.getWiek();
         for (Organizm o : posortowaneOrganizmy) {
@@ -146,8 +130,7 @@ public class Swiat {
             if (inicjatywaOrganizmu > o.getInicjatywa()) {
                 posortowaneOrganizmy.add(i, organizm);
                 return;
-            }
-            else if (inicjatywaOrganizmu == o.getInicjatywa() && wiekOrganizmu < o.getWiek()) {
+            } else if (inicjatywaOrganizmu == o.getInicjatywa() && wiekOrganizmu < o.getWiek()) {
                 posortowaneOrganizmy.add(i, organizm);
                 return;
             }
@@ -178,11 +161,9 @@ public class Swiat {
 
 
     public void wypiszWiadomosc(String wiadomosc) {
-        if (getLiczbaWiadomosci() > getWymiarMapyY()) liczbaWiadomosci = 0;
         //jakas graficzna zmiana
         System.out.println(wiadomosc);
         wiadomosci.add(wiadomosc);
-        setLiczbaWiadomosci();
     }
 
 
@@ -213,7 +194,157 @@ public class Swiat {
 
     public void ustawianieRuchuCzlowieka(int kierunek) {
         for (Organizm o : posortowaneOrganizmy) {
-            if(o instanceof Czlowiek) ((Czlowiek) o).setRuchCzlowieka(kierunek);
+            if (o instanceof Czlowiek) ((Czlowiek) o).setRuchCzlowieka(kierunek);
+        }
+    }
+
+
+    public int getIloscWiadomosci() {
+        return wiadomosci.size();
+    }
+
+
+    public void zapiszGre() {
+        StringBuilder wartosci = new StringBuilder();
+        wartosci.append(wymiarMapyX).append(" ").append(wymiarMapyY).append("\n");
+        for (Organizm o : posortowaneOrganizmy) {
+            wartosci.append(o.getNazwa()).append(" ");
+            wartosci.append(o.getSymbol()).append(" ");
+            wartosci.append(o.getSila()).append(" ");
+            wartosci.append(o.getInicjatywa()).append(" ");
+            wartosci.append(o.getPolozenieX()).append(" ");
+            wartosci.append(o.getPolozenieY()).append(" ");
+            wartosci.append(o.getWiek()).append(" ");
+            wartosci.append(o.czyNiesmiertelny()).append(" ");
+
+            if (o instanceof Czlowiek) {
+                wartosci.append(((Czlowiek) o).getLicznikTur()).append(" ");
+                wartosci.append(((Czlowiek) o).getCzyMoznaAktywowacNiesmiertelnosc()).append(" ");
+            }
+
+            wartosci.append("\n");
+        }
+
+        try {
+            zapiszDoPliku(wartosci);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void zapiszDoPliku(StringBuilder wartosci) throws IOException {
+        String[] elementy = wartosci.toString().split("\n");
+        File plik = new File(plikZapisu);
+        if (!plik.exists()) plik.createNewFile();
+        try (BufferedWriter zapis = new BufferedWriter(new FileWriter(plikZapisu))) {
+
+            for (String element : elementy) {
+                zapis.write(element);
+                zapis.write("\n");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void zaladujGre() {
+        File plik = new File(plikZapisu);
+        if (!plik.exists()) return;
+        try (BufferedReader zapis = new BufferedReader(new FileReader(plikZapisu))) {
+            wyzerujOrganizmy();
+            String linia = zapis.readLine();
+            String[] elementy = linia.split(" ");
+            setWymiarMapyX(Integer.parseInt(elementy[0]));
+            setWymiarMapyY(Integer.parseInt(elementy[1]));
+            uaktualnijGraniceMapy();
+
+            while ((linia = zapis.readLine()) != null) {
+                elementy = linia.split(" ");
+                //System.out.println(linia);
+                dodajOrganizmyKonkretnie(elementy);
+            }
+
+            wyswietlanie.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void dodajOrganizmyKonkretnie(String[] elementy) {
+        Organizm nowy;
+        switch (elementy[0]) {
+            case "Antylopa":
+                nowy = new Antylopa(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Czlowiek":
+                nowy = new Czlowiek(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                //((Czlowiek) nowy).setLicznikTur(Integer.parseInt(elementy[8]));
+                //((Czlowiek) nowy).setCzyMoznaAktywowacNiesmiertelnosc((Objects.equals(elementy[9], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Lis":
+                nowy = new Lis(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Owca":
+                nowy = new Owca(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Wilk":
+                nowy = new Wilk(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Zolw":
+                nowy = new Zolw(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "BarszczSosnowskiego":
+                nowy = new Barszcz(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Guarana":
+                nowy = new Guarana(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Mlecz":
+                nowy = new Mlecz(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "Trawa":
+                nowy = new Trawa(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+            case "WilczeJagody":
+                nowy = new WilczeJagody(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
+                break;
+
+        }
+    }
+
+
+    private void wyzerujOrganizmy() {
+        for (int y = 0; y < wymiarMapyY; y++) {
+            for (int x = 0; x < wymiarMapyX; x++) {
+                organizmy.get(y).set(x, null);
+            }
         }
     }
 }

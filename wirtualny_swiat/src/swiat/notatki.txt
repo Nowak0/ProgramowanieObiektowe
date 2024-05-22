@@ -1,5 +1,4 @@
 NOTATKI:
-- oczyscic info obok ekranu z syfu
 - brak zadania 4 pkt
-- brak zapisu
-- inaczej ustawic grafike zeby nie przypominalo tego z paczki
+- zapis i ladowanie zrobic jako osobna klasa
+- nie updatuje sie rozmiar planszy po zaladowaniu (trzeba to zmienic w klasie plansza)
