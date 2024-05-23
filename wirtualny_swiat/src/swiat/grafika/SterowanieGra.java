@@ -4,16 +4,18 @@ import java.awt.*;
 
 import swiat.Organizm;
 import swiat.Swiat;
+import swiat.Zapis;
 import swiat.zwierzeta.Czlowiek;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Sterowanie extends JPanel implements ActionListener {
+public class SterowanieGra extends JPanel implements ActionListener {
     private final Swiat swiat;
-
-    public Sterowanie(Swiat swiat) {
+    private Zapis zapis;
+    public SterowanieGra(Swiat swiat) {
         this.swiat = swiat;
+        this.zapis = new Zapis(swiat);
         repaint();
         dodajPrzyciski();
     }
@@ -34,15 +36,15 @@ public class Sterowanie extends JPanel implements ActionListener {
         final int BRAK_RUCHU = -1;
 
         nowaTura.addActionListener(e -> {
-                swiat.wykonajTure(BRAK_RUCHU);
+            swiat.wykonajTure(BRAK_RUCHU);
         });
 
         zapisz.addActionListener(e -> {
-            swiat.zapiszGre();
+            zapis.zapiszGre();
         });
 
         zaladuj.addActionListener(e -> {
-            swiat.zaladujGre();
+            zapis.zaladujGre();
         });
 
         niesmiertelnosc.addActionListener(e -> {

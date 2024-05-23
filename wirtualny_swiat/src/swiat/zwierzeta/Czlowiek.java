@@ -181,7 +181,9 @@ public class Czlowiek extends Zwierze {
             setNiesmiertelnosc(true);
             czyMoznaAktywowacNiesmiertelnosc = false;
             licznikTur = LICZBA_TUR_NIESMIERTELNOSC;
+            return;
         }
+        System.out.println("Cos nie dziala ");
     }
 
 
@@ -190,7 +192,7 @@ public class Czlowiek extends Zwierze {
             setNiesmiertelnosc(false);
             czyMoznaAktywowacNiesmiertelnosc = false;
         }
-        else if (licznikTur == LICZBA_TUR_NIESMIERTELNOSC) {
+        else if (licznikTur == LICZBA_TUR_NIESMIERTELNOSC && !czyNiesmiertelny()) {
             czyMoznaAktywowacNiesmiertelnosc = true;
         }
 
