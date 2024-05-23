@@ -1,3 +1,4 @@
 NOTATKI:
 - brak zadania 4 pkt
 - zapis i ladowanie zrobic jako osobna klasa
+- nie updatuje sie rozmiar planszy po zaladowaniu (trzeba to zmienic w klasie plansza)

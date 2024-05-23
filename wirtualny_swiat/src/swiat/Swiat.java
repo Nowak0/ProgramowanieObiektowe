@@ -3,10 +3,8 @@ package swiat;
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
 import swiat.grafika.*;
 import swiat.zwierzeta.*;
@@ -16,27 +14,39 @@ import swiat.rosliny.*;
 public class Swiat {
     private int wymiarMapyX;
     private int wymiarMapyY;
+    private final int maxWymiarMapyX = 22;
+    private final int maxWymiarMapyY = 28;
     private final int BRAK_RUCHU = -1;
     private boolean czlowiekZyje;
     private List<Organizm> posortowaneOrganizmy;
     private List<List<Organizm>> organizmy;
     private List<String> wiadomosci;
     private final String plikZapisu = ".\\src\\swiat\\zapis.txt";
-    public JFrame wyswietlanie;
+    private JFrame wyswietlanie;
+    private Plansza plansza;
 
 
     public Swiat(final int x, final int y) {
-        this.wymiarMapyX = x;
-        this.wymiarMapyY = y;
+        ustawianieRozmiaruMapy(x,y);
         this.czlowiekZyje = false;
         this.posortowaneOrganizmy = new ArrayList<>();
         this.wyswietlanie = new JFrame();
         this.wiadomosci = new ArrayList<>();
         uaktualnijGraniceMapy();
+        List<Organizm> noweOrganizmy = new ArrayList<>();
+        dodajOrganizmyRecznie(noweOrganizmy);
+        dodajOrganizmyDoSwiataLosowo(noweOrganizmy);
     }
 
 
-    public void uaktualnijGraniceMapy() {
+    private void ustawianieRozmiaruMapy(final int x, final int y) {
+        this.wymiarMapyX = Math.min(x, maxWymiarMapyX);
+        this.wymiarMapyY = Math.min(y, maxWymiarMapyY);
+    }
+
+
+    private void uaktualnijGraniceMapy() {
+        if(organizmy!=null) posortowaneOrganizmy.clear();
         organizmy = new ArrayList<>(wymiarMapyY);
         for (int i = 0; i < wymiarMapyY; i++) {
             List<Organizm> wiersz = new ArrayList<>(wymiarMapyX);
@@ -72,7 +82,8 @@ public class Swiat {
         wyswietlanie.setSize(1920, 1080);
         wyswietlanie.setLayout(new GridLayout(1, 1, 0, 0));
         wyswietlanie.add(new Sterowanie(this));
-        wyswietlanie.add(new Plansza(this, organizmy));
+        plansza = new Plansza(this, organizmy);
+        wyswietlanie.add(plansza);
         wyswietlanie.setVisible(true);
     }
 
@@ -118,6 +129,7 @@ public class Swiat {
         if (organizm instanceof Czlowiek) czlowiekZyje = true;
         organizm.setCzyZyje(true);
         organizmy.get(polozenieY).set(polozenieX, organizm);
+        //System.out.println("Jestem "+organizmy.get(polozenieY).get(polozenieX).getNazwa());
         dodajOrganizmDoPosortowanych(organizm);
     }
 
@@ -254,19 +266,18 @@ public class Swiat {
         File plik = new File(plikZapisu);
         if (!plik.exists()) return;
         try (BufferedReader zapis = new BufferedReader(new FileReader(plikZapisu))) {
-            wyzerujOrganizmy();
             String linia = zapis.readLine();
             String[] elementy = linia.split(" ");
-            setWymiarMapyX(Integer.parseInt(elementy[0]));
-            setWymiarMapyY(Integer.parseInt(elementy[1]));
+            ustawianieRozmiaruMapy(Integer.parseInt(elementy[0]), Integer.parseInt(elementy[1]));
             uaktualnijGraniceMapy();
 
             while ((linia = zapis.readLine()) != null) {
                 elementy = linia.split(" ");
                 //System.out.println(linia);
-                dodajOrganizmyKonkretnie(elementy);
+                dodajOrganizmyZapis(elementy);
             }
 
+            plansza.uaktualnijOrganizmy(organizmy);
             wyswietlanie.repaint();
 
         } catch (Exception e) {
@@ -275,7 +286,7 @@ public class Swiat {
     }
 
 
-    private void dodajOrganizmyKonkretnie(String[] elementy) {
+    private void dodajOrganizmyZapis(String[] elementy) {
         Organizm nowy;
         switch (elementy[0]) {
             case "Antylopa":
@@ -340,11 +351,43 @@ public class Swiat {
     }
 
 
-    private void wyzerujOrganizmy() {
-        for (int y = 0; y < wymiarMapyY; y++) {
-            for (int x = 0; x < wymiarMapyX; x++) {
-                organizmy.get(y).set(x, null);
+    public void dodajOrganizmyDoSwiataLosowo(List<Organizm> noweOrganizmy) {
+        Random random = new Random();
+        int wolneMiejsca = getWymiarMapyX() * getWymiarMapyY();
+
+        for (Organizm o : noweOrganizmy) {
+            boolean dodano = false;
+
+            while (!dodano && wolneMiejsca > 0)
+            {
+                int polozenieX = random.nextInt(getWymiarMapyX());
+                int polozenieY = random.nextInt(getWymiarMapyY());
+                if (getOrganizm(polozenieX, polozenieY) == null) {
+                    o.setPolozenieX(polozenieX);
+                    o.setPolozenieY(polozenieY);
+                    o.setWiek(getLiczbaOrganizmow() + 1);
+                    dodajOrganizm(o, o.getPolozenieX(), o.getPolozenieY());
+                    wolneMiejsca--;
+                    dodano = true;
+                }
             }
         }
+    }
+
+
+    public void dodajOrganizmyRecznie(List<Organizm> noweOrganizmy) {
+        noweOrganizmy.add(new Czlowiek(0, 0, 0));
+        noweOrganizmy.add(new Lis(0, 0, 0));
+        noweOrganizmy.add(new Antylopa(0, 0, 0));
+        noweOrganizmy.add(new Zolw(0, 0, 0));
+        noweOrganizmy.add(new Owca(0, 0, 0));
+        noweOrganizmy.add(new Trawa(0, 0, 0));
+        noweOrganizmy.add(new Barszcz(0, 0, 0));
+        noweOrganizmy.add(new Guarana(0, 0, 0));
+        noweOrganizmy.add(new Guarana(0, 0, 0));
+        noweOrganizmy.add(new Mlecz(0, 0, 0));
+        noweOrganizmy.add(new Mlecz(0, 0, 0));
+        noweOrganizmy.add(new Wilk(0, 0, 0));
+        noweOrganizmy.add(new WilczeJagody(0, 0, 0));
     }
 }

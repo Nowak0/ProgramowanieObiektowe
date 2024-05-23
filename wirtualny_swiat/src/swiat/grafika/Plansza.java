@@ -10,17 +10,13 @@ import java.util.List;
 
 
 public class Plansza extends JPanel implements ActionListener, KeyListener {
-    private final List<List<Organizm>> organizmy;
-    private final int wymiarMapyY;
-    private final int wymiarMapyX;
+    private List<List<Organizm>> organizmy;
     private final Swiat swiat;
 
 
     public Plansza(Swiat swiat, List<List<Organizm>> kopia) {
-        organizmy = kopia;
+        uaktualnijOrganizmy(kopia);
         this.swiat = swiat;
-        wymiarMapyY = swiat.getWymiarMapyY();
-        wymiarMapyX = swiat.getWymiarMapyX();
         addKeyListener(this);
         setFocusable(true);
     }
@@ -28,11 +24,12 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void paint(Graphics g) {
+        //super.paint(g);
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
         final int poczatkowyX = 0;
         final int poczatkowyY = -1;
-        for (int i = 0; i < wymiarMapyY; i++) {
-            for (int j = 0; j < wymiarMapyX; j++) {
+        for (int i = 0; i < swiat.getWymiarMapyY(); i++) {
+            for (int j = 0; j < swiat.getWymiarMapyX(); j++) {
                 if (organizmy.get(i).get(j) == null) {
                     g.setColor(Color.lightGray);
                     g.fillRect((poczatkowyX + j + 1) * 30, (poczatkowyY + i + 1) * 30, 30, 30);
@@ -75,5 +72,10 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
 
 
     public void keyReleased(KeyEvent e) {
+    }
+
+
+    public void uaktualnijOrganizmy(List<List<Organizm>> kopia) {
+        organizmy = kopia;
     }
 }

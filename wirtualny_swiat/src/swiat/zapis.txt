@@ -1,4 +1,4 @@
-20 20
+100 100
 Lis L 3 7 0 2 2 false 
 Wilk W 9 5 17 10 12 false 
 Czlowiek C 5 4 0 10 1 false 5 true 

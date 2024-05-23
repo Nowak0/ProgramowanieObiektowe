@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 public class Sterowanie extends JPanel implements ActionListener {
     private final Swiat swiat;
 
-
     public Sterowanie(Swiat swiat) {
         this.swiat = swiat;
         repaint();
@@ -89,7 +88,7 @@ public class Sterowanie extends JPanel implements ActionListener {
     private void wypiszWiadomosci(Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Helvetica", Font.PLAIN,20));
-        int poczatkowyY = 150, poczatkowyX = 100, przesuniecie = 50;
+        int poczatkowyY = 250, poczatkowyX = 100, przesuniecie = 50;
         for (int i = 0; i < swiat.getIloscWiadomosci(); i++) {
             String wiadomosc = swiat.getWiadomosci(i);
             g.drawString(wiadomosc, poczatkowyX, poczatkowyY+przesuniecie*i);
