@@ -3,7 +3,6 @@ package swiat;
 import swiat.zwierzeta.Czlowiek;
 
 import java.io.*;
-import java.util.List;
 
 public class Zapis {
     private final Swiat swiat;
@@ -44,8 +43,7 @@ public class Zapis {
 
     public void zapiszDoPliku(StringBuilder wartosci) throws IOException {
         String[] elementy = wartosci.toString().split("\n");
-        File plik = new File(plikZapisu);
-        //if (!plik.exists()) plik.createNewFile();
+
         try (BufferedWriter zapis = new BufferedWriter(new FileWriter(plikZapisu))) {
 
             for (String element : elementy) {

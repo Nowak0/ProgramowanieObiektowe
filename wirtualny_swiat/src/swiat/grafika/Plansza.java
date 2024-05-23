@@ -24,7 +24,6 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void paint(Graphics g) {
-        //super.paint(g);
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
         final int poczatkowyX = 0;
         final int poczatkowyY = -1;

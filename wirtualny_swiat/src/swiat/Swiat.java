@@ -69,7 +69,7 @@ public class Swiat {
         for (Organizm o : tmp) {
             if (o != null && o.getCzyZyje()) o.akcja(this);
         }
-        
+
         wyswietlanie.repaint();
     }
 
