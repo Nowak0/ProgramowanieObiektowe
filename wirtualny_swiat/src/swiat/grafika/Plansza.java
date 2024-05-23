@@ -25,19 +25,17 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
     @Override
     public void paint(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
-        final int poczatkowyX = 0;
-        final int poczatkowyY = -1;
         for (int i = 0; i < swiat.getWymiarMapyY(); i++) {
             for (int j = 0; j < swiat.getWymiarMapyX(); j++) {
                 if (organizmy.get(i).get(j) == null) {
                     g.setColor(Color.lightGray);
-                    g.fillRect((poczatkowyX + j + 1) * 30, (poczatkowyY + i + 1) * 30, 30, 30);
+                    g.fillRect((j + 1) * 30, (i) * 30, 30, 30);
                 } else {
                     g.setColor(organizmy.get(i).get(j).rysowanie());
-                    g.fillRect((poczatkowyX + j + 1) * 30, (poczatkowyY + i + 1) * 30, 30, 30);
+                    g.fillRect((j + 1) * 30, (i) * 30, 30, 30);
                     g.setColor(Color.BLACK);
                     char s = organizmy.get(i).get(j).getSymbol();
-                    g.drawString(String.valueOf(s), (poczatkowyX + j + 1) * 30 + 7, (poczatkowyY + i + 1) * 30 + 20);
+                    g.drawString(String.valueOf(s), (j + 1) * 30 + 7, (i) * 30 + 20);
                 }
 
             }
