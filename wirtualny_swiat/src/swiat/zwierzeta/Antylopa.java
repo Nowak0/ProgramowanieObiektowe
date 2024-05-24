@@ -92,7 +92,7 @@ public class Antylopa extends Zwierze {
 
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Antylopa zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Antylopa zabija " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
@@ -104,7 +104,7 @@ public class Antylopa extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa " + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 
@@ -126,7 +126,7 @@ public class Antylopa extends Zwierze {
                     swiat.dodajOrganizm(this, x, y);
                     swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
                     swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-                    swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+                    swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
                     return true;
                 }
             }

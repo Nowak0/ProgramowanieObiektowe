@@ -1,4 +1,13 @@
-2 4
-Lis L 3 7 1 2 1 false 
-Lis L 3 7 1 1 2 false 
-Lis L 3 7 0 0 3 false 
+20 20
+Lis 8 1 2 false 
+Wilk 6 8 12 false 
+Czlowiek 17 13 1 true 3 false 
+Antylopa 11 14 3 false 
+Owca 6 2 5 false 
+Zolw 17 8 4 false 
+Trawa 15 2 6 false 
+BarszczSosnowskiego 3 1 7 false 
+Guarana 5 8 8 false 
+Guarana 0 1 9 false 
+Mlecz 12 0 11 false 
+WilczeJagody 9 4 13 false 

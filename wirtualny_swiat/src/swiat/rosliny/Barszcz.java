@@ -45,7 +45,7 @@ public class Barszcz extends Roslina {
                     int tmpY = swiat.getOrganizm(x, y).getPolozenieY();
                     swiat.getOrganizm(x, y).setCzyZyje(false);
                     swiat.wypiszWiadomosc(swiat.getOrganizm(x, y).getNazwa() + " zostaje zabity");
-                    swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego"  + " " + tmpX + " " + tmpY);
+                    swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego"  + wypiszPolozenie(tmpX,tmpY));
                     swiat.usunOrganizm(swiat.getOrganizm(x, y), x, y);
                 }
             }
@@ -59,7 +59,7 @@ public class Barszcz extends Roslina {
 
         setCzyZyje(false);
         swiat.usunOrganizm(this, polozenieX, polozenieY);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego" + polozenieX + " " + polozenieY );
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego" + wypiszPolozenie(polozenieX,polozenieY));
 
         if (!atakujacy.czyNiesmiertelny()) {
             atakujacy.setCzyZyje(false);

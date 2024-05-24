@@ -129,4 +129,9 @@ public abstract class Organizm {
     public void setNiesmiertelnosc(boolean wyrazenie) {
         this.aktywnaNiesmiertelnosc = wyrazenie;
     }
+
+
+    public static String wypiszPolozenie(final int polozenieX, final int polozenieY) {
+        return " ("+polozenieX+","+polozenieY+")";
+    }
 }

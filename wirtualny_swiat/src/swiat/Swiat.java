@@ -19,8 +19,8 @@ public class Swiat {
     private boolean czlowiekZyje;
     private List<Organizm> posortowaneOrganizmy;
     private List<List<Organizm>> organizmy;
-    private List<String> wiadomosci;
-    private JFrame wyswietlanie;
+    private final List<String> wiadomosci;
+    private final JFrame wyswietlanie;
     private Plansza plansza;
 
 
@@ -105,6 +105,7 @@ public class Swiat {
         return posortowaneOrganizmy.get(i);
     }
 
+
     public Organizm getOrganizm(final int polozenieX, final int polozenieY) {
         return organizmy.get(polozenieY).get(polozenieX);
     }
@@ -127,12 +128,14 @@ public class Swiat {
 
     public void dodajOrganizmDoPosortowanych(Organizm organizm) {
         int i = 0, inicjatywaOrganizmu = organizm.getInicjatywa(), wiekOrganizmu = organizm.getWiek();
+
         for (Organizm o : posortowaneOrganizmy) {
             if (o == organizm) continue;
             if (inicjatywaOrganizmu > o.getInicjatywa()) {
                 posortowaneOrganizmy.add(i, organizm);
                 return;
-            } else if (inicjatywaOrganizmu == o.getInicjatywa() && wiekOrganizmu < o.getWiek()) {
+            }
+            else if (inicjatywaOrganizmu == o.getInicjatywa() && wiekOrganizmu < o.getWiek()) {
                 posortowaneOrganizmy.add(i, organizm);
                 return;
             }
@@ -153,7 +156,7 @@ public class Swiat {
     public void usunOrganizmZPosortowanych(Organizm organizm) {
         int i = 0;
         for (Organizm o : posortowaneOrganizmy) {
-            if (o != null && o == organizm) {
+            if (o == null || o == organizm) {
                 posortowaneOrganizmy.remove(i);
                 break;
             }
@@ -167,7 +170,7 @@ public class Swiat {
     }
 
 
-    public String getWiadomosci(int indeks) {
+    public String getWiadomosc(int indeks) {
         return wiadomosci.get(indeks);
     }
 
@@ -212,60 +215,60 @@ public class Swiat {
         Organizm nowy;
         switch (elementy[0]) {
             case "Antylopa":
-                nowy = new Antylopa(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Antylopa(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Czlowiek":
-                nowy = new Czlowiek(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
-                ((Czlowiek) nowy).setLicznikTur(Integer.parseInt(elementy[8]));
-                ((Czlowiek) nowy).setCzyMoznaAktywowacNiesmiertelnosc((Objects.equals(elementy[9], "true")));
+                nowy = new Czlowiek(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
+                ((Czlowiek) nowy).setLicznikTur(Integer.parseInt(elementy[5]));
+                ((Czlowiek) nowy).setCzyMoznaAktywowacNiesmiertelnosc((Objects.equals(elementy[6], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Lis":
-                nowy = new Lis(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Lis(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Owca":
-                nowy = new Owca(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Owca(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Wilk":
-                nowy = new Wilk(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Wilk(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Zolw":
-                nowy = new Zolw(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Zolw(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "BarszczSosnowskiego":
-                nowy = new Barszcz(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Barszcz(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Guarana":
-                nowy = new Guarana(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Guarana(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Mlecz":
-                nowy = new Mlecz(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Mlecz(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "Trawa":
-                nowy = new Trawa(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new Trawa(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
             case "WilczeJagody":
-                nowy = new WilczeJagody(Integer.parseInt(elementy[4]), Integer.parseInt(elementy[5]), Integer.parseInt(elementy[6]));
-                nowy.setNiesmiertelnosc((Objects.equals(elementy[7], "true")));
+                nowy = new WilczeJagody(Integer.parseInt(elementy[1]), Integer.parseInt(elementy[2]), Integer.parseInt(elementy[3]));
+                nowy.setNiesmiertelnosc((Objects.equals(elementy[4], "true")));
                 dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY());
                 break;
 
@@ -299,11 +302,18 @@ public class Swiat {
 
     public void dodajOrganizmyDoSwiataLosowo(Organizm organizm) {
         Random random = new Random();
-        int wolneMiejsca = getWymiarMapyX() * getWymiarMapyY();
-        boolean dodano = false;
+        int wolneMiejsca = getWymiarMapyX() * getWymiarMapyY() - posortowaneOrganizmy.size();
 
-        while (!dodano && wolneMiejsca > 0)
-        {
+        if(wolneMiejsca == 0) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Nie dodano organizmu, poniewaz nie ma miejsca",
+                    null,
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        while (true) {
             int x = random.nextInt(getWymiarMapyX());
             int y = random.nextInt(getWymiarMapyY());
             if (getOrganizm(x, y) == null) {
@@ -311,14 +321,13 @@ public class Swiat {
                 organizm.setPolozenieY(y);
                 organizm.setWiek(getLiczbaOrganizmow() + 1);
                 dodajOrganizm(organizm, organizm.getPolozenieX(), organizm.getPolozenieY());
-                wolneMiejsca--;
-                dodano = true;
                 wyswietlanie.repaint();
                 JOptionPane.showMessageDialog(
                         null,
                         "Dodano " + organizm.getNazwa() + " na pozycji " + x + " " + y,
                         null,
                         JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
         }
     }

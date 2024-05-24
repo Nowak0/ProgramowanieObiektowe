@@ -41,7 +41,7 @@ public class Wilk extends Zwierze {
 
         if (czyPrzetrwal) {
             atakujacy.setCzyZyje(false);
-            swiat.wypiszWiadomosc("Wilk zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Wilk zabija " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
 
@@ -52,7 +52,7 @@ public class Wilk extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Wilk " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Wilk" + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 

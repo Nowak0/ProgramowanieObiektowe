@@ -52,7 +52,7 @@ public class Lis extends Zwierze {
             }
         }
 
-        if (mozliweMiejscaX.size() == 0) return;
+        if (mozliweMiejscaX.isEmpty()) return;
 
         int ruch = random.nextInt(mozliweMiejscaX.size());
         int nowyX = mozliweMiejscaX.get(ruch), nowyY = mozliweMiejscaY.get(ruch);
@@ -86,7 +86,7 @@ public class Lis extends Zwierze {
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
@@ -97,7 +97,7 @@ public class Lis extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis" + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 

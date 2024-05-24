@@ -35,7 +35,7 @@ public class WilczeJagody extends Roslina {
 
         setCzyZyje(false);
         swiat.usunOrganizm(this, polozenieX, polozenieY);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Wilcze Jagody " + polozenieX + " " + polozenieY);
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Wilcze Jagody" + wypiszPolozenie(polozenieX,polozenieY));
 
         if (!atakujacy.czyNiesmiertelny()) {
             atakujacy.setCzyZyje(false);

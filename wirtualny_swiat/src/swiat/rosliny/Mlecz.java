@@ -47,7 +47,7 @@ public class Mlecz extends Roslina {
         atakujacy.setPolozenieY(polozenieY);
         swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
         swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Mlecz " + polozenieX + " " + polozenieY);
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Mlecz" + wypiszPolozenie(polozenieX,polozenieY));
     }
 
 

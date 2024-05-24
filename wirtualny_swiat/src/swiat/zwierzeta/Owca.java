@@ -40,7 +40,7 @@ public class Owca extends Zwierze {
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Owca zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Owca zabija " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
             atakujacy.setCzyZyje(false);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
@@ -51,7 +51,7 @@ public class Owca extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Owca " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Owca" + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 

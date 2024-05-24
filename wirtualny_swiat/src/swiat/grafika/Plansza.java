@@ -30,7 +30,8 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
                 if (organizmy.get(i).get(j) == null) {
                     g.setColor(Color.lightGray);
                     g.fillRect((j + 1) * 30, (i) * 30, 30, 30);
-                } else {
+                }
+                else {
                     g.setColor(organizmy.get(i).get(j).rysowanie());
                     g.fillRect((j + 1) * 30, (i) * 30, 30, 30);
                     g.setColor(Color.BLACK);
@@ -45,7 +46,7 @@ public class Plansza extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+
     }
 
 

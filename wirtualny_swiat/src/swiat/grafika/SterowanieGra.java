@@ -2,6 +2,8 @@ package swiat.grafika;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import swiat.Organizm;
 import swiat.Swiat;
@@ -9,18 +11,14 @@ import swiat.Zapis;
 import swiat.zwierzeta.*;
 import swiat.rosliny.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 public class SterowanieGra extends JPanel implements ActionListener {
     private final Swiat swiat;
-    private Zapis zapis;
+    private final Zapis zapis;
 
     public SterowanieGra(Swiat swiat) {
         this.swiat = swiat;
         this.zapis = new Zapis(swiat);
-        repaint();
         dodajPrzyciski();
     }
 
@@ -78,21 +76,25 @@ public class SterowanieGra extends JPanel implements ActionListener {
     private void ustawStylePrzyciskow(JButton nowaTura, JButton zapisz, JButton zaladuj, JButton niesmiertelnosc, JButton dodawanieOrganizmu) {
         int wysokoscPrzycisku = 100;
         int szerokoscPrzycisku = 200;
+
         nowaTura.setPreferredSize(new Dimension(szerokoscPrzycisku, wysokoscPrzycisku));
         zapisz.setPreferredSize(new Dimension(szerokoscPrzycisku, wysokoscPrzycisku));
         zaladuj.setPreferredSize(new Dimension(szerokoscPrzycisku, wysokoscPrzycisku));
         niesmiertelnosc.setPreferredSize(new Dimension(szerokoscPrzycisku, wysokoscPrzycisku));
         dodawanieOrganizmu.setPreferredSize(new Dimension(szerokoscPrzycisku, wysokoscPrzycisku));
+
         nowaTura.setBackground(Color.darkGray);
         zapisz.setBackground(Color.darkGray);
         zaladuj.setBackground(Color.darkGray);
         niesmiertelnosc.setBackground(Color.darkGray);
         dodawanieOrganizmu.setBackground(Color.darkGray);
+
         nowaTura.setForeground(Color.white);
         zapisz.setForeground(Color.white);
         zaladuj.setForeground(Color.white);
         niesmiertelnosc.setForeground(Color.white);
         dodawanieOrganizmu.setForeground(Color.white);
+
         nowaTura.setVisible(true);
         zapisz.setVisible(true);
         zaladuj.setVisible(true);
@@ -106,7 +108,7 @@ public class SterowanieGra extends JPanel implements ActionListener {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
         int poczatkowyY = 250, poczatkowyX = 100, przesuniecie = 50;
         for (int i = 0; i < swiat.getIloscWiadomosci(); i++) {
-            String wiadomosc = swiat.getWiadomosci(i);
+            String wiadomosc = swiat.getWiadomosc(i);
             g.drawString(wiadomosc, poczatkowyX, poczatkowyY + przesuniecie * i);
         }
     }
@@ -139,8 +141,10 @@ public class SterowanieGra extends JPanel implements ActionListener {
 
 
     private void sprecyzujOrganizm(final int odpowiedz) {
-        Organizm organizm = null;
+        Organizm organizm;
         switch (odpowiedz) {
+            case -1:
+                return;
             case 0:
                 organizm = new Antylopa(0, 0, 0);
                 swiat.dodajOrganizmyDoSwiataLosowo(organizm);
@@ -188,6 +192,6 @@ public class SterowanieGra extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+
     }
 }

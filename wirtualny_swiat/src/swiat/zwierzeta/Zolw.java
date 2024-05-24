@@ -51,7 +51,7 @@ public class Zolw extends Zwierze {
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 
         if (czyPrzetrwal) {
-            swiat.wypiszWiadomosc("Zolw odpiera atak " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Zolw odpiera atak " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
         }
         else {
             setCzyZyje(false);
@@ -60,7 +60,7 @@ public class Zolw extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw  " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw" + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 

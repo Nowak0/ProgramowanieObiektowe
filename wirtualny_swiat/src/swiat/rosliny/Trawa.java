@@ -39,7 +39,7 @@ public class Trawa extends Roslina {
         atakujacy.setPolozenieY(polozenieY);
         swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
         swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Trawa " + polozenieX + " " + polozenieY);
+        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Trawa" + wypiszPolozenie(polozenieX,polozenieY));
     }
 
 

@@ -50,7 +50,6 @@ public abstract class Zwierze extends Organizm {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
-        System.out.println("JESTEM");
         int polozenieX = atakujacy.getPolozenieX(), polozenieY = atakujacy.getPolozenieY();
         for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
         {
@@ -63,7 +62,7 @@ public abstract class Zwierze extends Organizm {
                     atakujacy.setPolozenieY(y);
                     atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1);
                     swiat.dodajOrganizm(atakujacy, x, y);
-                    swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa() + " " + x + " " + y);
+                    swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa() + wypiszPolozenie(x,y));
                     return;
                 }
             }

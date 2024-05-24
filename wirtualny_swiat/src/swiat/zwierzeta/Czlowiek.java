@@ -139,13 +139,13 @@ public class Czlowiek extends Zwierze {
                     atakujacy.setPolozenieY(polozenieY);
                     swiat.dodajOrganizm(this, x, y);
                     swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
-                    swiat.wypiszWiadomosc("Czlowiek unika ataku " + atakujacy.getNazwa());
+                    swiat.wypiszWiadomosc("Czlowiek unika ataku " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
                     return;
                 }
             }
         }
 
-        swiat.wypiszWiadomosc("Czlowiek unika ataku " + atakujacy.getNazwa());
+        swiat.wypiszWiadomosc("Czlowiek unika ataku " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
     }
 
 
@@ -155,7 +155,7 @@ public class Czlowiek extends Zwierze {
 
         if (czyPrzetrwal) {
             atakujacy.setCzyZyje(false);
-            swiat.wypiszWiadomosc("Czlowiek zabija " + atakujacy.getNazwa() + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc("Czlowiek zabija " + atakujacy.getNazwa() + wypiszPolozenie(polozenieX,polozenieY));
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
         }
         else {
@@ -165,7 +165,7 @@ public class Czlowiek extends Zwierze {
             atakujacy.setPolozenieY(polozenieY);
             swiat.dodajOrganizm(atakujacy, polozenieX, polozenieY);
             swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Czlowieka" + " " + polozenieX + " " + polozenieY);
+            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Czlowieka" + wypiszPolozenie(polozenieX,polozenieY));
         }
     }
 

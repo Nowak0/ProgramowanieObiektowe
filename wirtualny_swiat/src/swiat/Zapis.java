@@ -17,9 +17,6 @@ public class Zapis {
         for (int i = 0; i< swiat.getLiczbaOrganizmow(); i++) {
             Organizm o = swiat.getPosortowanyOrganizm(i);
             wartosci.append(o.getNazwa()).append(" ");
-            wartosci.append(o.getSymbol()).append(" ");
-            wartosci.append(o.getSila()).append(" ");
-            wartosci.append(o.getInicjatywa()).append(" ");
             wartosci.append(o.getPolozenieX()).append(" ");
             wartosci.append(o.getPolozenieY()).append(" ");
             wartosci.append(o.getWiek()).append(" ");
