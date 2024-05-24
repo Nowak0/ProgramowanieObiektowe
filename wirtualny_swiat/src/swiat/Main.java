@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Swiat swiat = new Swiat(20,20);
+        Swiat swiat = new Swiat(1,3);
         swiat.rysujSwiat();
     }
 }

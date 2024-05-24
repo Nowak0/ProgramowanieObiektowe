@@ -297,6 +297,33 @@ public class Swiat {
     }
 
 
+    public void dodajOrganizmyDoSwiataLosowo(Organizm organizm) {
+        Random random = new Random();
+        int wolneMiejsca = getWymiarMapyX() * getWymiarMapyY();
+        boolean dodano = false;
+
+        while (!dodano && wolneMiejsca > 0)
+        {
+            int x = random.nextInt(getWymiarMapyX());
+            int y = random.nextInt(getWymiarMapyY());
+            if (getOrganizm(x, y) == null) {
+                organizm.setPolozenieX(x);
+                organizm.setPolozenieY(y);
+                organizm.setWiek(getLiczbaOrganizmow() + 1);
+                dodajOrganizm(organizm, organizm.getPolozenieX(), organizm.getPolozenieY());
+                wolneMiejsca--;
+                dodano = true;
+                wyswietlanie.repaint();
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Dodano " + organizm.getNazwa() + " na pozycji " + x + " " + y,
+                        null,
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+
     public void dodajOrganizmyRecznie(List<Organizm> noweOrganizmy) {
         noweOrganizmy.add(new Czlowiek(0, 0, 0));
         noweOrganizmy.add(new Lis(0, 0, 0));

@@ -1,14 +1,4 @@
-20 20
-Lis L 3 7 10 3 2 false 
-Wilk W 9 5 9 8 12 false 
-Czlowiek C 5 4 2 16 1 false 5 true 
-Antylopa A 4 4 11 6 3 false 
-Owca O 4 4 11 3 5 false 
-Zolw Z 2 1 7 4 4 false 
-Trawa T 0 0 18 9 6 false 
-BarszczSosnowskiego B 10 0 11 11 7 false 
-Guarana G 0 0 2 7 8 false 
-Guarana G 0 0 10 2 9 false 
-Mlecz M 0 0 13 18 10 false 
-Mlecz M 0 0 6 9 11 false 
-WilczeJagody J 99 0 5 3 13 false 
+2 4
+Lis L 3 7 1 2 1 false 
+Lis L 3 7 1 1 2 false 
+Lis L 3 7 0 0 3 false 

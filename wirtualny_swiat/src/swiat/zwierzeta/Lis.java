@@ -77,6 +77,11 @@ public class Lis extends Zwierze {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
+        if(atakujacy instanceof Lis) {
+            super.kolizja(swiat, atakujacy);
+            return;
+        }
+
         int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);
 

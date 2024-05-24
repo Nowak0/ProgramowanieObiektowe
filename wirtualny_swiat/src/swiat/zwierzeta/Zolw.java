@@ -41,6 +41,11 @@ public class Zolw extends Zwierze {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
+        if(atakujacy instanceof Zolw) {
+            super.kolizja(swiat, atakujacy);
+            return;
+        }
+
         int polozenieX = getPolozenieX(), polozenieY = getPolozenieY();
         int polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
         boolean czyPrzetrwal = czyOdbilAtak(atakujacy, this);

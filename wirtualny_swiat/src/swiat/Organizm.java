@@ -20,9 +20,7 @@ public abstract class Organizm {
     public abstract void kolizja(Swiat swiat, Organizm atakujacy);
     public abstract Color rysowanie();
     public abstract Organizm stworzNowySklonowanyObiekt();
-    //public abstract void setRuchCzlowieka(final int ruch);
-    //public abstract boolean aktywujNiesmiertelnoscCzlowieka();
-    //public abstract void sprawdzLiczenieTur();
+
 
     public void kopiujObiekt(final Organizm innyOrganizm) {
         this.nazwa = innyOrganizm.getNazwa();

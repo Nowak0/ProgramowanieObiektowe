@@ -26,7 +26,7 @@ public abstract class Zwierze extends Organizm {
             }
         }
 
-        if (mozliweMiejscaX.size() == 0) return;
+        if (mozliweMiejscaX.isEmpty()) return;
 
         int ruch = random.nextInt(mozliweMiejscaX.size());
         int nowyX = mozliweMiejscaX.get(ruch), nowyY = mozliweMiejscaY.get(ruch);
@@ -50,6 +50,7 @@ public abstract class Zwierze extends Organizm {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
+        System.out.println("JESTEM");
         int polozenieX = atakujacy.getPolozenieX(), polozenieY = atakujacy.getPolozenieY();
         for (int y = polozenieY - 1; y <= polozenieY + 1; y++)
         {

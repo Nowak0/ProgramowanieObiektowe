@@ -78,6 +78,11 @@ public class Antylopa extends Zwierze {
 
     @Override
     public void kolizja(Swiat swiat, Organizm atakujacy) {
+        if(atakujacy instanceof Antylopa) {
+            super.kolizja(swiat, atakujacy);
+            return;
+        }
+
         int polozenieX = getPolozenieX(), polozenieY = getPolozenieY(), unik = random.nextInt(2);
         int polozenieXAtak = atakujacy.getPolozenieX(), polozenieYAtak = atakujacy.getPolozenieY();
 

@@ -176,14 +176,14 @@ public class Czlowiek extends Zwierze {
     }
 
 
-    public void aktywujNiesmiertelnoscCzlowieka() {
+    public boolean aktywujNiesmiertelnoscCzlowieka() {
         if (czyMoznaAktywowacNiesmiertelnosc && !czyNiesmiertelny()) {
             setNiesmiertelnosc(true);
             czyMoznaAktywowacNiesmiertelnosc = false;
             licznikTur = LICZBA_TUR_NIESMIERTELNOSC;
-            return;
+            return true;
         }
-        System.out.println("Cos nie dziala ");
+        return false;
     }
 
 
