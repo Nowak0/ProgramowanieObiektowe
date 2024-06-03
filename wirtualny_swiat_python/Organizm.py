@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from Swiat import Swiat
 
 
 class Organizm(ABC):
@@ -43,7 +42,7 @@ class Organizm(ABC):
         pass
 
     @abstractmethod
-    def stworzNowySklonowowanyObiekt(self):
+    def stworzNowySklonowanyObiekt(self):
         pass
 
     def kopiujObiekt(self, innyOrganizm):
