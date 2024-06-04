@@ -37,13 +37,12 @@ class Lis(Zwierze):
         nowyY = mozliweMiejscaY[ruch]
 
         if swiat.getOrganizm(nowyX, nowyY) is None:
+            swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
             self.setPolozenieX(nowyX)
             self.setPolozenieY(nowyY)
-            swiat.dodajOrganizm(swiat.getOrganizm(self.polozenieX, self.polozenieY), nowyX, nowyY)
-            swiat.usunOrganizm(swiat.getOrganizm(self.polozenieX, self.polozenieY), self.polozenieX, self.polozenieY)
+            swiat.dodajOrganizm(self, nowyX, nowyY)
 
-        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == swiat.getOrganizm(self.polozenieX,
-                                                                              self.polozenieY).getSymbol():
+        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == self.symbol:
             noweZwierze = self.stworzNowySklonowanyObiekt()
             super().kolizja(swiat, noweZwierze)
 
@@ -51,23 +50,23 @@ class Lis(Zwierze):
             swiat.getOrganizm(nowyX, nowyY).kolizja(swiat, self)
 
     def kolizja(self, swiat, atakujacy):
-        if isinstance(self, Lis):
+        if isinstance(atakujacy, Lis):
             super().kolizja(swiat, atakujacy)
             return
 
         czyPrzetrwal = super().czyOdbilAtak(atakujacy, self)
         if czyPrzetrwal:
-            swiat.wypiszWiadomosc("Lis zabija" + atakujacy.getNazwa()
+            swiat.wypiszWiadomosc("Lis zabija " + atakujacy.getNazwa()
                                   + super().wypiszPolozenie(self.polozenieX, self.polozenieY))
             atakujacy.setCzyZyje(False)
             swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
         else:
             self.setCzyZyje(False)
             swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             atakujacy.setPolozenieX(self.polozenieX)
             atakujacy.setPolozenieY(self.polozenieY)
             swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Lis"
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 

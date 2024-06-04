@@ -36,7 +36,7 @@ class Zwierze(Organizm, ABC):
             swiat.dodajOrganizm(swiat.getOrganizm(polozenieX, polozenieY), nowyX, nowyY)
             swiat.usunOrganizm(swiat.getOrganizm(polozenieX, polozenieY), polozenieX, polozenieY)
 
-        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == swiat.getOrganizm(polozenieX, polozenieY).getSymbol():
+        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == self.symbol:
             noweZwierze = self.stworzNowySklonowanyObiekt()
             self.kolizja(swiat, noweZwierze)
 
@@ -44,14 +44,14 @@ class Zwierze(Organizm, ABC):
             swiat.getOrganizm(nowyX, nowyY).kolizja(swiat, self)
 
     def kolizja(self, swiat, atakujacy):
-        polozenieX = atakujacy.getPolozenieX()
-        polozenieY = atakujacy.getPolozenieY()
+        polozenieX = self.getPolozenieX()
+        polozenieY = self.getPolozenieY()
 
         for y in range(polozenieY - 1, polozenieY + 2):
             if y < 0 or y >= swiat.getWymiarMapyY():
                 continue
             for x in range(polozenieX - 1, polozenieX + 2):
-                if x < 0 or x >= swiat.getWymiarMapyX:
+                if x < 0 or x >= swiat.getWymiarMapyX():
                     continue
                 if swiat.getOrganizm(x, y) is None:
                     atakujacy.setPolozenieX(x)

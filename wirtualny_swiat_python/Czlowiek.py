@@ -6,10 +6,10 @@ class Czlowiek(Zwierze):
 
     def __init__(self, x, y, wiek):
         super().__init__(x, y, wiek)
-        self.setNazwa("Zolw")
-        self.setSymbol('Z')
-        self.setSila(2)
-        self.setInicjatywa(1)
+        self.setNazwa("Czlowiek")
+        self.setSymbol('C')
+        self.setSila(5)
+        self.setInicjatywa(4)
         self.setNiesmiertelnosc(False)
         self.ruch = Zwierze.RUCH_NIEAKTYWNY
         self.licznikTur = Czlowiek.LICZBA_TUR_NIESMIERTELNOSC
@@ -116,10 +116,10 @@ class Czlowiek(Zwierze):
         else:
             self.setCzyZyje(False)
             swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             atakujacy.setPolozenieX(self.polozenieX)
             atakujacy.setPolozenieY(self.polozenieY)
             swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Czlowiek"
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 

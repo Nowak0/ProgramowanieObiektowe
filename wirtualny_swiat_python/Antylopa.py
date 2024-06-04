@@ -39,12 +39,12 @@ class Antylopa(Zwierze):
         nowyY = mozliweMiejscaY[ruch]
 
         if swiat.getOrganizm(nowyX, nowyY) is None:
+            swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
             self.setPolozenieX(nowyX)
             self.setPolozenieY(nowyY)
-            swiat.dodajOrganizm(swiat.getOrganizm(self.polozenieX, self.polozenieY), nowyX, nowyY)
-            swiat.usunOrganizm(swiat.getOrganizm(self.polozenieX, self.polozenieY), self.polozenieX, self.polozenieY)
+            swiat.dodajOrganizm(self, nowyX, nowyY)
 
-        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == swiat.getOrganizm(self.polozenieX, self.polozenieY).getSymbol():
+        elif swiat.getOrganizm(nowyX, nowyY).getSymbol() == self.symbol:
             noweZwierze = self.stworzNowySklonowanyObiekt()
             super().kolizja(swiat, noweZwierze)
 
@@ -71,34 +71,34 @@ class Antylopa(Zwierze):
         else:
             self.setCzyZyje(False)
             swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             atakujacy.setPolozenieX(self.polozenieX)
             atakujacy.setPolozenieY(self.polozenieY)
             swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa "
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def unikAntylopy(self, swiat, atakujacy):
         polozenieXAtak = atakujacy.getPolozenieX()
         polozenieYAtak = atakujacy.getPolozenieY()
-        for y in range(self.polozenieY-1, self.polozenieY+2):
+        for y in range(self.polozenieY - 1, self.polozenieY + 2):
             if y < 0 or y >= swiat.getWymiarMapyY():
                 continue
-            for x in range(self.polozenieX-1, self.polozenieX+2):
-                    if x < 0 or x >= swiat.getWymiarMapyX():
-                        continue
-                    if swiat.getOrganizm(x, y) is None:
-                        swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-                        self.setPolozenieX(x)
-                        self.setPolozenieY(y)
-                        atakujacy.setPolozenieX(self.polozenieX)
-                        atakujacy.setPolozenieY(self.polozenieY)
-                        swiat.dodajOrganizm(self, x, y);
-                        swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-                        swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak);
-                        swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa()
-                                              + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-                        return True
+            for x in range(self.polozenieX - 1, self.polozenieX + 2):
+                if x < 0 or x >= swiat.getWymiarMapyX():
+                    continue
+                if swiat.getOrganizm(x, y) is None:
+                    swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+                    swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak)
+                    self.setPolozenieX(x)
+                    self.setPolozenieY(y)
+                    atakujacy.setPolozenieX(self.polozenieX)
+                    atakujacy.setPolozenieY(self.polozenieY)
+                    swiat.dodajOrganizm(self, x, y)
+                    swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
+                    swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa()
+                                          + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
+                    return True
         return False
 
     def rysowanie(self):

@@ -10,6 +10,7 @@ from Zolw import Zolw
 from Trawa import Trawa
 from Mlecz import Mlecz
 from Guarana import Guarana
+from Grafika import Grafika
 
 
 class Swiat:
@@ -57,25 +58,31 @@ class Swiat:
             if o is not None and o.getCzyZyje():
                 o.akcja(self)
 
+        for i in self.wiadomosci:
+            print(i)
         # wyswietlanie.repaint()
 
     def rysujSwiat(self):
-        for y in range(-1, self.wymiarMapyY + 1):
-            for x in range(-1, self.wymiarMapyX + 1):
-                if x == -1 and (y == -1 or y == self.wymiarMapyY):
-                    print("<", end=" ")
-                elif x == self.wymiarMapyX and (y == -1 or y == self.wymiarMapyY):
-                    print(">", end=" ")
-                elif x == -1 or x == self.wymiarMapyX:
-                    print("|", end=" ")
-                elif y == -1 or y == self.wymiarMapyY:
-                    print("-", end=" ")
-                else:
-                    if self.organizmy[y][x] is None:
-                        print(" ", end=" ")
-                    else:
-                        print(self.organizmy[y][x].getSymbol(), end=" ")
-            print("\n")
+        # for y in range(-1, self.wymiarMapyY + 1):
+        #     for x in range(-1, self.wymiarMapyX + 1):
+        #         if x == -1 and (y == -1 or y == self.wymiarMapyY):
+        #             print("<", end=" ")
+        #         elif x == self.wymiarMapyX and (y == -1 or y == self.wymiarMapyY):
+        #             print(">", end=" ")
+        #         elif x == -1 or x == self.wymiarMapyX:
+        #             print("|", end=" ")
+        #         elif y == -1 or y == self.wymiarMapyY:
+        #             print("-", end=" ")
+        #         else:
+        #             if self.organizmy[y][x] is not None:
+        #                 print(self.organizmy[y][x].getSymbol(), end=" ")
+        #             else:
+        #                 print(" ", end=" ")
+        #     print("\n")
+        grafika = Grafika(self)
+        grafika.rysujSwiat()
+        grafika.dodajPrzyciski()
+        grafika.utrzymajStan()
 
     def getWymiarMapyX(self):
         return self.wymiarMapyX
@@ -112,7 +119,7 @@ class Swiat:
         wiekOrganizmu = organizm.getWiek()
 
         for o in self.posortowaneOrganizmy:
-            if o == organizm:
+            if o is organizm:
                 continue
             if inicjatywaOrganizmu > o.getInicjatywa():
                 self.posortowaneOrganizmy.insert(i, organizm)
@@ -134,8 +141,10 @@ class Swiat:
     def usunOrganizmZPosortowanych(self, organizm):
         i = 0
         for o in self.posortowaneOrganizmy:
-            if o is None or o == organizm:
-                self.posortowaneOrganizmy.remove(i)
+            if o is None:
+                del self.posortowaneOrganizmy[i]
+            elif o == organizm:
+                del self.posortowaneOrganizmy[i]
                 break
             i += 1
 

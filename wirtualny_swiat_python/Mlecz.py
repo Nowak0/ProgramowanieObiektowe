@@ -21,10 +21,10 @@ class Mlecz(Roslina):
     def kolizja(self, swiat, atakujacy):
         self.setCzyZyje(False)
         swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+        swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
         atakujacy.setPolozenieX(self.polozenieX)
         atakujacy.setPolozenieY(self.polozenieY)
         swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-        swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
         swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Mlecz"
                               + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 

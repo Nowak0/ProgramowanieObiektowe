@@ -2,8 +2,6 @@ from Swiat import Swiat
 
 
 class Main:
-    swiat = Swiat(20,20)
+    swiat = Swiat(5, 5)
     swiat.rysujSwiat()
-    swiat.wykonajTure(-1)
-    swiat.rysujSwiat()
-
+    #swiat.wykonajTure(-1)

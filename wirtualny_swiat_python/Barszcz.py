@@ -23,8 +23,11 @@ class Barszcz(Roslina):
                     continue
                 if x == self.polozenieX and y == self.polozenieY:
                     continue
-                elif swiat.getOrganizm(x, y).getSila() > 0 and (isinstance(swiat.getOrganizm(x, y), WilczeJagody) is False
-                        and swiat.getOrganizm(x, y).czyNiesmiertelny() is False):
+                if swiat.getOrganizm(x, y) is None:
+                    continue
+                elif (swiat.getOrganizm(x, y).getSila() > 0
+                      and (isinstance(swiat.getOrganizm(x, y), WilczeJagody) is False
+                           and swiat.getOrganizm(x, y).czyNiesmiertelny() is False)):
                     tmpX = swiat.getOrganizm(x, y).getPolozenieX()
                     tmpY = swiat.getOrganizm(x, y).getPolozenieY()
                     swiat.getOrganizm(x, y).setCzyZyje(False)
@@ -38,7 +41,7 @@ class Barszcz(Roslina):
         swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego"
                               + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
-        if atakujacy.czyNiesmiertlny() is False:
+        if atakujacy.czyNiesmiertelny() is False:
             atakujacy.setCzyZyje(False)
             swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc("i umiera w wyniku jego zjedzenia")

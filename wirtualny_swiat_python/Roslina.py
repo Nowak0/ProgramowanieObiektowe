@@ -24,8 +24,9 @@ class Roslina(Organizm, ABC):
                     continue
                 if x == polozenieX and y == polozenieY:
                     continue
-                mozliweMiejscaX.append(x)
-                mozliweMiejscaY.append(y)
+                if swiat.getOrganizm(x,y) is None:
+                    mozliweMiejscaX.append(x)
+                    mozliweMiejscaY.append(y)
 
         if len(mozliweMiejscaX) == 0:
             return

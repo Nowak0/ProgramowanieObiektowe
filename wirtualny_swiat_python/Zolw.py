@@ -3,7 +3,7 @@ import random
 
 
 class Zolw(Zwierze):
-    def __init__(self,x,y,wiek):
+    def __init__(self, x, y, wiek):
         super().__init__(x, y, wiek)
         self.setNazwa("Zolw")
         self.setSymbol('Z')
@@ -12,18 +12,18 @@ class Zolw(Zwierze):
         self.setNiesmiertelnosc(False)
 
     def stworzNowySklonowanyObiekt(self):
-        return Zolw(0,0,0)
+        return Zolw(0, 0, 0)
 
-    def akcja(self,swiat):
-        ruch = random.randint(0,100)
-        if ruch<=75:
+    def akcja(self, swiat):
+        ruch = random.randint(0, 100)
+        if ruch <= 75:
             return
         else:
             super().akcja(swiat)
 
     def kolizja(self, swiat, atakujacy):
-        if isinstance(self, Zolw):
-            super().kolizja(swiat,atakujacy)
+        if isinstance(atakujacy, Zolw):
+            super().kolizja(swiat, atakujacy)
             return
 
         czyPrzetrwal = self.czyOdbilAtak(atakujacy, self)
@@ -33,12 +33,12 @@ class Zolw(Zwierze):
         else:
             self.setCzyZyje(False)
             swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             atakujacy.setPolozenieX(self.polozenieX)
             atakujacy.setPolozenieY(self.polozenieY)
             swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw"
-                                + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
+                                  + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
         pass

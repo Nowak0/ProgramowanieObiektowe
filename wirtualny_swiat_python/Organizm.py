@@ -26,7 +26,7 @@ class Organizm(ABC):
     @staticmethod
     def czyOdbilAtak(atakujacy, atakowany):
         silaAtakowanego = atakowany.getSila()
-        silaAtakujacego = atakujacy.getSila
+        silaAtakujacego = atakujacy.getSila()
         return silaAtakujacego < silaAtakowanego
 
     @abstractmethod
@@ -44,15 +44,6 @@ class Organizm(ABC):
     @abstractmethod
     def stworzNowySklonowanyObiekt(self):
         pass
-
-    def kopiujObiekt(self, innyOrganizm):
-        self.nazwa = innyOrganizm.getNazwa()
-        self.symbol = innyOrganizm.getSymbol()
-        self.sila = innyOrganizm.getSila()
-        self.inicjatywa = innyOrganizm.getInicjatywa()
-        self.wiek = innyOrganizm.getWiek()
-        self.polozenieX = innyOrganizm.getPolozenieX()
-        self.polozenieY = innyOrganizm.getPolozenieY()
 
     def getNazwa(self):
         return self.nazwa
