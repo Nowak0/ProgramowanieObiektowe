@@ -1,5 +1,4 @@
 from Roslina import Roslina
-from WilczeJagody import WilczeJagody
 
 
 class Barszcz(Roslina):
@@ -25,15 +24,20 @@ class Barszcz(Roslina):
                     continue
                 if swiat.getOrganizm(x, y) is None:
                     continue
-                elif (swiat.getOrganizm(x, y).getSila() > 0
-                      and (isinstance(swiat.getOrganizm(x, y), WilczeJagody) is False
-                           and swiat.getOrganizm(x, y).czyNiesmiertelny() is False)):
+                elif self.sprawdzWarunkiDoAkcji(swiat, x, y):
                     tmpX = swiat.getOrganizm(x, y).getPolozenieX()
                     tmpY = swiat.getOrganizm(x, y).getPolozenieY()
                     swiat.getOrganizm(x, y).setCzyZyje(False)
                     swiat.wypiszWiadomosc(swiat.getOrganizm(x, y).getNazwa() + " zostaje zabity")
                     swiat.wypiszWiadomosc("przez Barszcz Sosnowskiego" + self.wypiszPolozenie(tmpX, tmpY))
                     swiat.usunOrganizm(swiat.getOrganizm(x, y), x, y)
+
+    def sprawdzWarunkiDoAkcji(self, swiat, x, y):
+        if (swiat.getOrganizm(x, y).getInicjatywa() > 0
+                and swiat.getOrganizm(x, y).czyNiesmiertelny() is False):
+            return True
+        else:
+            return False
 
     def kolizja(self, swiat, atakujacy):
         self.setCzyZyje(False)

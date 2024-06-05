@@ -127,10 +127,10 @@ class Czlowiek(Zwierze):
         return "bisque"
 
     def aktywujNiesmiertelnoscCzlowieka(self):
-        if self.czyMoznaAktywowacNiesmiertelnosc and self.czyNiesmiertelny() is False:
+        if self.czyMoznaAktywowacNiesmiertelnosc is True and self.czyNiesmiertelny() is False:
             self.setNiesmiertelnosc(True)
-            self.czyMoznaAktywowacNiesmiertelnosc = False
-            self.licznikTur = Czlowiek.LICZBA_TUR_NIESMIERTELNOSC
+            self.setCzyMoznaAktywowacNiesmiertelnosc(False)
+            self.setLicznikTur(Czlowiek.LICZBA_TUR_NIESMIERTELNOSC)
             return True
 
         return False
@@ -138,9 +138,9 @@ class Czlowiek(Zwierze):
     def sprawdzLiczenieTur(self):
         if self.licznikTur == 0:
             self.setNiesmiertelnosc(False)
-            self.czyMoznaAktywowacNiesmiertelnosc = False
+            self.setCzyMoznaAktywowacNiesmiertelnosc(False)
         elif self.licznikTur == Czlowiek.LICZBA_TUR_NIESMIERTELNOSC and self.czyNiesmiertelny() is False:
-            self.czyMoznaAktywowacNiesmiertelnosc = True
+            self.setCzyMoznaAktywowacNiesmiertelnosc(True)
 
         if self.czyNiesmiertelny():
             self.licznikTur -= 1

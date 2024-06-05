@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from Zapis import Zapis
 
 
@@ -54,7 +54,24 @@ class Grafika:
         wymiarY = self.swiat.getWymiarMapyY()
         self.plansza = Canvas(self.okno, width=wymiarX * Grafika.ROZMIAR_POLA, height=wymiarY * Grafika.ROZMIAR_POLA)
         self.plansza.pack()
-        self.plansza.grid(column=6, row=1)
+        self.plansza.grid(column=7, row=1)
+
+    def wyzerujPlansze(self):
+        wymiarX = self.swiat.getWymiarMapyX() + 1
+        wymiarY = self.swiat.getWymiarMapyY() + 1
+
+        for y in range(wymiarY):
+            for x in range(wymiarX):
+                x1 = x * Grafika.ROZMIAR_POLA
+                y1 = y * Grafika.ROZMIAR_POLA
+                x2 = x1 + Grafika.ROZMIAR_POLA
+                y2 = y1 + Grafika.ROZMIAR_POLA
+                kolor = 'white'
+                tekst = ""
+                self.plansza.create_rectangle(x1, y1, x2, y2, fill=kolor, outline='black')
+                self.plansza.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=tekst, fill='black')
+
+        self.wyczyscPoleZWiadomosciami()
 
     def rysujSwiat(self):
         wymiarX = self.swiat.getWymiarMapyX()
@@ -82,10 +99,11 @@ class Grafika:
         niesmiertelnosc.grid(column=2, row=0)
         przyciskZapisz = Button(self.okno, text="Zapisz Gre", command=self.akcjaPrzyciskZapisz)
         przyciskZapisz.grid(column=3, row=0)
-        przyciskZaladuj = Button(self.okno, text="Zaladuj Gre", comman=self.akcjaPrzyciskZaladuj)
+        przyciskZaladuj = Button(self.okno, text="Zaladuj Gre", command=self.akcjaPrzyciskZaladuj)
         przyciskZaladuj.grid(column=4, row=0)
+        self.przyciskNaDodawanieOrganizmu()
         przyciskZakoncz = Button(self.okno, text="Zakoncz Gre", command=self.akcjaPrzyciskZakoncz)
-        przyciskZakoncz.grid(column=5, row=0)
+        przyciskZakoncz.grid(column=6, row=0)
 
     def akcjaPrzyciskNowaTura(self):
         self.wyczyscPoleZWiadomosciami()
@@ -101,17 +119,45 @@ class Grafika:
     def aktywowanieNiesmiertelnosci(self):
         czlowiek = self.swiat.znajdzCzlowieka()
         if czlowiek.aktywujNiesmiertelnoscCzlowieka():
+            self.wyczyscPoleZWiadomosciami()
             messagebox.showinfo(title="Udalo sie!", message="Aktywowano niesmiertelnosc")
         else:
+            self.wyczyscPoleZWiadomosciami()
             messagebox.showinfo(title="Nie udalo sie :(", message="Nie mozna aktywowac niesmiertelnosci")
 
     def akcjaPrzyciskZapisz(self):
         zapisywanie = Zapis(self.swiat)
         zapisywanie.zapiszDoPliku()
+        messagebox.showinfo(title="Udalo sie!", message="Zapisano Gre!")
 
     def akcjaPrzyciskZaladuj(self):
         ladowanie = Zapis(self.swiat)
         ladowanie.zaladujPlik()
+        self.plansza.config(width=self.swiat.getWymiarMapyX() * Grafika.ROZMIAR_POLA)
+        self.plansza.config(height=self.swiat.getWymiarMapyY() * Grafika.ROZMIAR_POLA)
+        self.wyzerujPlansze()
+        self.rysujSwiat()
+
+    def przyciskNaDodawanieOrganizmu(self):
+        opcje = [
+            "Antylopa",
+            "Lis",
+            "Owca",
+            "Wilk",
+            "Zolw",
+            "Barszcz Sosnowskiego",
+            "Guarana",
+            "Mlecz",
+            "Trawa",
+            "Wilcze Jagody"
+        ]
+        klikniete = StringVar()
+        klikniete.set("Dodaj Organizm")
+        przyciskDodaj = OptionMenu(self.okno, klikniete, *opcje, command=self.akcjaPrzyciskDodaj)
+        przyciskDodaj.grid(column=5, row=0)
+
+    def akcjaPrzyciskDodaj(self, odpowiedz):
+        self.swiat.sprecyzujDodanyOrganizm(odpowiedz)
 
     def akcjaPrzyciskZakoncz(self):
         self.okno.destroy()
@@ -119,13 +165,13 @@ class Grafika:
     def wypiszWiadomosci(self):
         for i in range(self.swiat.getIloscWiadomosci()):
             wiadomosc = Label(self.okno, text=self.swiat.getWiadomosc(i), font=("Arial", 12))
-            wiadomosc.grid(column=7, row=(i + 2))
+            wiadomosc.grid(column=8, row=(i + 2))
 
     def wyczyscPoleZWiadomosciami(self):
         for i in range(self.swiat.getIloscWiadomosci()):
             tekst = " " * 2 * len(self.swiat.getWiadomosc(i))
             wiadomosc = Label(self.okno, text=tekst, font=("Arial", 12))
-            wiadomosc.grid(column=7, row=(i + 2))
+            wiadomosc.grid(column=8, row=(i + 2))
 
     def utrzymajStan(self):
         self.okno.mainloop()
