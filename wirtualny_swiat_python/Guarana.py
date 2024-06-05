@@ -24,4 +24,4 @@ class Guarana(Roslina):
                               + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
-        pass
+        return "hotpink"

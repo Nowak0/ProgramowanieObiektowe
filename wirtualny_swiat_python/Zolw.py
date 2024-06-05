@@ -41,4 +41,4 @@ class Zolw(Zwierze):
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
-        pass
+        return "darkgreen"

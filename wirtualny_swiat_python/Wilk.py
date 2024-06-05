@@ -35,4 +35,4 @@ class Wilk(Zwierze):
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
-        pass
+        return "silver"

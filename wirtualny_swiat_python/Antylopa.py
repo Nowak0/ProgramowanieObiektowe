@@ -102,4 +102,4 @@ class Antylopa(Zwierze):
         return False
 
     def rysowanie(self):
-        return
+        return "sienna"

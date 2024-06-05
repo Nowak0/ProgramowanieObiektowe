@@ -71,4 +71,4 @@ class Lis(Zwierze):
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
-        return
+        return "coral"

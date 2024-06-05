@@ -25,4 +25,4 @@ class WilczeJagody(Roslina):
             swiat.wypiszWiadomosc("i umiera w wyniku jego zjedzenia")
 
     def rysowanie(self):
-        pass
+        return "mediumblue"

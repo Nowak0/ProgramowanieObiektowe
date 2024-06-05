@@ -124,7 +124,7 @@ class Czlowiek(Zwierze):
                                   + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
     def rysowanie(self):
-        pass
+        return "bisque"
 
     def aktywujNiesmiertelnoscCzlowieka(self):
         if self.czyMoznaAktywowacNiesmiertelnosc and self.czyNiesmiertelny() is False:

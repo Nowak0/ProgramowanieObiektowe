@@ -16,7 +16,7 @@ from Grafika import Grafika
 class Swiat:
     MAX_WYMIAR_MAPY_X = 22
     MAX_WYMIAR_MAPY_Y = 28
-    BRAK_RUCHU = -1
+    RUCH_NIEAKTYWNY = -1
 
     def __init__(self, x, y):
         self.wymiarMapyX = 0
@@ -46,7 +46,7 @@ class Swiat:
     def wykonajTure(self, ruchCzlowieka):
         self.wiadomosci.clear()
         tmp = []
-        if ruchCzlowieka != Swiat.BRAK_RUCHU:
+        if ruchCzlowieka != Swiat.RUCH_NIEAKTYWNY:
             self.ustawianieRuchuCzlowieka(ruchCzlowieka)
 
         for o in self.posortowaneOrganizmy:
@@ -58,27 +58,7 @@ class Swiat:
             if o is not None and o.getCzyZyje():
                 o.akcja(self)
 
-        for i in self.wiadomosci:
-            print(i)
-        # wyswietlanie.repaint()
-
     def rysujSwiat(self):
-        # for y in range(-1, self.wymiarMapyY + 1):
-        #     for x in range(-1, self.wymiarMapyX + 1):
-        #         if x == -1 and (y == -1 or y == self.wymiarMapyY):
-        #             print("<", end=" ")
-        #         elif x == self.wymiarMapyX and (y == -1 or y == self.wymiarMapyY):
-        #             print(">", end=" ")
-        #         elif x == -1 or x == self.wymiarMapyX:
-        #             print("|", end=" ")
-        #         elif y == -1 or y == self.wymiarMapyY:
-        #             print("-", end=" ")
-        #         else:
-        #             if self.organizmy[y][x] is not None:
-        #                 print(self.organizmy[y][x].getSymbol(), end=" ")
-        #             else:
-        #                 print(" ", end=" ")
-        #     print("\n")
         grafika = Grafika(self)
         grafika.rysujSwiat()
         grafika.dodajPrzyciski()
