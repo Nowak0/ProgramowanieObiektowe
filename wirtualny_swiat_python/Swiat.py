@@ -36,9 +36,9 @@ class Swiat:
         self.wymiarMapyY = min(y, Swiat.MAX_WYMIAR_MAPY_Y)
 
     def uaktualnijGraniceMapy(self):
-        if self.organizmy is None:
-            self.posortowaneOrganizmy.clear()
-
+        # if self.organizmy is None:
+        #     self.posortowaneOrganizmy.clear()
+        self.posortowaneOrganizmy.clear()
         for y in range(self.wymiarMapyY):
             for x in range(self.wymiarMapyX):
                 self.organizmy[y][x] = None
@@ -73,8 +73,8 @@ class Swiat:
     def getLiczbaOrganizmow(self):
         return len(self.posortowaneOrganizmy)
 
-    def getPosortowanyOrganizm(self, i):
-        return self.posortowaneOrganizmy[i]
+    def getPosortowaneOrganizmy(self):
+        return self.posortowaneOrganizmy
 
     def getOrganizm(self, x, y):
         return self.organizmy[y][x]

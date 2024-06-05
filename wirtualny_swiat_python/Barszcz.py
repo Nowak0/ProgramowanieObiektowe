@@ -5,7 +5,7 @@ from WilczeJagody import WilczeJagody
 class Barszcz(Roslina):
     def __init__(self, x, y, wiek):
         super().__init__(x, y, wiek)
-        self.setNazwa("Barszcz")
+        self.setNazwa("BarszczSosnowskiego")
         self.setSymbol('B')
         self.setSila(10)
         self.setInicjatywa(0)

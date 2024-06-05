@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from Zapis import Zapis
 
 
 class Grafika:
@@ -9,6 +10,7 @@ class Grafika:
     RUCH_GORA = 3
     RUCH_DOL = 4
     ROZMIAR_POLA = 40
+
     def __init__(self, swiat):
         self.swiat = swiat
         self.okno = Tk()
@@ -78,9 +80,9 @@ class Grafika:
         przyciskNowaTura.grid(column=1, row=0)
         niesmiertelnosc = Button(self.okno, text="Aktywuj Niesmiertelnosc", command=self.akcjaPrzyciskNiesmiertelnosc)
         niesmiertelnosc.grid(column=2, row=0)
-        przyciskZapisz = Button(self.okno, text="Zapisz Gre")
+        przyciskZapisz = Button(self.okno, text="Zapisz Gre", command=self.akcjaPrzyciskZapisz)
         przyciskZapisz.grid(column=3, row=0)
-        przyciskZaladuj = Button(self.okno, text="Zaladuj Gre")
+        przyciskZaladuj = Button(self.okno, text="Zaladuj Gre", comman=self.akcjaPrzyciskZaladuj)
         przyciskZaladuj.grid(column=4, row=0)
         przyciskZakoncz = Button(self.okno, text="Zakoncz Gre", command=self.akcjaPrzyciskZakoncz)
         przyciskZakoncz.grid(column=5, row=0)
@@ -102,6 +104,14 @@ class Grafika:
             messagebox.showinfo(title="Udalo sie!", message="Aktywowano niesmiertelnosc")
         else:
             messagebox.showinfo(title="Nie udalo sie :(", message="Nie mozna aktywowac niesmiertelnosci")
+
+    def akcjaPrzyciskZapisz(self):
+        zapisywanie = Zapis(self.swiat)
+        zapisywanie.zapiszDoPliku()
+
+    def akcjaPrzyciskZaladuj(self):
+        ladowanie = Zapis(self.swiat)
+        ladowanie.zaladujPlik()
 
     def akcjaPrzyciskZakoncz(self):
         self.okno.destroy()

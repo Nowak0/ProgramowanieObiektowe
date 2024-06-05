@@ -1,0 +1,14 @@
+10 10
+Lis 5 2 2False
+Wilk 4 9 12False
+Czlowiek 4 2 1 False 5 True
+Antylopa 2 1 3False
+Owca 7 8 5False
+Zolw 4 3 4False
+Trawa 8 3 6False
+Barszcz 4 6 7False
+Guarana 6 7 8False
+Guarana 6 9 9False
+Mlecz 7 6 10False
+Mlecz 8 5 11False
+WilczeJagody 1 8 13False
