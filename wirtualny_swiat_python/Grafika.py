@@ -141,6 +141,7 @@ class Grafika:
     def przyciskNaDodawanieOrganizmu(self):
         opcje = [
             "Antylopa",
+            "Cyber Owca",
             "Lis",
             "Owca",
             "Wilk",

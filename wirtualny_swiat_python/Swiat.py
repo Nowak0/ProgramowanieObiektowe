@@ -1,5 +1,6 @@
 from Antylopa import Antylopa
 from Barszcz import Barszcz
+from CyberOwca import CyberOwca
 from Czlowiek import Czlowiek
 import random
 from Lis import Lis
@@ -73,6 +74,9 @@ class Swiat:
 
     def getPosortowaneOrganizmy(self):
         return self.posortowaneOrganizmy
+
+    def getPolozenieOrganizmu(self, i):
+        return self.posortowaneOrganizmy[i].getPolozenieX(), self.posortowaneOrganizmy[i].getPolozenieY()
 
     def getOrganizm(self, x, y):
         return self.organizmy[y][x]
@@ -197,6 +201,8 @@ class Swiat:
     def sprecyzujDodanyOrganizm(self, nazwa):
         if nazwa == "Antylopa":
             self.dodajOrganizmDoSwiataLosowo(Antylopa(0, 0, 0))
+        elif nazwa == "Cyber Owca":
+            self.dodajOrganizmDoSwiataLosowo(CyberOwca(0, 0, 0))
         elif nazwa == "Lis":
             self.dodajOrganizmDoSwiataLosowo(Lis(0, 0, 0))
         elif nazwa == "Owca":
@@ -230,3 +236,4 @@ class Swiat:
         self.noweOrganizmy.append(Mlecz(0, 0, 0))
         self.noweOrganizmy.append(Wilk(0, 0, 0))
         self.noweOrganizmy.append(WilczeJagody(0, 0, 0))
+        self.noweOrganizmy.append(CyberOwca(0, 0, 0))

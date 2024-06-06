@@ -1,4 +1,5 @@
 from Roslina import Roslina
+from CyberOwca import CyberOwca
 
 
 class Barszcz(Roslina):
@@ -34,7 +35,8 @@ class Barszcz(Roslina):
 
     def sprawdzWarunkiDoAkcji(self, swiat, x, y):
         if (swiat.getOrganizm(x, y).getInicjatywa() > 0
-                and swiat.getOrganizm(x, y).czyNiesmiertelny() is False):
+                and swiat.getOrganizm(x, y).czyNiesmiertelny() is False
+                and isinstance(swiat.getOrganizm(x, y), CyberOwca) is False):
             return True
         else:
             return False
@@ -45,10 +47,16 @@ class Barszcz(Roslina):
         swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Barszcz Sosnowskiego"
                               + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
 
-        if atakujacy.czyNiesmiertelny() is False:
+        if atakujacy.czyNiesmiertelny() is False and isinstance(atakujacy, CyberOwca) is False:
             atakujacy.setCzyZyje(False)
             swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
             swiat.wypiszWiadomosc("i umiera w wyniku jego zjedzenia")
+
+        if isinstance(atakujacy, CyberOwca):
+            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
+            atakujacy.setPolozenieX(self.polozenieX)
+            atakujacy.setPolozenieY(self.polozenieY)
+            swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
 
     def rysowanie(self):
         return "greenyellow"

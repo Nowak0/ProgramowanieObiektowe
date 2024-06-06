@@ -1,17 +1,13 @@
 20 20
-Lis 16 7 2 false 
-Wilk 18 15 12 false 
-Czlowiek 10 11 1 true 3 false 
-Owca 9 6 5 false 
-Zolw 18 17 4 false 
-Trawa 18 8 6 false 
-BarszczSosnowskiego 10 17 7 false 
-Guarana 17 3 8 false 
-Guarana 0 2 9 false 
-Mlecz 13 13 10 false 
-Mlecz 1 9 11 false 
-WilczeJagody 9 14 13 false 
-Mlecz 12 14 13 false 
-Guarana 18 2 14 false 
-Mlecz 0 10 15 false 
-WilczeJagody 10 14 16 false 
+Lis 8 1 2 false 
+Wilk 6 8 12 false 
+Czlowiek 17 13 1 true 3 false 
+Antylopa 11 14 3 false 
+Owca 6 2 5 false 
+Zolw 17 8 4 false 
+Trawa 15 2 6 false 
+BarszczSosnowskiego 3 1 7 false 
+Guarana 5 8 8 false 
+Guarana 0 1 9 false 
+Mlecz 12 0 11 false 
+WilczeJagody 9 4 13 false 

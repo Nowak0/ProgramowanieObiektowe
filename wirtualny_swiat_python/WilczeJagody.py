@@ -22,7 +22,7 @@ class WilczeJagody(Roslina):
         if atakujacy.czyNiesmiertelny() is False:
             atakujacy.setCzyZyje(False)
             swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-            swiat.wypiszWiadomosc("i umiera w wyniku jego zjedzenia")
+            swiat.wypiszWiadomosc("i umiera w wyniku ich zjedzenia")
 
     def rysowanie(self):
         return "mediumblue"

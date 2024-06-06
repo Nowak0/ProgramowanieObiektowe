@@ -1,7 +1,7 @@
 from Antylopa import Antylopa
 from Barszcz import Barszcz
 from Czlowiek import Czlowiek
-import random
+from CyberOwca import CyberOwca
 from Lis import Lis
 from Owca import Owca
 from WilczeJagody import WilczeJagody
@@ -65,6 +65,10 @@ class Zapis:
             nowy.setNiesmiertelnosc(linia[4])
             nowy.setLicznikTur(int(linia[5]))
             nowy.setCzyMoznaAktywowacNiesmiertelnosc(self.odczytajBool(linia[6]))
+            self.swiat.dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY())
+        elif linia[0] == "CyberOwca":
+            nowy = CyberOwca(int(linia[1]), int(linia[2]), int(linia[3]))
+            nowy.setNiesmiertelnosc(linia[4])
             self.swiat.dodajOrganizm(nowy, nowy.getPolozenieX(), nowy.getPolozenieY())
         elif linia[0] == "Lis":
             nowy = Lis(int(linia[1]), int(linia[2]), int(linia[3]))
