@@ -13,15 +13,5 @@ class Trawa(Roslina):
     def stworzNowySklonowanyObiekt(self):
         return Trawa(0, 0, 0)
 
-    def kolizja(self, swiat, atakujacy):
-        self.setCzyZyje(False)
-        swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-        swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-        atakujacy.setPolozenieX(self.polozenieX)
-        atakujacy.setPolozenieY(self.polozenieY)
-        swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Trawa"
-                              + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-
     def rysowanie(self):
         return "forestgreen"

@@ -46,17 +46,33 @@ class Zwierze(Organizm, ABC):
     def kolizja(self, swiat, atakujacy):
         polozenieX = self.getPolozenieX()
         polozenieY = self.getPolozenieY()
-
-        for y in range(polozenieY - 1, polozenieY + 2):
-            if y < 0 or y >= swiat.getWymiarMapyY():
-                continue
-            for x in range(polozenieX - 1, polozenieX + 2):
-                if x < 0 or x >= swiat.getWymiarMapyX():
+        if atakujacy.getSymbol() == self.symbol:
+            for y in range(polozenieY - 1, polozenieY + 2):
+                if y < 0 or y >= swiat.getWymiarMapyY():
                     continue
-                if swiat.getOrganizm(x, y) is None:
-                    atakujacy.setPolozenieX(x)
-                    atakujacy.setPolozenieY(y)
-                    atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1)
-                    swiat.dodajOrganizm(atakujacy, x, y)
-                    swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa() + Organizm.wypiszPolozenie(x, y))
-                    return
+                for x in range(polozenieX - 1, polozenieX + 2):
+                    if x < 0 or x >= swiat.getWymiarMapyX():
+                        continue
+                    if swiat.getOrganizm(x, y) is None:
+                        atakujacy.setPolozenieX(x)
+                        atakujacy.setPolozenieY(y)
+                        atakujacy.setWiek(swiat.getLiczbaOrganizmow() + 1)
+                        swiat.dodajOrganizm(atakujacy, x, y)
+                        swiat.wypiszWiadomosc("Nowe zwierze " + atakujacy.getNazwa() + Organizm.wypiszPolozenie(x, y))
+                        return
+        else:
+            czyPrzetrwal = super().czyOdbilAtak(atakujacy, self)
+            if czyPrzetrwal:
+                swiat.wypiszWiadomosc(self.nazwa + " zabijaa " + atakujacy.getNazwa()
+                                      + super().wypiszPolozenie(self.polozenieX, self.polozenieY))
+                atakujacy.setCzyZyje(False)
+                swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
+            else:
+                self.setCzyZyje(False)
+                swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
+                swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
+                atakujacy.setPolozenieX(self.polozenieX)
+                atakujacy.setPolozenieY(self.polozenieY)
+                swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
+                swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabijaa " + self.nazwa
+                                      + self.wypiszPolozenie(self.polozenieX, self.polozenieY))

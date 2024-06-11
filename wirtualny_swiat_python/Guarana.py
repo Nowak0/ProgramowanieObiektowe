@@ -14,15 +14,8 @@ class Guarana(Roslina):
         return Guarana(0, 0, 0)
 
     def kolizja(self, swiat, atakujacy):
-        self.setCzyZyje(False)
-        swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-        swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-        atakujacy.setPolozenieX(self.polozenieX)
-        atakujacy.setPolozenieY(self.polozenieY)
         atakujacy.setSila(atakujacy.getSila() + 3)
-        swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Guarana"
-                              + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
+        super().kolizja(swiat, atakujacy)
 
     def rysowanie(self):
         return "hotpink"

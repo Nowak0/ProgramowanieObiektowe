@@ -16,7 +16,7 @@ from tkinter import messagebox
 
 
 class Swiat:
-    MAX_WYMIAR_MAPY_X = 22
+    MAX_WYMIAR_MAPY_X = 18
     MAX_WYMIAR_MAPY_Y = 20
     RUCH_NIEAKTYWNY = -1
 
@@ -230,8 +230,8 @@ class Swiat:
         self.noweOrganizmy.append(Owca(0, 0, 0))
         self.noweOrganizmy.append(Trawa(0, 0, 0))
         self.noweOrganizmy.append(Barszcz(0, 0, 0))
-        self.noweOrganizmy.append(Guarana(0, 0, 0))
-        self.noweOrganizmy.append(Guarana(0, 0, 0))
+        #self.noweOrganizmy.append(Guarana(0, 0, 0))
+        #self.noweOrganizmy.append(Guarana(0, 0, 0))
         self.noweOrganizmy.append(Mlecz(0, 0, 0))
         self.noweOrganizmy.append(Mlecz(0, 0, 0))
         self.noweOrganizmy.append(Wilk(0, 0, 0))

@@ -95,14 +95,14 @@ class Grafika:
     def dodajPrzyciski(self):
         przyciskNowaTura = Button(self.okno, text="Nowa Tura", command=self.akcjaPrzyciskNowaTura)
         przyciskNowaTura.grid(column=1, row=0)
-        niesmiertelnosc = Button(self.okno, text="Aktywuj Niesmiertelnosc", command=self.akcjaPrzyciskNiesmiertelnosc)
+        niesmiertelnosc = Button(self.okno, text="Niesmiertelnosc", command=self.akcjaPrzyciskNiesmiertelnosc)
         niesmiertelnosc.grid(column=2, row=0)
-        przyciskZapisz = Button(self.okno, text="Zapisz Gre", command=self.akcjaPrzyciskZapisz)
+        przyciskZapisz = Button(self.okno, text="Zapisz", command=self.akcjaPrzyciskZapisz)
         przyciskZapisz.grid(column=3, row=0)
-        przyciskZaladuj = Button(self.okno, text="Zaladuj Gre", command=self.akcjaPrzyciskZaladuj)
+        przyciskZaladuj = Button(self.okno, text="Zaladuj", command=self.akcjaPrzyciskZaladuj)
         przyciskZaladuj.grid(column=4, row=0)
         self.przyciskNaDodawanieOrganizmu()
-        przyciskZakoncz = Button(self.okno, text="Zakoncz Gre", command=self.akcjaPrzyciskZakoncz)
+        przyciskZakoncz = Button(self.okno, text="Zakoncz", command=self.akcjaPrzyciskZakoncz)
         przyciskZakoncz.grid(column=6, row=0)
 
     def akcjaPrzyciskNowaTura(self):

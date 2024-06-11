@@ -21,24 +21,5 @@ class Zolw(Zwierze):
         else:
             super().akcja(swiat)
 
-    def kolizja(self, swiat, atakujacy):
-        if isinstance(atakujacy, Zolw):
-            super().kolizja(swiat, atakujacy)
-            return
-
-        czyPrzetrwal = self.czyOdbilAtak(atakujacy, self)
-        if czyPrzetrwal:
-            swiat.wypiszWiadomosc("Zolw odpiera atak " + atakujacy.getNazwa()
-                                  + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-        else:
-            self.setCzyZyje(False)
-            swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-            atakujacy.setPolozenieX(self.polozenieX)
-            atakujacy.setPolozenieY(self.polozenieY)
-            swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Zolw"
-                                  + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-
     def rysowanie(self):
         return "darkgreen"

@@ -52,31 +52,11 @@ class Antylopa(Zwierze):
             swiat.getOrganizm(nowyX, nowyY).kolizja(swiat, self)
 
     def kolizja(self, swiat, atakujacy):
-        if isinstance(atakujacy, Antylopa):
-            super().kolizja(swiat, atakujacy)
-            return
-
         unik = random.randint(0, 1)
         if unik == 1:
             if self.unikAntylopy(swiat, atakujacy):
                 return
-
-        czyPrzetrwal = self.czyOdbilAtak(atakujacy, self)
-        if czyPrzetrwal:
-            swiat.wypiszWiadomosc("Antylopa zabija "
-                                  + atakujacy.getNazwa()
-                                  + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-            atakujacy.setCzyZyje(False)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-        else:
-            self.setCzyZyje(False)
-            swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-            swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-            atakujacy.setPolozenieX(self.polozenieX)
-            atakujacy.setPolozenieY(self.polozenieY)
-            swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-            swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija Antylopa "
-                                  + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
+        super().kolizja(swiat, atakujacy)
 
     def unikAntylopy(self, swiat, atakujacy):
         polozenieXAtak = atakujacy.getPolozenieX()
@@ -90,12 +70,12 @@ class Antylopa(Zwierze):
                 if swiat.getOrganizm(x, y) is None:
                     swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
                     swiat.usunOrganizm(atakujacy, polozenieXAtak, polozenieYAtak)
-                    self.setPolozenieX(x)
-                    self.setPolozenieY(y)
                     atakujacy.setPolozenieX(self.polozenieX)
                     atakujacy.setPolozenieY(self.polozenieY)
-                    swiat.dodajOrganizm(self, x, y)
                     swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
+                    self.setPolozenieX(x)
+                    self.setPolozenieY(y)
+                    swiat.dodajOrganizm(self, x, y)
                     swiat.wypiszWiadomosc("Antylopa unika ataku " + atakujacy.getNazwa()
                                           + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
                     return True

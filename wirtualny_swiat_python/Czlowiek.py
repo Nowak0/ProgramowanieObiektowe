@@ -31,6 +31,8 @@ class Czlowiek(Zwierze):
         elif self.ruch == Zwierze.RUCH_GORA and self.polozenieY - 1 >= 0:
             self.akcjaRuchWGore(swiat)
 
+        self.ruch = Czlowiek.RUCH_NIEAKTYWNY
+
     def akcjaRuchWPrawo(self, swiat):
         if swiat.getOrganizm(self.polozenieX + 1, self.polozenieY) is None:
             swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)

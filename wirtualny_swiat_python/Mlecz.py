@@ -18,15 +18,5 @@ class Mlecz(Roslina):
         super().akcja(swiat)
         super().akcja(swiat)
 
-    def kolizja(self, swiat, atakujacy):
-        self.setCzyZyje(False)
-        swiat.usunOrganizm(self, self.polozenieX, self.polozenieY)
-        swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
-        atakujacy.setPolozenieX(self.polozenieX)
-        atakujacy.setPolozenieY(self.polozenieY)
-        swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-        swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zjada Mlecz"
-                              + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
-
     def rysowanie(self):
         return "yellow"
