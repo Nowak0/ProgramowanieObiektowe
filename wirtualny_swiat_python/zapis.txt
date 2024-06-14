@@ -1,13 +1,26 @@
-10 10
-Lis 8 0 2 False
-Wilk 6 6 10 False
-Czlowiek 6 0 1 False 5 True
-Antylopa 0 1 3 False
-Owca 8 4 5 False
-CyberOwca 9 5 12 False
-Zolw 1 8 4 False
-Trawa 8 2 6 False
-BarszczSosnowskiego 7 1 7 False
-Mlecz 2 0 8 False
-Mlecz 5 4 9 False
-WilczeJagody 2 9 11 False
+10 15
+Lis 8 5 2 False
+Czlowiek 4 5 1 False 2 False
+Antylopa 4 8 3 False
+Owca 0 7 5 False
+CyberOwca 9 3 12 False
+Zolw 8 1 4 False
+Trawa 0 1 6 False
+Mlecz 4 10 8 False
+Mlecz 4 1 9 False
+WilczeJagody 4 12 11 False
+Trawa 0 0 13 False
+Mlecz 3 2 14 False
+Mlecz 4 3 16 False
+Mlecz 3 11 17 False
+Trawa 1 1 18 False
+Mlecz 3 12 18 False
+Mlecz 3 9 18 False
+Mlecz 3 0 19 False
+Mlecz 4 11 20 False
+Mlecz 2 12 21 False
+Mlecz 2 11 22 False
+Mlecz 3 10 22 False
+Mlecz 4 2 23 False
+Mlecz 2 13 24 False
+Mlecz 4 9 25 False

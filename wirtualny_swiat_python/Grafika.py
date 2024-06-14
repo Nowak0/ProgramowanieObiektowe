@@ -165,13 +165,13 @@ class Grafika:
 
     def wypiszWiadomosci(self):
         for i in range(self.swiat.getIloscWiadomosci()):
-            wiadomosc = Label(self.okno, text=self.swiat.getWiadomosc(i), font=("Arial", 12))
+            wiadomosc = Label(self.okno, text=self.swiat.getWiadomosc(i), font=("Arial", 10))
             wiadomosc.grid(column=8, row=(i + 2))
 
     def wyczyscPoleZWiadomosciami(self):
         for i in range(self.swiat.getIloscWiadomosci()):
             tekst = " " * 2 * len(self.swiat.getWiadomosc(i))
-            wiadomosc = Label(self.okno, text=tekst, font=("Arial", 12))
+            wiadomosc = Label(self.okno, text=tekst, font=("Arial", 10))
             wiadomosc.grid(column=8, row=(i + 2))
 
     def utrzymajStan(self):
