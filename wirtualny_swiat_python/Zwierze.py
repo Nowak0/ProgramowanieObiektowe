@@ -63,7 +63,7 @@ class Zwierze(Organizm, ABC):
         else:
             czyPrzetrwal = super().czyOdbilAtak(atakujacy, self)
             if czyPrzetrwal:
-                swiat.wypiszWiadomosc(self.nazwa + " zabijaa " + atakujacy.getNazwa()
+                swiat.wypiszWiadomosc(self.nazwa + " zabija " + atakujacy.getNazwa()
                                       + super().wypiszPolozenie(self.polozenieX, self.polozenieY))
                 atakujacy.setCzyZyje(False)
                 swiat.usunOrganizm(atakujacy, atakujacy.getPolozenieX(), atakujacy.getPolozenieY())
@@ -74,5 +74,5 @@ class Zwierze(Organizm, ABC):
                 atakujacy.setPolozenieX(self.polozenieX)
                 atakujacy.setPolozenieY(self.polozenieY)
                 swiat.dodajOrganizm(atakujacy, self.polozenieX, self.polozenieY)
-                swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabijaa " + self.nazwa
+                swiat.wypiszWiadomosc(atakujacy.getNazwa() + " zabija " + self.nazwa
                                       + self.wypiszPolozenie(self.polozenieX, self.polozenieY))
